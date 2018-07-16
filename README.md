@@ -45,3 +45,15 @@ https://arxiv.org/abs/1607.02533
     
 ## ConvNets:
   Currently, AlexNet & VGG19 from torch vision library (pre-trained on ImageNet).
+
+## Instructions:
+
+[1] Choose a visualization method by opening the corresponding file.
+
+[2] Choose a sample image (first line of the main methods, "target example") A number from 0-2.
+
+[3] Choose a ConvNet. (Either 'AlexNet' or 'VGG19')
+
+[4] Choose an attack. (FGSM, PGD, Boundary, DeepFool, SinglePixel)
+
+[5] Run the code :D

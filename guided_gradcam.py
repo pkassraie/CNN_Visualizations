@@ -31,6 +31,7 @@ if __name__ == '__main__':
     target_example = 2  # Snake
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
         get_params(target_example,'AlexNet')
+    attack_type = 'FGSM'
 
     # Grad cam
     gcv2 = GradCam(pretrained_model, target_layer=11)
@@ -60,7 +61,7 @@ if __name__ == '__main__':
     plt.title('Guided Grad Cam Grasycale')
 
 
-    adversarial,advers_class = attack('FGSM',pretrained_model,original_image,file_name_to_export,target_class)
+    adversarial,advers_class = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
     cam = gcv2.generate_cam(adversarial, advers_class)
     print('Grad cam completed')
 

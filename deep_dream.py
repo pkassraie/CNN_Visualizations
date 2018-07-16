@@ -93,9 +93,11 @@ if __name__ == '__main__':
 # Attack:
     target_example = 0  # Snake
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) = get_params(target_example,'VGG19')
+    attack_type = 'FGSM'
 
-    attack('FGSM',pretrained_model,original_image,'DeepDream',target_class)
-    im_path = 'DeepDream_Attack.jpg'
+
+    attack(attack_type,pretrained_model,original_image,'DeepDream',target_class)
+    im_path = 'result/DeepDream_Attack.jpg'
     dd = DeepDream(pretrained_model, cnn_layer, filter_pos, im_path)
 
     # WHAT THE FUCK IS GOING ON HERE!!!

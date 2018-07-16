@@ -51,6 +51,7 @@ if __name__ == '__main__':
     target_example = 0  # Snake
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
         get_params(target_example,'AlexNet')
+    attack_type = 'FGSM'
 
     VBP = VanillaBackprop(pretrained_model)
     # GBP = GuidedBackprop(pretrained_model)  # if you want to use GBP dont forget to
@@ -81,7 +82,7 @@ if __name__ == '__main__':
 
 
     # Now the attack:
-    adversarial,advers_class = attack('FGSM',pretrained_model,original_image,file_name_to_export,target_class)
+    adversarial,advers_class = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
     smooth_grad = generate_smooth_grad(VBP,  # ^This parameter
                                        adversarial,
                                        advers_class,
