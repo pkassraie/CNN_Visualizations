@@ -29,9 +29,6 @@ class DeepDream():
         self.created_image = cv2.imread(im_path, 1)
         # Hook the layers to get result of the convolution
         self.hook_layer()
-        # Create the folder to export images if not exists
-        if not os.path.exists('../generated'):
-            os.makedirs('../generated')
 
     def hook_layer(self):
         def hook_function(module, grad_in, grad_out):
@@ -41,7 +38,7 @@ class DeepDream():
         # Hook the selected layer
         self.model[self.selected_layer].register_forward_hook(hook_function)
 
-    def dream(self):
+    def dream(self,name=''):
         # Process image and return variable
         self.processed_image = preprocess_image(self.created_image, False)
         # Define optimizer for the image
@@ -60,21 +57,28 @@ class DeepDream():
             # Loss function is the mean of the output of the selected layer/filter
             # We try to minimize the mean of the output of that specific filter
             loss = -torch.mean(self.conv_output)
-            print('Iteration:', str(i), 'Loss:', "{0:.2f}".format(loss.data.numpy()[0]))
+            print('Iteration:', str(i), 'Loss:', "{0:.2f}".format(loss.data.numpy()))
             # Backward
             loss.backward()
             # Update image
             optimizer.step()
             # Recreate image
             self.created_image = recreate_image(self.processed_image)
-            # Save image every 20 iteration
-            if i % 20 == 0:
-                cv2.imwrite('../generated/ddream_l' + str(self.selected_layer) +
+            # Save image every X iteration
+            if i % 50 == 0: # Change 50 if you want
+                cv2.imwrite('results/'+name + str(self.selected_layer) +
                             '_f' + str(self.selected_filter) + '_iter'+str(i)+'.jpg',
                             self.created_image)
 
+        return self.created_image
+
 
 if __name__ == '__main__':
+
+    choose_network = 'VGG19'
+    target_example = 3  # volcano
+    attack_type = 'FGSM'
+
     ### THIS OPERATION IS MEMORY HUNGRY! ###
     # Because of the selected image is very large
     # If it gives out of memory error or locks the computer
@@ -82,24 +86,33 @@ if __name__ == '__main__':
     cnn_layer = 34
     filter_pos = 94
 
-    im_path = '../input_images/dd_tree.jpg'
+
+    if choose_network == 'VGG19':
+        pretrained_model = models.vgg19(pretrained=True).features
+    if choose_network == 'AlexNet':
+        pretrained_model = models.AlexNet(pretrained = True).features
+
+    im_path = 'input_images/volcano.jpg'
     # Fully connected layer is not needed
-    pretrained_model = models.vgg19(pretrained=True).features
+
     dd = DeepDream(pretrained_model, cnn_layer, filter_pos, im_path)
     # This operation can also be done without Pytorch hooks
     # See layer visualisation for the implementation without hooks
-    dd.dream()
+    (original_image, prep_img, target_class, file_name_to_export, pretrained_model) = get_params(target_example,choose_network)
+    result = dd.dream(file_name_to_export)
 
+    plt.subplot(2,1,1)
+    plt.imshow(result)
+    plt.title('Natural Dream')
 # Attack:
-    target_example = 0  # Snake
-    (original_image, prep_img, target_class, file_name_to_export, pretrained_model) = get_params(target_example,'VGG19')
-    attack_type = 'FGSM'
-
-
     attack(attack_type,pretrained_model,original_image,'DeepDream',target_class)
-    im_path = 'result/DeepDream_Attack.jpg'
-    dd = DeepDream(pretrained_model, cnn_layer, filter_pos, im_path)
+    im_path = 'results/DeepDream_'+attack_type+'_Attack.jpg'
+    dd2 = DeepDream(pretrained_model.features, cnn_layer, filter_pos, im_path)
 
-    # WHAT THE FUCK IS GOING ON HERE!!!
-    path = 'FGSM'
-    dd.dream()
+    result2 = dd2.dream(file_name_to_export+'_'+attack_type)
+
+    plt.subplot(2,1,2)
+    plt.imshow(result2)
+    plt.title('Adversary Dream')
+
+    plt.show()

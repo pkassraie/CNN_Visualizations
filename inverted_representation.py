@@ -7,7 +7,8 @@ import cv2
 import torch
 from torch.autograd import Variable
 from torch.optim import SGD
-
+from matplotlib import pyplot as plt
+from attacks import attack
 from misc_functions import get_params, recreate_image
 
 
@@ -15,8 +16,6 @@ class InvertedRepresentation():
     def __init__(self, model):
         self.model = model
         self.model.eval()
-        if not os.path.exists('../generated'):
-            os.makedirs('../generated')
 
     def alpha_norm(self, input_matrix, alpha):
         """
@@ -61,7 +60,11 @@ class InvertedRepresentation():
                 break
         return layer_output
 
-    def generate_inverted_image_specific_layer(self, input_image, img_size, target_layer=3):
+    def generate_inverted_image_specific_layer(self, input_image, img_size, advers, target_layer=3):
+        if advers ==True:
+            name = ''
+        else:
+            name = '_Adversarial'
         # Generate a random image which we will optimize
         opt_img = Variable(1e-1 * torch.randn(1, 3, img_size, img_size), requires_grad=True)
         # Define optimizer for previously created image
@@ -83,7 +86,7 @@ class InvertedRepresentation():
         # The multiplier, lambda beta
         tv_reg_lambda = 1e-8
 
-        for i in range(201):
+        for i in range(251): #Increase later
             optimizer.zero_grad()
             # Get the output from the model after a forward pass until target_layer
             # with the generated image (randomly generated one, NOT the real image)
@@ -100,27 +103,45 @@ class InvertedRepresentation():
             # Step
             loss.backward()
             optimizer.step()
-            # Generate image every 5 iterations
-            if i % 5 == 0:
-                print('Iteration:', str(i), 'Loss:', loss.data.numpy()[0])
+            # Generate image every 50 iterations
+            if i % 50 == 0:
+                print('Iteration:', str(i), 'Loss:', loss.data.numpy())
                 x = recreate_image(opt_img)
-                cv2.imwrite('../generated/Inv_Image_Layer_' + str(target_layer) +
-                            '_Iteration_' + str(i) + '.jpg', x)
+                cv2.imwrite('results/Inv_Image_Layer_' + str(target_layer) +
+                            '_Iteration_' + str(i)+ name + '.jpg', x)
             # Reduce learning rate every 40 iterations
             if i % 40 == 0:
                 for param_group in optimizer.param_groups:
                     param_group['lr'] *= 1/10
+        return x;
 
 
 if __name__ == '__main__':
     # Get params
     target_example = 0  # Snake
+    choose_network = 'AlexNet'
+    attack_type = 'FGSM'
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example)
+        get_params(target_example,choose_network)
 
     inverted_representation = InvertedRepresentation(pretrained_model)
-    image_size = 224  # width & height
+    image_size = original_image.shape[0]  # width & height
     target_layer = 12
-    inverted_representation.generate_inverted_image_specific_layer(prep_img,
+    cleanres = inverted_representation.generate_inverted_image_specific_layer(prep_img,
                                                                    image_size,
+                                                                   False,
                                                                    target_layer)
+    
+    adversarial,advers_class = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
+    adversres = inverted_representation.generate_inverted_image_specific_layer(adversarial,
+                                                                   image_size,
+                                                                   True,
+                                                                   target_layer)
+
+    plt.subplot(2,1,1)
+    plt.imshow(cleanres)
+    plt.title('Normal Inverted Repres')
+    plt.subplot(2,1,2)
+    plt.imshow(adversres)
+    plt.title('Adversary Inverted Repres')
+    plt.show()

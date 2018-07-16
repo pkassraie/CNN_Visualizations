@@ -167,7 +167,8 @@ def get_params(example_index,network):
     # Pick one of the examples
     example_list = [['input_images/snake.jpg', 56],
                     ['input_images/cat_dog.png', 243],
-                    ['input_images/spider.png', 72]]
+                    ['input_images/spider.png', 72],
+                    ['input_images/volcano.jpg', 980]]
     selected_example = example_index
     img_path = example_list[selected_example][0]
     target_class = example_list[selected_example][1]
@@ -180,7 +181,7 @@ def get_params(example_index,network):
     if network == "AlexNet":
         pretrained_model = models.alexnet(pretrained=True)
     elif network =="VGG19":
-        pretrained_model = models.vgg19(pretrained_model = True)
+        pretrained_model = models.vgg19(pretrained = True)
     return (original_image,
             prep_img,
             target_class,
