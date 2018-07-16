@@ -17,6 +17,10 @@
 * Deep Dream
 
     D. Smilkov, N. Thorat, N. Kim, F. Viégas, M. Wattenberg. SmoothGrad: removing noise by adding noise https://arxiv.org/abs/1706.03825
+
+* Inverted image representations
+
+    A. Mahendran, A. Vedaldi. Understanding Deep Image Representations by Inverting Them, https://arxiv.org/abs/1412.0035 
     
 * Deep Image Prior (To be implemented)
 
