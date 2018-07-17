@@ -53,12 +53,15 @@ if __name__ == '__main__':
     print('Guided grad cam completed')
 
 
-    plt.subplot(2,2,1)
-    plt.imshow(guidedgrad)
-    plt.title('Guided Grad Cam')
-    plt.subplot(2,2,2)
-    plt.imshow(grayguidedgrad[:,:,0])
-    plt.title('Guided Grad Cam Grasycale')
+    fig = plt.figure()
+    fig.suptitle(file_name_to_export+' - '+attack_type+' - Guided GradCam')
+
+    ax1 = fig.add_subplot(2,2,1)
+    ax1.imshow(guidedgrad)
+    ax1.set_title('Guided Grad Cam')
+    ax2 = fig.add_subplot(2,2,2)
+    ax2.imshow(grayguidedgrad[:,:,0])
+    ax2.set_title('Guided Grad Cam Grasycale')
 
 
     adversarial,advers_class = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
@@ -73,17 +76,18 @@ if __name__ == '__main__':
 
     # Guided Grad cam
     cam_gb = guided_grad_cam(cam, guided_grads)
-    guidedgrad = save_gradient_images(cam_gb, 'Adversary_'+ file_name_to_export + '_GGrad_Cam')
+    guidedgrad2 = save_gradient_images(cam_gb, 'Adversary_'+ file_name_to_export + '_GGrad_Cam')
     grayscale_cam_gb = convert_to_grayscale(cam_gb)
-    grayguidedgrad = save_gradient_images(grayscale_cam_gb,'Adversary_'+ file_name_to_export + '_GGrad_Cam_gray')
+    grayguidedgrad2 = save_gradient_images(grayscale_cam_gb,'Adversary_'+ file_name_to_export + '_GGrad_Cam_gray')
     print('Guided grad cam completed')
 
 
-    plt.subplot(2,2,3)
-    plt.imshow(guidedgrad)
-    plt.title('Adversary Guided Grad Cam')
-    plt.subplot(2,2,4)
-    plt.imshow(grayguidedgrad[:,:,0])
-    plt.title('Adversary Guided Grad Cam Grasycale')
+    ax3 = fig.add_subplot(2,2,3)
+    ax3.imshow(guidedgrad2)
+    ax3.set_title('Adversary Guided Grad Cam')
+    ax4 = fig.add_subplot(2,2,4)
+    ax4.imshow(grayguidedgrad2[:,:,0])
+    ax4.set_title('Adversary Guided Grad Cam Grasycale')
 
-    plt.show()
+    fig.set_size_inches(18.5, 10.5)
+    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_Guided GradCam',dpi = 100)

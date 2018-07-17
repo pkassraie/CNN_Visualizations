@@ -100,10 +100,11 @@ if __name__ == '__main__':
     # See layer visualisation for the implementation without hooks
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) = get_params(target_example,choose_network)
     result = dd.dream(file_name_to_export)
-
-    plt.subplot(2,1,1)
-    plt.imshow(result)
-    plt.title('Natural Dream')
+    fig = plt.figure()
+    fig.suptitle(file_name_to_export+' - '+attack_type+' - Deep Dream '+str(cnn_layer))
+    ax1 = fig.add_subplot(2,1,1)
+    ax1.imshow(result)
+    ax1.set_title('Natural Dream')
 # Attack:
     attack(attack_type,pretrained_model,original_image,'DeepDream',target_class)
     im_path = 'results/DeepDream_'+attack_type+'_Attack.jpg'
@@ -111,8 +112,10 @@ if __name__ == '__main__':
 
     result2 = dd2.dream(file_name_to_export+'_'+attack_type)
 
-    plt.subplot(2,1,2)
-    plt.imshow(result2)
-    plt.title('Adversary Dream')
+    ax2 = fig.add_subplot(2,1,2)
+    ax2.imshow(result2)
+    ax2.set_title('Adversary Dream')
 
-    plt.show()
+    fig.set_size_inches(18.5, 10.5)
+    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+' - Deep Dream '+str(cnn_layer),dpi = 100)
+

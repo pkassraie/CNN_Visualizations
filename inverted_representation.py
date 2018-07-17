@@ -137,11 +137,14 @@ if __name__ == '__main__':
                                                                    image_size,
                                                                    True,
                                                                    target_layer)
+    fig = plt.figure()
+    fig.suptitle(file_name_to_export+' - '+attack_type+' - Inverted Representation')
 
-    plt.subplot(2,1,1)
-    plt.imshow(cleanres)
-    plt.title('Normal Inverted Repres')
-    plt.subplot(2,1,2)
-    plt.imshow(adversres)
-    plt.title('Adversary Inverted Repres')
-    plt.show()
+    ax1 = fig.add_subplot(2,1,1)
+    ax1.imshow(cleanres)
+    ax1.set_title('Normal Inverted Repres')
+    ax2 = fig.add_subplot(2,1,2)
+    ax2.imshow(adversres)
+    ax2.set_title('Adversary Inverted Repres')
+    fig.set_size_inches(18.5, 10.5)
+    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_InvertedRep',dpi = 100)

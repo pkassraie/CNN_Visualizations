@@ -73,12 +73,15 @@ if __name__ == '__main__':
     graygrads = save_gradient_images(grayscale_smooth_grad, file_name_to_export + '_SmoothGrad_gray')
     print('Smooth grad completed')
 
-    plt.subplot(2, 2, 1)
-    plt.imshow(colorgrads)
-    plt.title('Smooth BP')
-    plt.subplot(2, 2, 2)
-    plt.imshow(graygrads[:,:,0])
-    plt.title('Smooth BP Gray')
+    fig = plt.figure()
+    fig.suptitle(file_name_to_export+' - '+attack_type+' - Smooth BackProp')
+
+    ax1 = fig.add_subplot(2,2,1)
+    ax1.imshow(colorgrads)
+    ax1.set_title('Smooth BP')
+    ax2 = fig.add_subplot(2, 2, 2)
+    ax2.imshow(graygrads[:,:,0])
+    ax2.set_title('Smooth BP Gray')
 
 
     # Now the attack:
@@ -90,18 +93,19 @@ if __name__ == '__main__':
                                        param_sigma_multiplier)
 
     # Save colored gradients
-    colorgrads = save_gradient_images(smooth_grad, 'Adversary_'+file_name_to_export + '_SmoothGrad_color')
+    colorgrads2 = save_gradient_images(smooth_grad, 'Adversary_'+file_name_to_export + '_SmoothGrad_color')
     # Convert to grayscale
     grayscale_smooth_grad = convert_to_grayscale(smooth_grad)
     # Save grayscale gradients
-    graygrads = save_gradient_images(grayscale_smooth_grad, 'Adversary_'+file_name_to_export + '_SmoothGrad_gray')
+    graygrads2 = save_gradient_images(grayscale_smooth_grad, 'Adversary_'+file_name_to_export + '_SmoothGrad_gray')
     print('Adversary Smooth grad completed')
 
-    plt.subplot(2, 2, 3)
-    plt.imshow(colorgrads)
-    plt.title('Adversary Smooth BP')
-    plt.subplot(2, 2, 4)
-    plt.imshow(graygrads[:,:,0])
-    plt.title('Adversary Smooth BP Gray')
+    ax3 = fig.add_subplot(2, 2, 3)
+    ax3.imshow(colorgrads2)
+    ax3.set_title('Adversary Smooth BP')
+    ax4 = fig.add_subplot(2, 2, 4)
+    ax4.imshow(graygrads2[:,:,0])
+    ax4.set_title('Adversary Smooth BP Gray')
 
-    plt.show()
+    fig.set_size_inches(18.5, 10.5)
+    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_SmoothGrad',dpi = 100)

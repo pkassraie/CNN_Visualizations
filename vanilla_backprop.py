@@ -65,31 +65,35 @@ if __name__ == '__main__':
     grayvanilbp = save_gradient_images(grayscale_vanilla_grads, file_name_to_export + '_Vanilla_BP_gray')
     print('Vanilla backprop completed')
 
-    plt.subplot(2,2,1)
-    plt.imshow(vanilbp)
-    plt.title('Vanilla BackProp')
-    plt.subplot(2,2,2)
-    plt.imshow(grayvanilbp[:,:,0])
-    plt.title('Vanilla BackProp GrayScale')
+    fig = plt.figure()
+    fig.suptitle(file_name_to_export+' - '+attack_type+' - Vanilla BackProp')
+
+    ax1 = fig.add_subplot(2,2,1)
+    ax1.imshow(vanilbp)
+    ax1.set_title('Vanilla BackProp')
+    ax2 = fig.add_subplot(2,2,2)
+    ax2.imshow(grayvanilbp[:,:,0])
+    ax2.set_title('Vanilla BackProp GrayScale')
 
 
     adversarial,advers_class = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
     # Generate gradients
     vanilla_grads = VBP.generate_gradients(adversarial, advers_class)
     # Save colored gradients
-    vanilbp = save_gradient_images(vanilla_grads, 'Adversary_'+ file_name_to_export + '_Vanilla_BP_color')
+    vanilbp2 = save_gradient_images(vanilla_grads, 'Adversary_'+ file_name_to_export + '_Vanilla_BP_color')
     # Convert to grayscale
     grayscale_vanilla_grads = convert_to_grayscale(vanilla_grads)
     # Save grayscale gradients
-    grayvanilbp = save_gradient_images(grayscale_vanilla_grads,'Adversary_'+ file_name_to_export + '_Vanilla_BP_gray')
+    grayvanilbp2 = save_gradient_images(grayscale_vanilla_grads,'Adversary_'+ file_name_to_export + '_Vanilla_BP_gray')
     print('Adversary Vanilla backprop completed')
 
-    plt.subplot(2,2,3)
-    plt.imshow(vanilbp)
-    plt.title('Adversary Vanilla BackProp')
-    plt.subplot(2,2,4)
-    plt.imshow(grayvanilbp[:,:,0])
-    plt.title('Adversary Vanilla BackProp GrayScale')
+    ax3 = fig.add_subplot(2,2,3)
+    ax3.imshow(vanilbp2)
+    ax3.set_title('Adversary Vanilla BackProp')
+    ax4 = fig.add_subplot(2,2,4)
+    ax4.imshow(grayvanilbp2[:,:,0])
+    ax4.set_title('Adversary Vanilla BackProp GrayScale')
 
-    plt.show()
+    fig.set_size_inches(18.5, 10.5)
+    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_VanillaBP',dpi = 100)
 

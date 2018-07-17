@@ -102,16 +102,21 @@ if __name__ == '__main__':
     cam = grad_cam.generate_cam(prep_img, target_class)
     # Save mask
     gray,color, result = save_class_activation_on_image(original_image, cam, file_name_to_export)
+
     print('Grad cam completed')
-    plt.subplot(2,3,1)
-    plt.imshow(gray)
-    plt.title('Cam Grasycale')
-    plt.subplot(2,3,2)
-    plt.imshow(color)
-    plt.title('Cam HeatMap')
-    plt.subplot(2,3,3)
-    plt.imshow(result)
-    plt.title('Cam Result')
+
+    fig = plt.figure()
+    fig.suptitle(file_name_to_export+' - '+attack_type+' - GradCam')
+
+    ax1 = fig.add_subplot(2,3,1)
+    ax1.imshow(gray)
+    ax1.set_title('Cam Grasycale')
+    ax2 = fig.add_subplot(2,3,2)
+    ax2.imshow(color)
+    ax2.set_title('Cam HeatMap')
+    ax3 = fig.add_subplot(2,3,3)
+    ax3.imshow(result)
+    ax3.set_title('Cam Result')
 
 # Adversary:
     adversarial,advers_class = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
@@ -121,17 +126,18 @@ if __name__ == '__main__':
     # Generate cam mask
     cam = grad_cam.generate_cam(adversarial,advers_class)
     # Save mask
-    gray,color, result = save_class_activation_on_image(original_image, cam, 'Adversary_'+file_name_to_export)
+    gray2,color2, result2 = save_class_activation_on_image(original_image, cam, 'Adversary_'+file_name_to_export)
     print('Adversary Grad cam completed')
 
-    plt.subplot(2,3,4)
-    plt.imshow(gray)
-    plt.title('Adversary Cam Grasycale')
-    plt.subplot(2,3,5)
-    plt.imshow(color)
-    plt.title('Adversary Cam HeatMap')
-    plt.subplot(2,3,6)
-    plt.imshow(result)
-    plt.title('Adversary Cam Result')
+    ax4 = fig.add_subplot(2,3,4)
+    ax4.imshow(gray2)
+    ax4.set_title('Adversary Cam Grasycale')
+    ax5 = fig.add_subplot(2,3,5)
+    ax5.imshow(color2)
+    ax5.set_title('Adversary Cam HeatMap')
+    ax6 = fig.add_subplot(2,3,6)
+    ax6.imshow(result2)
+    ax6.set_title('Adversary Cam Result')
 
-    plt.show()
+    fig.set_size_inches(18.5, 10.5)
+    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_GradCam',dpi = 100)
