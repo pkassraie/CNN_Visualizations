@@ -60,7 +60,7 @@ https://arxiv.org/abs/1607.02533
 
 * Attack Type: Can be chosen from: 'FGSM', 'PGD', 'Boundary', 'DeepFool', 'SinglePixel'.
 
-*Example Index: Choose a number from 0-3 to choose an image from 'input_images'.
+* Example Index: Choose a number from 0-3 to choose an image from 'input_images'.
 
 
 
