@@ -44,13 +44,13 @@ class VanillaBackprop():
         gradients_as_arr = self.gradients.data.numpy()[0]
         return gradients_as_arr
 
-
-if __name__ == '__main__':
+def runVanillaBP(choose_network = 'AlexNet',
+                 target_example = 3,
+                 attack_type = 'FGSM'):
+#if __name__ == '__main__':
     # Get params
-    target_example = 1  # Dog
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,'AlexNet')
-    attack_type = 'FGSM'
+        get_params(target_example,choose_network)
 
     # Vanilla backprop
     VBP = VanillaBackprop(pretrained_model)

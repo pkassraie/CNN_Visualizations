@@ -13,7 +13,6 @@ from torchvision import models
 
 from misc_functions import preprocess_image, recreate_image,get_params
 
-
 class DeepDream():
     """
         Produces an image that minimizes the loss of a convolution
@@ -38,13 +37,13 @@ class DeepDream():
         # Hook the selected layer
         self.model[self.selected_layer].register_forward_hook(hook_function)
 
-    def dream(self,name=''):
+    def dream(self,name,iters):
         # Process image and return variable
         self.processed_image = preprocess_image(self.created_image, False)
         # Define optimizer for the image
         # Earlier layers need higher learning rates to visualize whereas layer layers need less
         optimizer = SGD([self.processed_image], lr=12,  weight_decay=1e-4)
-        for i in range(1, 251):
+        for i in range(1, iters+1):
             optimizer.zero_grad()
             # Assign create image to a variable to move forward in the model
             x = self.processed_image
@@ -72,34 +71,36 @@ class DeepDream():
 
         return self.created_image
 
+def runDeepDream(choose_network = 'VGG19',
+                 target_example = 3,
+                 attack_type = 'FGSM',
+                 cnn_layer = 34,
+                 filter_pos = 94,
+                 iters = 50):
 
-if __name__ == '__main__':
-
-    choose_network = 'VGG19'
-    target_example = 3  # volcano
-    attack_type = 'FGSM'
-
-    ### THIS OPERATION IS MEMORY HUNGRY! ###
-    # Because of the selected image is very large
-    # If it gives out of memory error or locks the computer
-    # Try it with a smaller image
-    cnn_layer = 34
-    filter_pos = 94
-
+    #if __name__ == '__main__':
 
     if choose_network == 'VGG19':
         pretrained_model = models.vgg19(pretrained=True).features
     if choose_network == 'AlexNet':
         pretrained_model = models.AlexNet(pretrained = True).features
 
-    im_path = 'input_images/volcano.jpg'
+    if target_example == 3:
+        im_path = 'input_images/volcano.jpg'
+    elif target_example == 0:
+        im_path = 'input_images/snake.jpg'
+    elif target_example ==1:
+        im_path = 'iput_images/cat_dog.jpg'
+    elif target_example ==2:
+        im_path = 'input_images/spider.jpg'
+
     # Fully connected layer is not needed
 
     dd = DeepDream(pretrained_model, cnn_layer, filter_pos, im_path)
     # This operation can also be done without Pytorch hooks
     # See layer visualisation for the implementation without hooks
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) = get_params(target_example,choose_network)
-    result = dd.dream(file_name_to_export)
+    result = dd.dream(file_name_to_export,iters)
     fig = plt.figure()
     fig.suptitle(file_name_to_export+' - '+attack_type+' - Deep Dream '+str(cnn_layer))
     ax1 = fig.add_subplot(2,1,1)
@@ -110,7 +111,7 @@ if __name__ == '__main__':
     im_path = 'results/DeepDream_'+attack_type+'_Attack.jpg'
     dd2 = DeepDream(pretrained_model.features, cnn_layer, filter_pos, im_path)
 
-    result2 = dd2.dream(file_name_to_export+'_'+attack_type)
+    result2 = dd2.dream(file_name_to_export+'_'+attack_type,iters)
 
     ax2 = fig.add_subplot(2,1,2)
     ax2.imshow(result2)

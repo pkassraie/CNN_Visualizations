@@ -52,12 +52,15 @@ https://arxiv.org/abs/1607.02533
 
 ## Instructions:
 
-[1] Choose a visualization method by opening the corresponding file.
+[1] Open 'massRun.py'
 
-[2] Choose a sample image (first line of the main methods, "target example") A number from 0-2.
+[2] There is a function for each type of visualization. The common arguments between all functions are:
 
-[3] Choose a ConvNet. (Either 'AlexNet' or 'VGG19')
+* Choose Network: Currently you can either choose 'VGG19' or 'AlexNet'.
 
-[4] Choose an attack. (FGSM, PGD, Boundary, DeepFool, SinglePixel)
+* Attack Type: Can be chosen from: 'FGSM', 'PGD', 'Boundary', 'DeepFool', 'SinglePixel'.
 
-[5] Run the code :D
+*Example Index: Choose a number from 0-3 to choose an image from 'input_images'.
+
+
+

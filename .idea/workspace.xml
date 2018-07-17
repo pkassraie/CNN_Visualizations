@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8344d12-8091-45c3-b842-6dacb9194184" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/Dog_FGSM_GBP.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/Snake_FGSM_InvertedRepres(250).png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/Snake_FGSM_InvertedRepres(50).png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/Spider_FGSM_GuidedGradCam.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/Spider_FGSM_GradCam.png" afterPath="$PROJECT_DIR$/Concise Results/Spider_FGSM_GradCam.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_snake_SmoothGrad_color.jpg" afterPath="$PROJECT_DIR$/results/Adversary_snake_SmoothGrad_color.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_snake_SmoothGrad_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversary_snake_SmoothGrad_gray.jpg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/cnn_layer_visualization.py" afterPath="$PROJECT_DIR$/visualization/cnn_layer_visualization.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/deep_dream.py" afterPath="$PROJECT_DIR$/visualization/deep_dream.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/gradcam.py" afterPath="$PROJECT_DIR$/visualization/gradcam.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/guided_backprop.py" afterPath="$PROJECT_DIR$/visualization/guided_backprop.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/guided_gradcam.py" afterPath="$PROJECT_DIR$/visualization/guided_gradcam.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/inverted_representation.py" afterPath="$PROJECT_DIR$/visualization/inverted_representation.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/smooth_grad.py" afterPath="$PROJECT_DIR$/visualization/smooth_grad.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/vanilla_backprop.py" afterPath="$PROJECT_DIR$/visualization/vanilla_backprop.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/volcano_FGSM - Deep Dream 34.png" afterPath="$PROJECT_DIR$/Concise Results/volcano_FGSM - Deep Dream 34.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_0.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_0.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_0_Adversarial.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_0_Adversarial.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_100.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_100.jpg" />
@@ -21,17 +23,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_250_Adversarial.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_250_Adversarial.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_50.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_50.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_50_Adversarial.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_50_Adversarial.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_SmoothGrad_color.jpg" afterPath="$PROJECT_DIR$/results/snake_SmoothGrad_color.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_SmoothGrad_gray.jpg" afterPath="$PROJECT_DIR$/results/snake_SmoothGrad_gray.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_FGSM_Attack.jpg" afterPath="$PROJECT_DIR$/results/spider_FGSM_Attack.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Visualizing Adversarial Examples on ImageNet.iml" afterPath="$PROJECT_DIR$/.idea/Visualizing Adversarial Examples on ImageNet.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deep_dream.py" afterPath="$PROJECT_DIR$/deep_dream.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradcam.py" afterPath="$PROJECT_DIR$/gradcam.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/guided_backprop.py" afterPath="$PROJECT_DIR$/guided_backprop.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/guided_gradcam.py" afterPath="$PROJECT_DIR$/guided_gradcam.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inverted_representation.py" afterPath="$PROJECT_DIR$/inverted_representation.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smooth_grad.py" afterPath="$PROJECT_DIR$/smooth_grad.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vanilla_backprop.py" afterPath="$PROJECT_DIR$/vanilla_backprop.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="Visualizing Adversarial Examples on CIFAR10.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,23 +46,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="FoolboxInit.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Getting Started/models/FoolboxInit.py">
+      <file leaf-file-name="deep_dream.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/visualization/deep_dream.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="misc_functions.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/misc_functions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
+              <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
               <folding>
                 <element signature="e#92#101#0" expanded="true" />
               </folding>
@@ -77,64 +59,42 @@
         </entry>
       </file>
       <file leaf-file-name="guided_backprop.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/guided_backprop.py">
+        <entry file="file://$PROJECT_DIR$/visualization/guided_backprop.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="136" selection-end-column="101" />
-              <folding>
-                <element signature="e#92#104#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gradcam.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gradcam.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="110" selection-end-column="32" />
+              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="guided_gradcam.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/guided_gradcam.py">
+        <entry file="file://$PROJECT_DIR$/visualization/guided_gradcam.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="92" selection-end-column="99" />
+              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="inverted_representation.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inverted_representation.py">
+      <file leaf-file-name="massRun.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/massRun.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="139" column="0" selection-start-line="139" selection-start-column="0" selection-end-line="142" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.25118935">
+              <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vanilla_backprop.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/vanilla_backprop.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4342857">
-              <caret line="87" column="43" selection-start-line="87" selection-start-column="43" selection-end-line="87" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="attacks.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/attacks.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/visualization/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
+              <caret line="6" column="55" selection-start-line="6" selection-start-column="55" selection-end-line="6" selection-end-column="55" />
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#0#50#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -170,13 +130,16 @@
         <option value="$PROJECT_DIR$/attacks.py" />
         <option value="$PROJECT_DIR$/generate_class_specific_samples.py" />
         <option value="$PROJECT_DIR$/misc_functions.py" />
-        <option value="$PROJECT_DIR$/guided_backprop.py" />
-        <option value="$PROJECT_DIR$/deep_dream.py" />
         <option value="$PROJECT_DIR$/gradcam.py" />
+        <option value="$PROJECT_DIR$/guided_backprop.py" />
         <option value="$PROJECT_DIR$/guided_gradcam.py" />
+        <option value="$PROJECT_DIR$/deep_dream.py" />
         <option value="$PROJECT_DIR$/inverted_representation.py" />
         <option value="$PROJECT_DIR$/smooth_grad.py" />
         <option value="$PROJECT_DIR$/vanilla_backprop.py" />
+        <option value="$PROJECT_DIR$/visualization/__init__.py" />
+        <option value="$PROJECT_DIR$/visualization/deep_dream.py" />
+        <option value="$PROJECT_DIR$/massRun.py" />
       </list>
     </option>
   </component>
@@ -231,6 +194,34 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Visualizing Adversarial Examples on ImageNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Visualizing Adversarial Examples on ImageNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visualization" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Visualizing Adversarial Examples on ImageNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Visualizing Adversarial Examples on ImageNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="input_images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -241,32 +232,16 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Nirvana\Documents\CAMP\Visualizing Adversarial Examples on ImageNet\Visuals" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Nirvana\Documents\CAMP\Visualizing Adversarial Examples on ImageNet\visualization" />
       <recent name="C:\Users\Nirvana\Documents\CAMP\Visualizing Adversarial Examples on ImageNet\Visuals" />
       <recent name="C:\Users\Nirvana\Documents\CAMP\Visualizing Adversarial Examples on CIFAR10" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Nirvana\Documents\CAMP\Visualizing Adversarial Examples on ImageNet\Visuals" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.vanilla_backprop">
-    <configuration default="false" name="gradcam" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Visualizing Adversarial Examples on ImageNet" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gradcam.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.massRun">
     <configuration default="false" name="guided_gradcam" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -279,7 +254,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Visualizing Adversarial Examples on ImageNet" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/guided_gradcam.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Nirvana\Documents\CAMP\Visualizing Adversarial Examples on ImageNet\visualization\guided_gradcam.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -296,7 +271,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Visualizing Adversarial Examples on ImageNet" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/inverted_representation.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Nirvana\Documents\CAMP\Visualizing Adversarial Examples on ImageNet\visualization\inverted_representation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -313,7 +288,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Visualizing Adversarial Examples on ImageNet" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/smooth_grad.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Nirvana\Documents\CAMP\Visualizing Adversarial Examples on ImageNet\visualization\smooth_grad.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -330,7 +305,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Visualizing Adversarial Examples on ImageNet" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vanilla_backprop.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Nirvana\Documents\CAMP\Visualizing Adversarial Examples on ImageNet\visualization\vanilla_backprop.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="massRun" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Visualizing Adversarial Examples on ImageNet" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/massRun.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -458,19 +450,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.gradcam" />
-      <item index="1" class="java.lang.String" itemvalue="Python.guided_gradcam" />
-      <item index="2" class="java.lang.String" itemvalue="Python.inverted_representation" />
-      <item index="3" class="java.lang.String" itemvalue="Python.smooth_grad" />
-      <item index="4" class="java.lang.String" itemvalue="Python.vanilla_backprop" />
+      <item index="0" class="java.lang.String" itemvalue="Python.guided_gradcam" />
+      <item index="1" class="java.lang.String" itemvalue="Python.inverted_representation" />
+      <item index="2" class="java.lang.String" itemvalue="Python.smooth_grad" />
+      <item index="3" class="java.lang.String" itemvalue="Python.vanilla_backprop" />
+      <item index="4" class="java.lang.String" itemvalue="Python.massRun" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.vanilla_backprop" />
-        <item index="1" class="java.lang.String" itemvalue="Python.smooth_grad" />
-        <item index="2" class="java.lang.String" itemvalue="Python.inverted_representation" />
-        <item index="3" class="java.lang.String" itemvalue="Python.guided_gradcam" />
-        <item index="4" class="java.lang.String" itemvalue="Python.gradcam" />
+        <item index="0" class="java.lang.String" itemvalue="Python.massRun" />
+        <item index="1" class="java.lang.String" itemvalue="Python.vanilla_backprop" />
+        <item index="2" class="java.lang.String" itemvalue="Python.smooth_grad" />
+        <item index="3" class="java.lang.String" itemvalue="Python.inverted_representation" />
+        <item index="4" class="java.lang.String" itemvalue="Python.guided_gradcam" />
       </list>
     </recent_temporary>
   </component>
@@ -496,7 +488,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2752475" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27458745" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -533,7 +525,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -543,27 +535,27 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
           <folding>
-            <element signature="e#92#101#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/deep_dream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
             <element signature="e#92#101#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/guided_backprop.py">
+    <entry file="file://$PROJECT_DIR$/visualization/deep_dream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#92#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/guided_backprop.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="132" column="22" selection-start-line="132" selection-start-column="22" selection-end-line="132" selection-end-column="22" />
           <folding>
-            <element signature="e#92#104#0" expanded="true" />
+            <element signature="e#92#104#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -573,7 +565,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -583,7 +575,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -593,27 +585,27 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
           <folding>
-            <element signature="e#92#101#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/deep_dream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
             <element signature="e#92#101#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/guided_backprop.py">
+    <entry file="file://$PROJECT_DIR$/visualization/deep_dream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#92#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/guided_backprop.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="132" column="22" selection-start-line="132" selection-start-column="22" selection-end-line="132" selection-end-column="22" />
           <folding>
-            <element signature="e#92#104#0" expanded="true" />
+            <element signature="e#92#104#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -623,7 +615,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -633,7 +625,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -643,17 +635,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
           <folding>
-            <element signature="e#92#101#0" expanded="true" />
+            <element signature="e#92#101#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deep_dream.py">
+    <entry file="file://$PROJECT_DIR$/visualization/deep_dream.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#92#101#0" expanded="false" />
+            <element signature="e#92#101#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -663,7 +655,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -673,29 +665,29 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="70" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deep_dream.py">
+    <entry file="file://$PROJECT_DIR$/visualization/deep_dream.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="84" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
           <folding>
-            <element signature="e#92#101#0" expanded="false" />
+            <element signature="e#92#101#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vanilla_backprop.py">
+    <entry file="file://$PROJECT_DIR$/visualization/vanilla_backprop.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="29" selection-start-line="0" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gradcam.py">
+    <entry file="file://$PROJECT_DIR$/visualization/gradcam.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="88" column="18" selection-start-line="0" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
@@ -707,7 +699,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="178" column="38" selection-start-line="178" selection-start-column="38" selection-end-line="178" selection-end-column="38" />
           <folding>
-            <element signature="e#92#101#0" expanded="true" />
+            <element signature="e#92#101#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -731,24 +723,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cnn_layer_visualization.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8296089">
-          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/misc_functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
-          <folding>
-            <element signature="e#92#101#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -758,67 +733,101 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deep_dream.py">
+    <entry file="file://$PROJECT_DIR$/misc_functions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+          <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
           <folding>
             <element signature="e#92#101#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/guided_backprop.py">
+    <entry file="file://$PROJECT_DIR$/visualization/guided_backprop.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="136" selection-end-column="101" />
+          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/guided_gradcam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/inverted_representation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="120" column="39" selection-start-line="120" selection-start-column="39" selection-end-line="120" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/smooth_grad.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="49" selection-start-line="56" selection-start-column="49" selection-end-line="56" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/vanilla_backprop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.4757375">
+          <caret line="52" column="48" selection-start-line="52" selection-start-column="48" selection-end-line="52" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/cnn_layer_visualization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.829686">
+          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/gradcam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03139867">
+          <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="55" selection-start-line="6" selection-start-column="55" selection-end-line="6" selection-end-column="55" />
           <folding>
-            <element signature="e#92#104#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gradcam.py">
+    <entry file="file://$PROJECT_DIR$/visualization/deep_dream.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="110" selection-end-column="32" />
-          <folding />
+          <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
+          <folding>
+            <element signature="e#92#101#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/guided_gradcam.py">
+    <entry file="file://$PROJECT_DIR$/massRun.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="92" selection-end-column="99" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smooth_grad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27714285">
-          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="78" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inverted_representation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="139" column="0" selection-start-line="139" selection-start-column="0" selection-end-line="142" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vanilla_backprop.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4342857">
-          <caret line="87" column="43" selection-start-line="87" selection-start-column="43" selection-end-line="87" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.25118935">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
           <folding />
         </state>
       </provider>

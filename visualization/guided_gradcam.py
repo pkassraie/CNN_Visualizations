@@ -4,13 +4,14 @@ Created on Thu Oct 23 11:27:15 2017
 @author: Utku Ozbulak - github.com/utkuozbulak
 """
 import numpy as np
+from guided_backprop import GuidedBackprop
 from matplotlib import pyplot as plt
+
 from attacks import attack
 from misc_functions import (get_params,
                             convert_to_grayscale,
                             save_gradient_images)
-from gradcam import GradCam
-from guided_backprop import GuidedBackprop
+from visualization.gradcam import GradCam
 
 
 def guided_grad_cam(grad_cam_mask, guided_backprop_mask):
@@ -25,13 +26,13 @@ def guided_grad_cam(grad_cam_mask, guided_backprop_mask):
     cam_gb = np.multiply(grad_cam_mask, guided_backprop_mask)
     return cam_gb
 
-
-if __name__ == '__main__':
+def runGGradCam(choose_network = 'AlexNet',
+                 target_example = 3,
+                 attack_type = 'FGSM'):
+    #if __name__ == '__main__':
     # Get params
-    target_example = 2  # Snake
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,'AlexNet')
-    attack_type = 'FGSM'
+        get_params(target_example,choose_network)
 
     # Grad cam
     gcv2 = GradCam(pretrained_model, target_layer=11)

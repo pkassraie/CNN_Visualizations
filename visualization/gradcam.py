@@ -10,7 +10,6 @@ from matplotlib import pyplot as plt
 from attacks import attack
 from misc_functions import get_params, save_class_activation_on_image
 
-
 class CamExtractor():
     """
         Extracts cam features from the model
@@ -90,12 +89,15 @@ class GradCam():
         return cam
 
 
-if __name__ == '__main__':
-    # Get params
-    target_example = 2  # Snake
+#if __name__ == '__main__':
+# Get params
+def runGradCam(choose_network = 'AlexNet',
+                 target_example = 3,
+                 attack_type = 'FGSM'):
+
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,'AlexNet')
-    attack_type = 'FGSM'
+        get_params(target_example,choose_network)
+
     # Grad cam
     grad_cam = GradCam(pretrained_model, target_layer=11)
     # Generate cam mask
@@ -118,7 +120,7 @@ if __name__ == '__main__':
     ax3.imshow(result)
     ax3.set_title('Cam Result')
 
-# Adversary:
+    # Adversary:
     adversarial,advers_class = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
 
     # Grad cam

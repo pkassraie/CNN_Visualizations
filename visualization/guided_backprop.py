@@ -12,7 +12,6 @@ from misc_functions import (get_params,
                             save_gradient_images,
                             get_positive_negative_saliency)
 
-
 class GuidedBackprop():
     """
        Produces gradients generated with guided back propagation from the given image
@@ -63,12 +62,14 @@ class GuidedBackprop():
         gradients_as_arr = self.gradients.data.numpy()[0]
         return gradients_as_arr
 
+def runGBackProp(choose_network = 'AlexNet',
+                 target_example = 3,
+                 attack_type = 'FGSM'):
 
-if __name__ == '__main__':
-    target_example = 1  # Dog
+    #if __name__ == '__main__':
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,'AlexNet')
-    attack_type = 'FGSM'
+        get_params(target_example,choose_network)
+
 
     # Guided backprop
     GBP = GuidedBackprop(pretrained_model)

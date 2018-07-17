@@ -4,15 +4,17 @@ Created on Wed Mar 28 10:12:13 2018
 @author: Utku Ozbulak - github.com/utkuozbulak
 """
 import numpy as np
-from attacks import attack
+import torch
 from matplotlib import pyplot as plt
 from torch.autograd import Variable
-import torch
 
+from attacks import attack
 from misc_functions import (get_params,
                             convert_to_grayscale,
                             save_gradient_images)
-from vanilla_backprop import VanillaBackprop
+from visualization.vanilla_backprop import VanillaBackprop
+
+
 # from guided_backprop import GuidedBackprop  # To use with guided backprop
 
 
@@ -45,13 +47,14 @@ def generate_smooth_grad(Backprop, prep_img, target_class, param_n, param_sigma_
     smooth_grad = smooth_grad / param_n
     return smooth_grad
 
+def runsmoothGrad(choose_network = 'AlexNet',
+                 target_example = 3,
+                 attack_type = 'FGSM'):
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
     # Get params
-    target_example = 0  # Snake
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,'AlexNet')
-    attack_type = 'FGSM'
+        get_params(target_example,choose_network)
 
     VBP = VanillaBackprop(pretrained_model)
     # GBP = GuidedBackprop(pretrained_model)  # if you want to use GBP dont forget to

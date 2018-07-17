@@ -12,6 +12,7 @@ from attacks import attack
 from misc_functions import get_params, recreate_image
 
 
+
 class InvertedRepresentation():
     def __init__(self, model):
         self.model = model
@@ -115,12 +116,11 @@ class InvertedRepresentation():
                     param_group['lr'] *= 1/10
         return x;
 
-
-if __name__ == '__main__':
-    # Get params
-    target_example = 0  # Snake
-    choose_network = 'AlexNet'
-    attack_type = 'FGSM'
+def runInvRep(choose_network = 'AlexNet',
+                 target_example = 3,
+                 attack_type = 'FGSM'):
+    #if __name__ == '__main__':
+        # Get params
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
         get_params(target_example,choose_network)
 
@@ -131,7 +131,7 @@ if __name__ == '__main__':
                                                                    image_size,
                                                                    False,
                                                                    target_layer)
-    
+
     adversarial,advers_class = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
     adversres = inverted_representation.generate_inverted_image_specific_layer(adversarial,
                                                                    image_size,
