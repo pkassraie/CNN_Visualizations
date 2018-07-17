@@ -2,15 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8344d12-8091-45c3-b842-6dacb9194184" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/cnn_layer_visualization.py" afterPath="$PROJECT_DIR$/visualization/cnn_layer_visualization.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/deep_dream.py" afterPath="$PROJECT_DIR$/visualization/deep_dream.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/gradcam.py" afterPath="$PROJECT_DIR$/visualization/gradcam.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/guided_backprop.py" afterPath="$PROJECT_DIR$/visualization/guided_backprop.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/guided_gradcam.py" afterPath="$PROJECT_DIR$/visualization/guided_gradcam.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/inverted_representation.py" afterPath="$PROJECT_DIR$/visualization/inverted_representation.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/smooth_grad.py" afterPath="$PROJECT_DIR$/visualization/smooth_grad.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/vanilla_backprop.py" afterPath="$PROJECT_DIR$/visualization/vanilla_backprop.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/volcano_FGSM - Deep Dream 34.png" afterPath="$PROJECT_DIR$/Concise Results/volcano_FGSM - Deep Dream 34.png" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/Dog_FGSM_VanilBP.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/Snake_FGSM_SmoothBP.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/Spider_FGSM_GradCam.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/spider_FGSM_Guided GradCam.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/volcano_FGSM_GradCam.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/volcano_FGSM_Guided GradCam.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM_InvertedRep.png" afterPath="$PROJECT_DIR$/Concise Results/snake_FGSM_InvertedRep.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM_SmoothGrad.png" afterPath="$PROJECT_DIR$/Concise Results/snake_FGSM_SmoothGrad.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_snake_SmoothGrad_color.jpg" afterPath="$PROJECT_DIR$/results/Adversary_snake_SmoothGrad_color.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_snake_SmoothGrad_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversary_snake_SmoothGrad_gray.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_spider_Cam_Grayscale.jpg" afterPath="$PROJECT_DIR$/results/Adversary_spider_Cam_Grayscale.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_spider_Cam_Heatmap.jpg" afterPath="$PROJECT_DIR$/results/Adversary_spider_Cam_Heatmap.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_spider_Cam_On_Image.jpg" afterPath="$PROJECT_DIR$/results/Adversary_spider_Cam_On_Image.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_spider_GGrad_Cam.jpg" afterPath="$PROJECT_DIR$/results/Adversary_spider_GGrad_Cam.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_spider_GGrad_Cam_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversary_spider_GGrad_Cam_gray.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_Cam_Grayscale.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_Cam_Grayscale.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_Cam_Heatmap.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_Cam_Heatmap.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_Cam_On_Image.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_Cam_On_Image.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_GGrad_Cam.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_GGrad_Cam.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_GGrad_Cam_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_GGrad_Cam_gray.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/DeepDream.jpg" afterPath="$PROJECT_DIR$/results/DeepDream.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/DeepDream_FGSM_Attack.jpg" afterPath="$PROJECT_DIR$/results/DeepDream_FGSM_Attack.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_0.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_0.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_0_Adversarial.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_0_Adversarial.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_100.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_100.jpg" />
@@ -23,9 +36,26 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_250_Adversarial.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_250_Adversarial.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_50.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_50.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_50_Adversarial.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_50_Adversarial.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Visualizing Adversarial Examples on ImageNet.iml" afterPath="$PROJECT_DIR$/.idea/Visualizing Adversarial Examples on ImageNet.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_FGSM_Attack.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_FGSM_Attack.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_FGSM_Attack.jpg" afterPath="$PROJECT_DIR$/results/snake_FGSM_Attack.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_GGrad_Cam.jpg" afterPath="$PROJECT_DIR$/results/snake_GGrad_Cam.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_GGrad_Cam_gray.jpg" afterPath="$PROJECT_DIR$/results/snake_GGrad_Cam_gray.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_SmoothGrad_color.jpg" afterPath="$PROJECT_DIR$/results/snake_SmoothGrad_color.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_SmoothGrad_gray.jpg" afterPath="$PROJECT_DIR$/results/snake_SmoothGrad_gray.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_Cam_Grayscale.jpg" afterPath="$PROJECT_DIR$/results/spider_Cam_Grayscale.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_Cam_Heatmap.jpg" afterPath="$PROJECT_DIR$/results/spider_Cam_Heatmap.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_Cam_On_Image.jpg" afterPath="$PROJECT_DIR$/results/spider_Cam_On_Image.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_FGSM_Attack.jpg" afterPath="$PROJECT_DIR$/results/spider_FGSM_Attack.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_GGrad_Cam.jpg" afterPath="$PROJECT_DIR$/results/spider_GGrad_Cam.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_GGrad_Cam_gray.jpg" afterPath="$PROJECT_DIR$/results/spider_GGrad_Cam_gray.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_Cam_Grayscale.jpg" afterPath="$PROJECT_DIR$/results/volcano_Cam_Grayscale.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_Cam_Heatmap.jpg" afterPath="$PROJECT_DIR$/results/volcano_Cam_Heatmap.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_Cam_On_Image.jpg" afterPath="$PROJECT_DIR$/results/volcano_Cam_On_Image.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_FGSM_Attack.jpg" afterPath="$PROJECT_DIR$/results/volcano_FGSM_Attack.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_GGrad_Cam.jpg" afterPath="$PROJECT_DIR$/results/volcano_GGrad_Cam.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_GGrad_Cam_gray.jpg" afterPath="$PROJECT_DIR$/results/volcano_GGrad_Cam_gray.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/massRun.py" afterPath="$PROJECT_DIR$/massRun.py" />
     </list>
     <ignored path="Visualizing Adversarial Examples on CIFAR10.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/visualization/deep_dream.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
+              <caret line="108" column="9" selection-start-line="108" selection-start-column="9" selection-end-line="108" selection-end-column="9" />
               <folding>
                 <element signature="e#92#101#0" expanded="true" />
               </folding>
@@ -81,8 +111,8 @@
       <file leaf-file-name="massRun.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/massRun.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25118935">
-              <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.3133903">
+              <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -174,7 +204,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -224,6 +253,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -488,7 +518,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27458745" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27422544" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -520,13 +550,54 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/visualization/deep_dream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="108" column="9" selection-start-line="108" selection-start-column="9" selection-end-line="108" selection-end-column="9" />
+          <folding>
+            <element signature="e#92#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/guided_backprop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/guided_gradcam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/massRun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="55" selection-start-line="6" selection-start-column="55" selection-end-line="6" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../Getting Started/models/FoolboxInit.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -534,9 +605,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
-          <folding>
-            <element signature="e#92#101#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -554,9 +622,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="132" column="22" selection-start-line="132" selection-start-column="22" selection-end-line="132" selection-end-column="22" />
-          <folding>
-            <element signature="e#92#104#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -564,9 +630,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -574,9 +637,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -584,9 +644,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
-          <folding>
-            <element signature="e#92#101#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -604,9 +661,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="132" column="22" selection-start-line="132" selection-start-column="22" selection-end-line="132" selection-end-column="22" />
-          <folding>
-            <element signature="e#92#104#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -614,9 +669,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -624,9 +676,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -634,9 +683,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
-          <folding>
-            <element signature="e#92#101#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -654,9 +700,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -664,9 +707,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="70" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -698,9 +738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="178" column="38" selection-start-line="178" selection-start-column="38" selection-end-line="178" selection-end-column="38" />
-          <folding>
-            <element signature="e#92#101#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -722,9 +759,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -732,9 +766,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -742,9 +773,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
-          <folding>
-            <element signature="e#92#101#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -752,14 +780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualization/guided_gradcam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -792,7 +812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.829686">
           <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -814,10 +833,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/guided_gradcam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/visualization/deep_dream.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
+          <caret line="108" column="9" selection-start-line="108" selection-start-column="9" selection-end-line="108" selection-end-column="9" />
           <folding>
             <element signature="e#92#101#0" expanded="true" />
           </folding>
@@ -826,8 +853,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/massRun.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25118935">
-          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.3133903">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
           <folding />
         </state>
       </provider>
