@@ -6,8 +6,8 @@ Created on Thu Oct 26 11:19:58 2017
 import torch
 from matplotlib import pyplot as plt
 from attacks import attack
-from misc_functions import get_params, convert_to_grayscale, save_gradient_images
-
+from misc_functions import get_params, convert_to_grayscale, save_gradient_images,prediction_reader
+import numpy as np
 import cv2
 class VanillaBackprop():
     """
@@ -45,12 +45,13 @@ class VanillaBackprop():
         return gradients_as_arr
 
 def runVanillaBP(choose_network = 'AlexNet',
+                 isTrained = True,
                  target_example = 3,
                  attack_type = 'FGSM'):
 #if __name__ == '__main__':
     # Get params
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,choose_network)
+        get_params(target_example,choose_network,isTrained)
 
     # Vanilla backprop
     VBP = VanillaBackprop(pretrained_model)
@@ -65,18 +66,13 @@ def runVanillaBP(choose_network = 'AlexNet',
     grayvanilbp = save_gradient_images(grayscale_vanilla_grads, file_name_to_export + '_Vanilla_BP_gray')
     print('Vanilla backprop completed')
 
-    fig = plt.figure()
-    fig.suptitle(file_name_to_export+' - '+attack_type+' - Vanilla BackProp')
 
-    ax1 = fig.add_subplot(2,2,1)
-    ax1.imshow(vanilbp)
-    ax1.set_title('Vanilla BackProp')
-    ax2 = fig.add_subplot(2,2,2)
-    ax2.imshow(grayvanilbp[:,:,0])
-    ax2.set_title('Vanilla BackProp GrayScale')
+    adversarial,advers_class,orig_pred,adver_pred = attack(attack_type,pretrained_model,
+                                      original_image,file_name_to_export,target_class)
 
-
-    adversarial,advers_class = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
+    orig_labs,orig_vals = prediction_reader(orig_pred,10)
+    adver_labs,adver_vals = prediction_reader(adver_pred,10)
+    indices = np.arange(len(orig_labs))
     # Generate gradients
     vanilla_grads = VBP.generate_gradients(adversarial, advers_class)
     # Save colored gradients
@@ -87,13 +83,51 @@ def runVanillaBP(choose_network = 'AlexNet',
     grayvanilbp2 = save_gradient_images(grayscale_vanilla_grads,'Adversary_'+ file_name_to_export + '_Vanilla_BP_gray')
     print('Adversary Vanilla backprop completed')
 
-    ax3 = fig.add_subplot(2,2,3)
+    fig = plt.figure()
+    fig.suptitle(file_name_to_export+' - '+attack_type+' - Vanilla BackProp')
+
+    ax0 = fig.add_subplot(2,4,1)
+    ax0.imshow(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB))
+    ax0.set_title('Original Image')
+
+    ax1 = fig.add_subplot(2,4,2)
+    ax1.imshow(vanilbp)
+    ax1.set_title('Vanilla BackProp')
+    ax2 = fig.add_subplot(2,4,3)
+    ax2.imshow(grayvanilbp[:,:,0])
+    ax2.set_title('Vanilla BackProp GrayScale')
+
+
+
+    ax9 = fig.add_subplot(2,4,4)
+    ax9.bar(indices,orig_vals,align='center', alpha=0.5)
+    ax9.set_title('Orignial Image Predictions')
+    ax9.set_xticks(indices)
+    ax9.set_xticklabels(orig_labs,rotation = 45,ha="right")
+
+    adversarial = cv2.imread('results/'+file_name_to_export+'_'+attack_type +'_Attack.jpg')
+    ax12 = fig.add_subplot(2,4,5)
+    ax12.imshow(cv2.cvtColor(adversarial, cv2.COLOR_BGR2RGB))
+    ax12.set_title('Adversary Image')
+
+    ax3 = fig.add_subplot(2,4,6)
     ax3.imshow(vanilbp2)
     ax3.set_title('Adversary Vanilla BackProp')
-    ax4 = fig.add_subplot(2,2,4)
+    ax4 = fig.add_subplot(2,4,7)
     ax4.imshow(grayvanilbp2[:,:,0])
     ax4.set_title('Adversary Vanilla BackProp GrayScale')
 
-    fig.set_size_inches(18.5, 10.5)
-    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_VanillaBP',dpi = 100)
+    ax10 = fig.add_subplot(2,4,8)
+    ax10.bar(indices,adver_vals,align='center', alpha=0.5)
+    ax10.set_title('Adversary Image Predictions')
+    ax10.set_xticks(indices)
+    ax10.set_xticklabels(adver_labs,rotation = 45,ha="right")
+
+    fig.set_size_inches(32, 18)
+    fig.tight_layout()
+    if isTrained:
+        train = 'Trained'
+    else:
+        train = 'UnTrained'
+    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_VanillaBP('+train+choose_network+')',dpi = 100)
 

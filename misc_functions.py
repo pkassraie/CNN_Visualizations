@@ -1,8 +1,3 @@
-"""
-Created on Thu Oct 21 11:09:09 2017
-
-@author: Utku Ozbulak - github.com/utkuozbulak
-"""
 import os
 import copy
 import cv2
@@ -11,7 +6,7 @@ import numpy as np
 import torch
 from torch.autograd import Variable
 from torchvision import models
-
+from torch.nn import functional as F
 
 def convert_to_grayscale(cv2im):
     """
@@ -150,7 +145,7 @@ def get_positive_negative_saliency(gradient):
     return pos_saliency, neg_saliency
 
 
-def get_params(example_index,network):
+def get_params(example_index,network,isTrained):
     """
         Gets used variables for almost all visualizations, like the image, model etc.
 
@@ -179,12 +174,30 @@ def get_params(example_index,network):
     prep_img = preprocess_image(original_image)
     # Define model
     if network == "AlexNet":
-        pretrained_model = models.alexnet(pretrained=True)
+        pretrained_model = models.alexnet(pretrained=isTrained)
     elif network =="VGG19":
-        pretrained_model = models.vgg19(pretrained = True)
+        pretrained_model = models.vgg19(pretrained = isTrained)
     return (original_image,
             prep_img,
             target_class,
             file_name_to_export,
             pretrained_model)
+
+
+def prediction_reader(preds,length):
+
+    dict = {}
+    with open("input_images/labels.txt") as f:
+        for line in f:
+           (key, val) = line.split(': ')
+           val = val[1:-3]
+           val = val.split(',')[0]
+           dict[int(key)] = val
+
+    output = F.softmax(torch.from_numpy(preds), dim=0).numpy()
+
+    toppreds = output.argsort()[-length:][::-1]
+    labels = [dict[x] for x in toppreds]
+    return labels,output[toppreds]
+
 

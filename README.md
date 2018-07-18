@@ -32,7 +32,7 @@
 
     Alexey Kurakin, Ian Goodfellow, Samy Bengio, “Adversarial examples in the physical world”,
 https://arxiv.org/abs/1607.02533
-* PGD
+* PGD / Random Start PGD
 
     Aleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, Adrian Vladu, “Towards Deep Learning Models Resistant to Adversarial Attacks”, https://arxiv.org/abs/1706.06083
 * Single Pixel
@@ -45,7 +45,14 @@ https://arxiv.org/abs/1607.02533
 
     Seyed-Mohsen Moosavi-Dezfooli, Alhussein Fawzi, Pascal Frossard, “DeepFool: a simple and accurate method to fool deep neural networks”, https://arxiv.org/abs/1511.04599
     
-* ...?
+* LBFGS
+
+    Pedro Tabacof, Eduardo Valle. Exploring the Space of Adversarial Images, https://arxiv.org/abs/1510.05328
+
+
+* Saliency Map
+
+    Nicolas Papernot, Patrick McDaniel, Somesh Jha, Matt Fredrikson, Z. Berkay Celik, Ananthram Swami. The Limitations of Deep Learning in Adversarial Settings,   https://arxiv.org/abs/1511.07528	
     
 ## ConvNets:
   Currently, AlexNet & VGG19 from torch vision library (pre-trained on ImageNet).
@@ -58,7 +65,7 @@ https://arxiv.org/abs/1607.02533
 
 * Choose Network: Currently you can either choose 'VGG19' or 'AlexNet'.
 
-* Attack Type: Can be chosen from: 'FGSM', 'PGD', 'Boundary', 'DeepFool', 'SinglePixel'.
+* Attack Type: Can be chosen from: 'FGSM', 'LBFGS', 'PGD', 'RPGD', 'Boundary', 'DeepFool', 'SinglePixel', 'SalMap'
 
 * Example Index: Choose a number from 0-3 to choose an image from 'input_images'.
 

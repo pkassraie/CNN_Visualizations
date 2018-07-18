@@ -10,8 +10,8 @@ from attacks import attack
 import torch
 from torch.optim import SGD
 from torchvision import models
-
-from misc_functions import preprocess_image, recreate_image,get_params
+import numpy as np
+from misc_functions import preprocess_image, recreate_image,get_params,prediction_reader
 
 class DeepDream():
     """
@@ -72,6 +72,7 @@ class DeepDream():
         return self.created_image
 
 def runDeepDream(choose_network = 'VGG19',
+                 isTrained = True,
                  target_example = 3,
                  attack_type = 'FGSM',
                  cnn_layer = 34,
@@ -81,9 +82,9 @@ def runDeepDream(choose_network = 'VGG19',
     #if __name__ == '__main__':
 
     if choose_network == 'VGG19':
-        pretrained_model = models.vgg19(pretrained=True).features
+        pretrained_model = models.vgg19(pretrained=isTrained).features
     if choose_network == 'AlexNet':
-        pretrained_model = models.AlexNet(pretrained = True).features
+        pretrained_model = models.AlexNet(pretrained = isTrained).features
 
     if target_example == 3:
         im_path = 'input_images/volcano.jpg'
@@ -99,24 +100,58 @@ def runDeepDream(choose_network = 'VGG19',
     dd = DeepDream(pretrained_model, cnn_layer, filter_pos, im_path)
     # This operation can also be done without Pytorch hooks
     # See layer visualisation for the implementation without hooks
-    (original_image, prep_img, target_class, file_name_to_export, pretrained_model) = get_params(target_example,choose_network)
+    (original_image, prep_img, target_class, file_name_to_export, pretrained_model) = get_params(target_example,
+                                                                                                 choose_network,
+                                                                                                 isTrained)
     result = dd.dream(file_name_to_export,iters)
     fig = plt.figure()
-    fig.suptitle(file_name_to_export+' - '+attack_type+' - Deep Dream '+str(cnn_layer))
-    ax1 = fig.add_subplot(2,1,1)
-    ax1.imshow(result)
+    fig.suptitle(file_name_to_export+' - '+attack_type+' - Deep Dream '+str(cnn_layer) +' On:'+ choose_network)
+    ax3 = fig.add_subplot(2,3,1)
+    ax3.imshow(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB))
+    ax3.set_title('Original Image')
+    ax1 = fig.add_subplot(2,3,2)
+    ax1.imshow((cv2.cvtColor(result, cv2.COLOR_BGR2RGB)))
     ax1.set_title('Natural Dream')
+
 # Attack:
-    attack(attack_type,pretrained_model,original_image,'DeepDream',target_class)
+    adversarial, advers_class,orig_pred,adver_pred = attack(attack_type,pretrained_model,original_image,'DeepDream',target_class)
     im_path = 'results/DeepDream_'+attack_type+'_Attack.jpg'
     dd2 = DeepDream(pretrained_model.features, cnn_layer, filter_pos, im_path)
 
     result2 = dd2.dream(file_name_to_export+'_'+attack_type,iters)
 
-    ax2 = fig.add_subplot(2,1,2)
-    ax2.imshow(result2)
+    orig_labs,orig_vals = prediction_reader(orig_pred,10)
+    adver_labs,adver_vals = prediction_reader(adver_pred,10)
+    indices = np.arange(len(orig_labs))
+
+    ax5 = fig.add_subplot(2,3,3)
+    ax5.bar(indices,orig_vals,align='center', alpha=0.5)
+    ax5.set_title('Orignial Image Predictions')
+    ax5.set_xticks(indices)
+    ax5.set_xticklabels(orig_labs,rotation = 45,ha="right")
+
+    adversarial = cv2.imread('results/'+file_name_to_export+'_'+attack_type +'_Attack.jpg')
+
+    ax4 = fig.add_subplot(2,3,4)
+    ax4.imshow(cv2.cvtColor(adversarial, cv2.COLOR_BGR2RGB))
+    ax4.set_title('Adversary Image')
+
+    ax2 = fig.add_subplot(2,3,5)
+    ax2.imshow((cv2.cvtColor(result2, cv2.COLOR_BGR2RGB)))
     ax2.set_title('Adversary Dream')
 
-    fig.set_size_inches(18.5, 10.5)
-    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+' - Deep Dream '+str(cnn_layer),dpi = 100)
+    ax6 = fig.add_subplot(2,3,6)
+    ax6.bar(indices,adver_vals,align='center', alpha=0.5)
+    ax6.set_title('Adversary Image Predictions')
+    ax6.set_xticks(indices)
+    ax6.set_xticklabels(adver_labs,rotation = 45,ha="right")
+
+    fig.set_size_inches(32, 18)
+    fig.tight_layout()
+    if isTrained:
+        train = 'Trained'
+    else:
+        train = 'UnTrained'
+    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+
+                '_DeepDream '+str(cnn_layer)+'('+train+choose_network+')',dpi = 100)
 

@@ -4,6 +4,7 @@ Created on Wed Mar 28 10:12:13 2018
 @author: Utku Ozbulak - github.com/utkuozbulak
 """
 import numpy as np
+import cv2
 import torch
 from matplotlib import pyplot as plt
 from torch.autograd import Variable
@@ -11,7 +12,8 @@ from torch.autograd import Variable
 from attacks import attack
 from misc_functions import (get_params,
                             convert_to_grayscale,
-                            save_gradient_images)
+                            save_gradient_images,
+                            prediction_reader)
 from visualization.vanilla_backprop import VanillaBackprop
 
 
@@ -48,13 +50,14 @@ def generate_smooth_grad(Backprop, prep_img, target_class, param_n, param_sigma_
     return smooth_grad
 
 def runsmoothGrad(choose_network = 'AlexNet',
+                 isTrained = True,
                  target_example = 3,
                  attack_type = 'FGSM'):
 
 #if __name__ == '__main__':
     # Get params
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,choose_network)
+        get_params(target_example,choose_network,isTrained)
 
     VBP = VanillaBackprop(pretrained_model)
     # GBP = GuidedBackprop(pretrained_model)  # if you want to use GBP dont forget to
@@ -76,19 +79,14 @@ def runsmoothGrad(choose_network = 'AlexNet',
     graygrads = save_gradient_images(grayscale_smooth_grad, file_name_to_export + '_SmoothGrad_gray')
     print('Smooth grad completed')
 
-    fig = plt.figure()
-    fig.suptitle(file_name_to_export+' - '+attack_type+' - Smooth BackProp')
-
-    ax1 = fig.add_subplot(2,2,1)
-    ax1.imshow(colorgrads)
-    ax1.set_title('Smooth BP')
-    ax2 = fig.add_subplot(2, 2, 2)
-    ax2.imshow(graygrads[:,:,0])
-    ax2.set_title('Smooth BP Gray')
-
-
     # Now the attack:
-    adversarial,advers_class = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
+    adversarial,advers_class,orig_pred,adver_pred = attack(attack_type,pretrained_model,
+                                                           original_image,file_name_to_export,target_class)
+
+    orig_labs,orig_vals = prediction_reader(orig_pred,10)
+    adver_labs,adver_vals = prediction_reader(adver_pred,10)
+    indices = np.arange(len(orig_labs))
+
     smooth_grad = generate_smooth_grad(VBP,  # ^This parameter
                                        adversarial,
                                        advers_class,
@@ -103,14 +101,52 @@ def runsmoothGrad(choose_network = 'AlexNet',
     graygrads2 = save_gradient_images(grayscale_smooth_grad, 'Adversary_'+file_name_to_export + '_SmoothGrad_gray')
     print('Adversary Smooth grad completed')
 
-    ax3 = fig.add_subplot(2, 2, 3)
+
+    fig = plt.figure()
+    fig.suptitle(file_name_to_export+' - '+attack_type+' - Smooth BackProp')
+
+    ax0 = fig.add_subplot(2,4,1)
+    ax0.imshow(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB))
+    ax0.set_title('Original Image')
+
+    ax1 = fig.add_subplot(2,4,2)
+    ax1.imshow(colorgrads)
+    ax1.set_title('Smooth BP')
+    ax2 = fig.add_subplot(2, 4, 3)
+    ax2.imshow(graygrads[:,:,0])
+    ax2.set_title('Smooth BP Gray')
+
+    ax9 = fig.add_subplot(2,4,4)
+    ax9.bar(indices,orig_vals,align='center', alpha=0.5)
+    ax9.set_title('Orignial Image Predictions')
+    ax9.set_xticks(indices)
+    ax9.set_xticklabels(orig_labs,rotation = 45,ha="right")
+
+    adversarial = cv2.imread('results/'+file_name_to_export+'_'+attack_type +'_Attack.jpg')
+    ax12 = fig.add_subplot(2,4,5)
+    ax12.imshow(cv2.cvtColor(adversarial, cv2.COLOR_BGR2RGB))
+    ax12.set_title('Adversary Image')
+
+    ax3 = fig.add_subplot(2, 4, 6)
     ax3.imshow(colorgrads2)
     ax3.set_title('Adversary Smooth BP')
-    ax4 = fig.add_subplot(2, 2, 4)
+    ax4 = fig.add_subplot(2, 4, 7)
     ax4.imshow(graygrads2[:,:,0])
     ax4.set_title('Adversary Smooth BP Gray')
 
-    fig.set_size_inches(18.5, 10.5)
-    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_SmoothGrad',dpi = 100)
+    ax10 = fig.add_subplot(2,4,8)
+    ax10.bar(indices,adver_vals,align='center', alpha=0.5)
+    ax10.set_title('Adversary Image Predictions')
+    ax10.set_xticks(indices)
+    ax10.set_xticklabels(adver_labs,rotation = 45,ha="right")
+
+    fig.set_size_inches(32, 18)
+    fig.tight_layout()
+    if isTrained:
+        train = 'Trained'
+    else:
+        train = 'UnTrained'
+
+    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_SmoothGrad('+train+choose_network+')',dpi = 100)
 
     return np.cov(graygrads[:,:,0],graygrads2[:,:,0])

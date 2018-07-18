@@ -6,11 +6,12 @@ Created on Thu Oct 23 11:27:15 2017
 import numpy as np
 from guided_backprop import GuidedBackprop
 from matplotlib import pyplot as plt
-
+import cv2
 from attacks import attack
 from misc_functions import (get_params,
                             convert_to_grayscale,
-                            save_gradient_images)
+                            save_gradient_images,
+                            prediction_reader)
 from visualization.gradcam import GradCam
 
 
@@ -27,12 +28,13 @@ def guided_grad_cam(grad_cam_mask, guided_backprop_mask):
     return cam_gb
 
 def runGGradCam(choose_network = 'AlexNet',
+                isTrained = True,
                  target_example = 3,
                  attack_type = 'FGSM'):
     #if __name__ == '__main__':
     # Get params
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,choose_network)
+        get_params(target_example,choose_network,isTrained)
 
     # Grad cam
     gcv2 = GradCam(pretrained_model, target_layer=11)
@@ -53,19 +55,12 @@ def runGGradCam(choose_network = 'AlexNet',
     grayguidedgrad = save_gradient_images(grayscale_cam_gb, file_name_to_export + '_GGrad_Cam_gray')
     print('Guided grad cam completed')
 
+    adversarial,advers_class,orig_pred,adver_pred = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
 
-    fig = plt.figure()
-    fig.suptitle(file_name_to_export+' - '+attack_type+' - Guided GradCam')
+    orig_labs,orig_vals = prediction_reader(orig_pred,10)
+    adver_labs,adver_vals = prediction_reader(adver_pred,10)
+    indices = np.arange(len(orig_labs))
 
-    ax1 = fig.add_subplot(2,2,1)
-    ax1.imshow(guidedgrad)
-    ax1.set_title('Guided Grad Cam')
-    ax2 = fig.add_subplot(2,2,2)
-    ax2.imshow(grayguidedgrad[:,:,0])
-    ax2.set_title('Guided Grad Cam Grasycale')
-
-
-    adversarial,advers_class = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
     cam = gcv2.generate_cam(adversarial, advers_class)
     print('Grad cam completed')
 
@@ -80,17 +75,52 @@ def runGGradCam(choose_network = 'AlexNet',
     guidedgrad2 = save_gradient_images(cam_gb, 'Adversary_'+ file_name_to_export + '_GGrad_Cam')
     grayscale_cam_gb = convert_to_grayscale(cam_gb)
     grayguidedgrad2 = save_gradient_images(grayscale_cam_gb,'Adversary_'+ file_name_to_export + '_GGrad_Cam_gray')
-    print('Guided grad cam completed')
+    print('Adversary Guided grad cam completed')
 
 
-    ax3 = fig.add_subplot(2,2,3)
+    fig = plt.figure()
+    fig.suptitle(file_name_to_export+' - '+attack_type+' - Guided GradCam')
+    ax0 = fig.add_subplot(2,4,1)
+    ax0.imshow(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB))
+    ax0.set_title('Original Image')
+    ax1 = fig.add_subplot(2,4,2)
+    ax1.imshow(guidedgrad)
+    ax1.set_title('Guided Grad Cam')
+    ax2 = fig.add_subplot(2,4,3)
+    ax2.imshow(grayguidedgrad[:,:,0])
+    ax2.set_title('Guided Grad Cam Grasycale')
+
+    ax9 = fig.add_subplot(2,4,4)
+    ax9.bar(indices,orig_vals,align='center', alpha=0.5)
+    ax9.set_title('Orignial Image Predictions')
+    ax9.set_xticks(indices)
+    ax9.set_xticklabels(orig_labs,rotation = 45,ha="right")
+
+    adversarial = cv2.imread('results/'+file_name_to_export+'_'+attack_type +'_Attack.jpg')
+    ax12 = fig.add_subplot(2,4,5)
+    ax12.imshow(cv2.cvtColor(adversarial, cv2.COLOR_BGR2RGB))
+    ax12.set_title('Adversary Image')
+
+    ax3 = fig.add_subplot(2,4,6)
     ax3.imshow(guidedgrad2)
     ax3.set_title('Adversary Guided Grad Cam')
-    ax4 = fig.add_subplot(2,2,4)
+    ax4 = fig.add_subplot(2,4,7)
     ax4.imshow(grayguidedgrad2[:,:,0])
     ax4.set_title('Adversary Guided Grad Cam Grasycale')
 
-    fig.set_size_inches(18.5, 10.5)
-    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_Guided GradCam',dpi = 100)
+    ax10 = fig.add_subplot(2,4,8)
+    ax10.bar(indices,adver_vals,align='center', alpha=0.5)
+    ax10.set_title('Adversary Image Predictions')
+    ax10.set_xticks(indices)
+    ax10.set_xticklabels(adver_labs,rotation = 45,ha="right")
+
+    fig.set_size_inches(32, 18)
+    fig.tight_layout()
+    if isTrained:
+        train = 'Trained'
+    else:
+        train = 'UnTrained'
+    fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_Guided GradCam('+
+                train+choose_network+')',dpi = 100)
 
     return np.cov(grayguidedgrad[:,:,0],grayguidedgrad2[:,:,0])

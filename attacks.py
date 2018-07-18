@@ -21,6 +21,7 @@ def attack(type, model, image, file_name,label):
     image = np.float32(image / 255.)  # because our model expects values in [0, 1]
     #label = target_class  #WHAT SHOULD I DO HERE?!?
     label = np.argmax(fmodel.predictions(image))
+    orig_preds = np.array(fmodel.predictions(image))
 
     # select the attack:
     if type == 'FGSM':
@@ -28,7 +29,7 @@ def attack(type, model, image, file_name,label):
         attack_name = '_FGSM'
         adversarial = attack(image,np.int64(label))
     elif type =='PGD':
-        attack = foolbox.attacks.RandomStartProjectedGradientDescentAttack(fmodel)
+        attack = foolbox.attacks.ProjectedGradientDescentAttack(fmodel)
         attack_name = '_PGD'
         adversarial = attack(image,np.int64(label))
     elif type == 'DeepFool':
@@ -43,10 +44,24 @@ def attack(type, model, image, file_name,label):
         attack = foolbox.attacks.BoundaryAttack(fmodel) # Default iterations ir on 5000!!
         attack_name = '_Boundary'
         adversarial = attack(image,np.int64(label))
+    elif type == 'RPGD':
+        attack = foolbox.attacks.RandomStartProjectedGradientDescentAttack(fmodel)
+        attack_name = '_RandomPGD'
+        adversarial = attack(image,np.int64(label)) # shouldn't this be trained on the actual output instead of the label?
 
-    adversarial = attack(image,np.int64(label)) # shouldn't this be trained on the actual output instead of the label?
+    elif type == 'LBFGS':
+        attack = foolbox.attacks.LBFGSAttack(fmodel)
+        attack_name = '_LBFGS'
+        adverarial = attack(image,np.int64(label))
+
+    elif type == 'SalMap':
+        attack = foolbox.attacks.SaliencyMapAttack(fmodel)
+        attack_name = '_SaliMap'
+
+
     # apply attack on source image
     advers_class = np.argmax(fmodel.predictions(adversarial))
+    adver_preds = np.array(fmodel.predictions(adversarial))
 
     print('label', label)
     print('predicted class', np.argmax(fmodel.predictions(image)))
@@ -57,7 +72,7 @@ def attack(type, model, image, file_name,label):
     adversarial = adversarial * 255.
 
     cv2.imwrite('results/'+file_name+ attack_name +'_Attack.jpg',adversarial)
-    cv2.imwrite('results/'+ file_name+'.jpg',temp)
+
     adversarial = preprocess_image(adversarial)
 
-    return adversarial,advers_class
+    return adversarial,advers_class,orig_preds,adver_preds
