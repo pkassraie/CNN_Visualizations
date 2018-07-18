@@ -11,7 +11,7 @@ from misc_functions import (get_params,
                             convert_to_grayscale,
                             save_gradient_images,
                             get_positive_negative_saliency)
-
+import numpy as np
 class GuidedBackprop():
     """
        Produces gradients generated with guided back propagation from the given image
@@ -61,6 +61,7 @@ class GuidedBackprop():
         # [0] to get rid of the first channel (1,3,224,224)
         gradients_as_arr = self.gradients.data.numpy()[0]
         return gradients_as_arr
+
 
 def runGBackProp(choose_network = 'AlexNet',
                  target_example = 3,
@@ -136,3 +137,4 @@ def runGBackProp(choose_network = 'AlexNet',
 
     fig.set_size_inches(18.5, 10.5)
     fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_Guided Back Prop',dpi = 100)
+

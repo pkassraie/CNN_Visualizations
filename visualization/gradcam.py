@@ -143,3 +143,5 @@ def runGradCam(choose_network = 'AlexNet',
 
     fig.set_size_inches(18.5, 10.5)
     fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_GradCam',dpi = 100)
+
+    return np.cov(gray,gray2)

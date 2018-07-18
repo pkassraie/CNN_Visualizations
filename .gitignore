@@ -180,6 +180,8 @@ env.bak/
 
 venv.bak/
 
+result/
+
 
 
 # Spyder project settings
