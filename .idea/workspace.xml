@@ -2,35 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8344d12-8091-45c3-b842-6dacb9194184" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM - Deep Dream 34.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/spider_DeepFool_GradCam.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/spider_DeepFool_Guided GradCam.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/spider_DeepFool_SmoothGrad.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/spider_PGD_GradCam.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/spider_PGD_Guided GradCam.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/spider_PGD_SmoothGrad.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/volcano_DeepFool_GradCam.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/volcano_DeepFool_Guided GradCam.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/volcano_DeepFool_SmoothGrad.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/volcano_FGSM - Deep Dream 34.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/volcano_PGD_GradCam.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/volcano_PGD_Guided GradCam.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Concise Results/volcano_PGD_SmoothGrad.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_Guided Back Prop.png" afterPath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_Guided Back Prop.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_VanillaBP.png" afterPath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_VanillaBP.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM_Guided Back Prop.png" afterPath="$PROJECT_DIR$/Concise Results/snake_FGSM_Guided Back Prop.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM_InvertedRep.png" afterPath="$PROJECT_DIR$/Concise Results/snake_FGSM_InvertedRep.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM_SmoothGrad.png" afterPath="$PROJECT_DIR$/Concise Results/snake_FGSM_SmoothGrad.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM_VanillaBP.png" afterPath="$PROJECT_DIR$/Concise Results/snake_FGSM_VanillaBP.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/spider_FGSM_GradCam.png" afterPath="$PROJECT_DIR$/Concise Results/spider_FGSM_GradCam.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/spider_FGSM_Guided GradCam.png" afterPath="$PROJECT_DIR$/Concise Results/spider_FGSM_Guided GradCam.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/spider_FGSM_SmoothGrad.png" afterPath="$PROJECT_DIR$/Concise Results/spider_FGSM_SmoothGrad.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/volcano_FGSM_GradCam.png" afterPath="$PROJECT_DIR$/Concise Results/volcano_FGSM_GradCam.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/volcano_FGSM_Guided Back Prop.png" afterPath="$PROJECT_DIR$/Concise Results/volcano_FGSM_Guided Back Prop.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/volcano_FGSM_Guided GradCam.png" afterPath="$PROJECT_DIR$/Concise Results/volcano_FGSM_Guided GradCam.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/volcano_FGSM_InvertedRep.png" afterPath="$PROJECT_DIR$/Concise Results/volcano_FGSM_InvertedRep.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/volcano_FGSM_SmoothGrad.png" afterPath="$PROJECT_DIR$/Concise Results/volcano_FGSM_SmoothGrad.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/volcano_FGSM_VanillaBP.png" afterPath="$PROJECT_DIR$/Concise Results/volcano_FGSM_VanillaBP.png" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/results/DeepDream.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/results/DeepDream_FGSM_Attack.jpg" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_GradCam(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_GradCam(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_Guided Back Prop(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_Guided Back Prop(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_Guided GradCam(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_Guided GradCam(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_InvertedRep(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_InvertedRep(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_SmoothGrad(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_SmoothGrad(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_VanillaBP(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/cat_dog_FGSM_VanillaBP(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM_GradCam(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/snake_FGSM_GradCam(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM_Guided Back Prop(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/snake_FGSM_Guided Back Prop(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM_Guided GradCam(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/snake_FGSM_Guided GradCam(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM_InvertedRep(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/snake_FGSM_InvertedRep(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM_SmoothGrad(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/snake_FGSM_SmoothGrad(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/snake_FGSM_VanillaBP(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/snake_FGSM_VanillaBP(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/spider_FGSM_GradCam(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/spider_FGSM_GradCam(UnTrainedAlexNet).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Concise Results/spider_FGSM_Guided GradCam(UnTrainedAlexNet).png" afterPath="$PROJECT_DIR$/Concise Results/spider_FGSM_Guided GradCam(UnTrainedAlexNet).png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversarial_cat_dog_Guided_BP_color_.jpg" afterPath="$PROJECT_DIR$/results/Adversarial_cat_dog_Guided_BP_color_.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversarial_cat_dog_Guided_BP_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversarial_cat_dog_Guided_BP_gray.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversarial_cat_dog_neg_sal.jpg" afterPath="$PROJECT_DIR$/results/Adversarial_cat_dog_neg_sal.jpg" />
@@ -39,15 +26,13 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversarial_snake_Guided_BP_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversarial_snake_Guided_BP_gray.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversarial_snake_neg_sal.jpg" afterPath="$PROJECT_DIR$/results/Adversarial_snake_neg_sal.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversarial_snake_pos_sal.jpg" afterPath="$PROJECT_DIR$/results/Adversarial_snake_pos_sal.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversarial_volcano_Guided_BP_color_.jpg" afterPath="$PROJECT_DIR$/results/Adversarial_volcano_Guided_BP_color_.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversarial_volcano_Guided_BP_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversarial_volcano_Guided_BP_gray.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversarial_volcano_neg_sal.jpg" afterPath="$PROJECT_DIR$/results/Adversarial_volcano_neg_sal.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversarial_volcano_pos_sal.jpg" afterPath="$PROJECT_DIR$/results/Adversarial_volcano_pos_sal.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_cat_dog_Cam_Grayscale.jpg" afterPath="$PROJECT_DIR$/results/Adversary_cat_dog_Cam_Grayscale.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_cat_dog_Cam_Heatmap.jpg" afterPath="$PROJECT_DIR$/results/Adversary_cat_dog_Cam_Heatmap.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_cat_dog_Cam_On_Image.jpg" afterPath="$PROJECT_DIR$/results/Adversary_cat_dog_Cam_On_Image.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_cat_dog_GGrad_Cam.jpg" afterPath="$PROJECT_DIR$/results/Adversary_cat_dog_GGrad_Cam.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_cat_dog_GGrad_Cam_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversary_cat_dog_GGrad_Cam_gray.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_cat_dog_SmoothGrad_color.jpg" afterPath="$PROJECT_DIR$/results/Adversary_cat_dog_SmoothGrad_color.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_cat_dog_SmoothGrad_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversary_cat_dog_SmoothGrad_gray.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_cat_dog_Vanilla_BP_color.jpg" afterPath="$PROJECT_DIR$/results/Adversary_cat_dog_Vanilla_BP_color.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_cat_dog_Vanilla_BP_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversary_cat_dog_Vanilla_BP_gray.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_snake_Cam_Grayscale.jpg" afterPath="$PROJECT_DIR$/results/Adversary_snake_Cam_Grayscale.jpg" />
@@ -64,17 +49,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_spider_Cam_On_Image.jpg" afterPath="$PROJECT_DIR$/results/Adversary_spider_Cam_On_Image.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_spider_GGrad_Cam.jpg" afterPath="$PROJECT_DIR$/results/Adversary_spider_GGrad_Cam.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_spider_GGrad_Cam_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversary_spider_GGrad_Cam_gray.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_spider_SmoothGrad_color.jpg" afterPath="$PROJECT_DIR$/results/Adversary_spider_SmoothGrad_color.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_spider_SmoothGrad_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversary_spider_SmoothGrad_gray.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_Cam_Grayscale.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_Cam_Grayscale.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_Cam_Heatmap.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_Cam_Heatmap.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_Cam_On_Image.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_Cam_On_Image.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_GGrad_Cam.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_GGrad_Cam.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_GGrad_Cam_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_GGrad_Cam_gray.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_SmoothGrad_color.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_SmoothGrad_color.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_SmoothGrad_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_SmoothGrad_gray.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_Vanilla_BP_color.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_Vanilla_BP_color.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Adversary_volcano_Vanilla_BP_gray.jpg" afterPath="$PROJECT_DIR$/results/Adversary_volcano_Vanilla_BP_gray.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_0.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_0.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_0_Adversarial.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_0_Adversarial.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_100.jpg" afterPath="$PROJECT_DIR$/results/Inv_Image_Layer_12_Iteration_100.jpg" />
@@ -90,11 +64,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_Cam_Grayscale.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_Cam_Grayscale.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_Cam_Heatmap.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_Cam_Heatmap.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_Cam_On_Image.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_Cam_On_Image.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_FGSM_Attack.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_FGSM_Attack.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_GGrad_Cam.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_GGrad_Cam.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_GGrad_Cam_gray.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_GGrad_Cam_gray.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_Guided_BP_color.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_Guided_BP_color.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_Guided_BP_gray.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_Guided_BP_gray.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_SmoothGrad_color.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_SmoothGrad_color.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_SmoothGrad_gray.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_SmoothGrad_gray.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_Vanilla_BP_color.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_Vanilla_BP_color.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_Vanilla_BP_gray.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_Vanilla_BP_gray.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/cat_dog_neg_sal.jpg" afterPath="$PROJECT_DIR$/results/cat_dog_neg_sal.jpg" />
@@ -102,7 +77,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_Cam_Grayscale.jpg" afterPath="$PROJECT_DIR$/results/snake_Cam_Grayscale.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_Cam_Heatmap.jpg" afterPath="$PROJECT_DIR$/results/snake_Cam_Heatmap.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_Cam_On_Image.jpg" afterPath="$PROJECT_DIR$/results/snake_Cam_On_Image.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_FGSM_Attack.jpg" afterPath="$PROJECT_DIR$/results/snake_FGSM_Attack.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_GGrad_Cam.jpg" afterPath="$PROJECT_DIR$/results/snake_GGrad_Cam.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_GGrad_Cam_gray.jpg" afterPath="$PROJECT_DIR$/results/snake_GGrad_Cam_gray.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/snake_Guided_BP_color.jpg" afterPath="$PROJECT_DIR$/results/snake_Guided_BP_color.jpg" />
@@ -116,28 +90,13 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_Cam_Grayscale.jpg" afterPath="$PROJECT_DIR$/results/spider_Cam_Grayscale.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_Cam_Heatmap.jpg" afterPath="$PROJECT_DIR$/results/spider_Cam_Heatmap.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_Cam_On_Image.jpg" afterPath="$PROJECT_DIR$/results/spider_Cam_On_Image.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_FGSM_Attack.jpg" afterPath="$PROJECT_DIR$/results/spider_FGSM_Attack.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_GGrad_Cam.jpg" afterPath="$PROJECT_DIR$/results/spider_GGrad_Cam.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_GGrad_Cam_gray.jpg" afterPath="$PROJECT_DIR$/results/spider_GGrad_Cam_gray.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_SmoothGrad_color.jpg" afterPath="$PROJECT_DIR$/results/spider_SmoothGrad_color.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/spider_SmoothGrad_gray.jpg" afterPath="$PROJECT_DIR$/results/spider_SmoothGrad_gray.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_Cam_Grayscale.jpg" afterPath="$PROJECT_DIR$/results/volcano_Cam_Grayscale.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_Cam_Heatmap.jpg" afterPath="$PROJECT_DIR$/results/volcano_Cam_Heatmap.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_Cam_On_Image.jpg" afterPath="$PROJECT_DIR$/results/volcano_Cam_On_Image.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_GGrad_Cam.jpg" afterPath="$PROJECT_DIR$/results/volcano_GGrad_Cam.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_GGrad_Cam_gray.jpg" afterPath="$PROJECT_DIR$/results/volcano_GGrad_Cam_gray.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_Guided_BP_color.jpg" afterPath="$PROJECT_DIR$/results/volcano_Guided_BP_color.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_Guided_BP_gray.jpg" afterPath="$PROJECT_DIR$/results/volcano_Guided_BP_gray.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_SmoothGrad_color.jpg" afterPath="$PROJECT_DIR$/results/volcano_SmoothGrad_color.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_SmoothGrad_gray.jpg" afterPath="$PROJECT_DIR$/results/volcano_SmoothGrad_gray.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_Vanilla_BP_color.jpg" afterPath="$PROJECT_DIR$/results/volcano_Vanilla_BP_color.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_Vanilla_BP_gray.jpg" afterPath="$PROJECT_DIR$/results/volcano_Vanilla_BP_gray.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_neg_sal.jpg" afterPath="$PROJECT_DIR$/results/volcano_neg_sal.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/results/volcano_pos_sal.jpg" afterPath="$PROJECT_DIR$/results/volcano_pos_sal.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/attacks.py" afterPath="$PROJECT_DIR$/attacks.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imageSimilarity.py" afterPath="$PROJECT_DIR$/imageSimilarity.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/massRun.py" afterPath="$PROJECT_DIR$/massRun.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/misc_functions.py" afterPath="$PROJECT_DIR$/misc_functions.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/visualization/deep_dream.py" afterPath="$PROJECT_DIR$/visualization/deep_dream.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/visualization/gradcam.py" afterPath="$PROJECT_DIR$/visualization/gradcam.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/visualization/guided_backprop.py" afterPath="$PROJECT_DIR$/visualization/guided_backprop.py" />
@@ -165,14 +124,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="massRun.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="massRun.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/massRun.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4985755">
-              <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
               <folding>
                 <element signature="e#1#28#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="guided_backprop.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/visualization/guided_backprop.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.43874645">
+              <caret line="145" column="54" selection-start-line="145" selection-start-column="54" selection-end-line="145" selection-end-column="54" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -212,10 +181,10 @@
         <option value="$PROJECT_DIR$/smooth_grad.py" />
         <option value="$PROJECT_DIR$/vanilla_backprop.py" />
         <option value="$PROJECT_DIR$/visualization/__init__.py" />
-        <option value="$PROJECT_DIR$/attacks.py" />
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/imageSimilarity.py" />
         <option value="$PROJECT_DIR$/misc_functions.py" />
+        <option value="$PROJECT_DIR$/imageSimilarity.py" />
+        <option value="$PROJECT_DIR$/massRun.py" />
         <option value="$PROJECT_DIR$/visualization/vanilla_backprop.py" />
         <option value="$PROJECT_DIR$/visualization/smooth_grad.py" />
         <option value="$PROJECT_DIR$/visualization/inverted_representation.py" />
@@ -223,7 +192,7 @@
         <option value="$PROJECT_DIR$/visualization/guided_backprop.py" />
         <option value="$PROJECT_DIR$/visualization/gradcam.py" />
         <option value="$PROJECT_DIR$/visualization/deep_dream.py" />
-        <option value="$PROJECT_DIR$/massRun.py" />
+        <option value="$PROJECT_DIR$/attacks.py" />
       </list>
     </option>
   </component>
@@ -326,23 +295,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.massRun">
-    <configuration default="false" name="smooth_grad" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Visualizing Adversarial Examples on ImageNet" />
-      <option name="SCRIPT_NAME" value="C:\Users\Nirvana\Documents\CAMP\Visualizing Adversarial Examples on ImageNet\visualization\smooth_grad.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="vanilla_backprop" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -407,6 +359,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Visualizing Adversarial Examples on ImageNet" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/visualization/guided_backprop.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="imageSimilarity" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Visualizing Adversarial Examples on ImageNet" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/imageSimilarity.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -534,19 +503,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.smooth_grad" />
-      <item index="1" class="java.lang.String" itemvalue="Python.vanilla_backprop" />
-      <item index="2" class="java.lang.String" itemvalue="Python.massRun" />
-      <item index="3" class="java.lang.String" itemvalue="Python.test" />
-      <item index="4" class="java.lang.String" itemvalue="Python.guided_backprop" />
+      <item index="0" class="java.lang.String" itemvalue="Python.vanilla_backprop" />
+      <item index="1" class="java.lang.String" itemvalue="Python.massRun" />
+      <item index="2" class="java.lang.String" itemvalue="Python.test" />
+      <item index="3" class="java.lang.String" itemvalue="Python.guided_backprop" />
+      <item index="4" class="java.lang.String" itemvalue="Python.imageSimilarity" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.massRun" />
-        <item index="1" class="java.lang.String" itemvalue="Python.test" />
-        <item index="2" class="java.lang.String" itemvalue="Python.guided_backprop" />
-        <item index="3" class="java.lang.String" itemvalue="Python.vanilla_backprop" />
-        <item index="4" class="java.lang.String" itemvalue="Python.smooth_grad" />
+        <item index="1" class="java.lang.String" itemvalue="Python.imageSimilarity" />
+        <item index="2" class="java.lang.String" itemvalue="Python.test" />
+        <item index="3" class="java.lang.String" itemvalue="Python.guided_backprop" />
+        <item index="4" class="java.lang.String" itemvalue="Python.vanilla_backprop" />
       </list>
     </recent_temporary>
   </component>
@@ -905,84 +874,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/attacks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imageSimilarity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualization/vanilla_backprop.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="131" column="82" selection-start-line="131" selection-start-column="82" selection-end-line="131" selection-end-column="109" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualization/smooth_grad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="149" column="110" selection-start-line="149" selection-start-column="110" selection-end-line="149" selection-end-column="110" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualization/inverted_representation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="185" column="111" selection-start-line="185" selection-start-column="111" selection-end-line="185" selection-end-column="111" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualization/guided_gradcam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="123" column="16" selection-start-line="123" selection-start-column="16" selection-end-line="123" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualization/guided_backprop.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="174" column="16" selection-start-line="174" selection-start-column="16" selection-end-line="174" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualization/gradcam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="177" column="16" selection-start-line="177" selection-start-column="16" selection-end-line="177" selection-end-column="16" />
-          <folding>
-            <element signature="e#92#102#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualization/deep_dream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.888889">
-          <caret line="156" column="0" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
-          <folding>
-            <element signature="e#92#101#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/misc_functions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6866097">
@@ -991,13 +882,89 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/imageSimilarity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/massRun.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4985755">
-          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
           <folding>
             <element signature="e#1#28#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/deep_dream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="136" column="53" selection-start-line="136" selection-start-column="53" selection-end-line="136" selection-end-column="53" />
+          <folding>
+            <element signature="e#92#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/vanilla_backprop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65527064">
+          <caret line="110" column="45" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/attacks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7806268">
+          <caret line="81" column="93" selection-start-line="81" selection-start-column="93" selection-end-line="81" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/inverted_representation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.93732196">
+          <caret line="167" column="54" selection-start-line="167" selection-start-column="54" selection-end-line="167" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/smooth_grad.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3133903">
+          <caret line="127" column="54" selection-start-line="127" selection-start-column="54" selection-end-line="127" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/guided_gradcam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6581197">
+          <caret line="101" column="54" selection-start-line="101" selection-start-column="54" selection-end-line="101" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/gradcam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18803419">
+          <caret line="152" column="54" selection-start-line="152" selection-start-column="54" selection-end-line="152" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization/guided_backprop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43874645">
+          <caret line="145" column="54" selection-start-line="145" selection-start-column="54" selection-end-line="145" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -135,7 +135,7 @@ def runInvRep(choose_network = 'AlexNet',
                                                                    False,
                                                                    target_layer)
 
-    adversarial,advers_class,orig_pred,adver_pred = attack(attack_type,pretrained_model,original_image,
+    adversarial,advers_class,orig_pred,adver_pred,diff = attack(attack_type,pretrained_model,original_image,
                                                            file_name_to_export,target_class)
     orig_labs,orig_vals = prediction_reader(orig_pred,10)
     adver_labs,adver_vals = prediction_reader(adver_pred,10)
@@ -165,7 +165,7 @@ def runInvRep(choose_network = 'AlexNet',
     adversarial = cv2.imread('results/'+file_name_to_export+'_'+attack_type +'_Attack.jpg')
     ax12 = fig.add_subplot(2,3,4)
     ax12.imshow(cv2.cvtColor(adversarial, cv2.COLOR_BGR2RGB))
-    ax12.set_title('Adversary Image')
+    ax12.set_title('Adversary Image(SSIM = '+str(diff)+')')
 
     ax2 = fig.add_subplot(2,3,5)
     ax2.imshow(adversres)

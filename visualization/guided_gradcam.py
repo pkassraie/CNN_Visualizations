@@ -55,7 +55,7 @@ def runGGradCam(choose_network = 'AlexNet',
     grayguidedgrad = save_gradient_images(grayscale_cam_gb, file_name_to_export + '_GGrad_Cam_gray')
     print('Guided grad cam completed')
 
-    adversarial,advers_class,orig_pred,adver_pred = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
+    adversarial,advers_class,orig_pred,adver_pred,diff = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
 
     orig_labs,orig_vals = prediction_reader(orig_pred,10)
     adver_labs,adver_vals = prediction_reader(adver_pred,10)
@@ -99,7 +99,7 @@ def runGGradCam(choose_network = 'AlexNet',
     adversarial = cv2.imread('results/'+file_name_to_export+'_'+attack_type +'_Attack.jpg')
     ax12 = fig.add_subplot(2,4,5)
     ax12.imshow(cv2.cvtColor(adversarial, cv2.COLOR_BGR2RGB))
-    ax12.set_title('Adversary Image')
+    ax12.set_title('Adversary Image(SSIM = '+str(diff)+')')
 
     ax3 = fig.add_subplot(2,4,6)
     ax3.imshow(guidedgrad2)

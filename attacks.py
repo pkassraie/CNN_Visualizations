@@ -3,6 +3,7 @@ import foolbox
 import cv2
 from misc_functions import preprocess_image
 
+from skimage.measure import compare_ssim as ssim
 
 # So basically, the attack functions receive a trained model, an image (and sometimes) the correct label.
 # They return a processed adversarial image, ready to be fed to the visualizer.
@@ -28,22 +29,27 @@ def attack(type, model, image, file_name,label):
         attack = foolbox.attacks.FGSM(fmodel)
         attack_name = '_FGSM'
         adversarial = attack(image,np.int64(label))
+
     elif type =='PGD':
         attack = foolbox.attacks.ProjectedGradientDescentAttack(fmodel)
         attack_name = '_PGD'
         adversarial = attack(image,np.int64(label))
+
     elif type == 'DeepFool':
         attack = foolbox.attacks.DeepFoolLinfinityAttack(fmodel)
         attack_name = '_DeepFool'
         adversarial = attack(image,np.int64(label))
+
     elif type =='SinglePixel':
         attack = foolbox.attacks.SinglePixelAttack(fmodel)
         attack_name = '_SinglePixel'
         adversarial = attack(image,np.int64(label))
+
     elif type =='Boundary':
         attack = foolbox.attacks.BoundaryAttack(fmodel) # Default iterations ir on 5000!!
         attack_name = '_Boundary'
         adversarial = attack(image,np.int64(label))
+
     elif type == 'RPGD':
         attack = foolbox.attacks.RandomStartProjectedGradientDescentAttack(fmodel)
         attack_name = '_RandomPGD'
@@ -52,11 +58,12 @@ def attack(type, model, image, file_name,label):
     elif type == 'LBFGS':
         attack = foolbox.attacks.LBFGSAttack(fmodel)
         attack_name = '_LBFGS'
-        adverarial = attack(image,np.int64(label))
+        adversarial = attack(image,np.int64(label))
 
     elif type == 'SalMap':
         attack = foolbox.attacks.SaliencyMapAttack(fmodel)
-        attack_name = '_SaliMap'
+        attack_name = '_SalMap'
+        adversarial = attack(image,np.int64(label))
 
 
     # apply attack on source image
@@ -72,7 +79,8 @@ def attack(type, model, image, file_name,label):
     adversarial = adversarial * 255.
 
     cv2.imwrite('results/'+file_name+ attack_name +'_Attack.jpg',adversarial)
+    cv2.imwrite('results/'+file_name+ attack_name +'_Attack(Difference).jpg',adversarial-temp)
 
+    diff = ssim(temp, adversarial,multichannel=True)
     adversarial = preprocess_image(adversarial)
-
-    return adversarial,advers_class,orig_preds,adver_preds
+    return adversarial,advers_class,orig_preds,adver_preds, diff

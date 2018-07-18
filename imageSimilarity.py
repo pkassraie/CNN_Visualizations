@@ -21,6 +21,8 @@ ssim_none = ssim(img1, img2)
 
 
 label = 'MSE: {:.6f}, SSIM: {:.6f}'
+tep = img1-img2
+print(tep)
 
 ax[0].imshow(img1)
 ax[0].set_title('Original image')
