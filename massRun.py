@@ -9,7 +9,7 @@ target_example = range(0, 4) #its (0,4) really
 #fig = plt.figure()
 #fig.suptitle('Covariance Matrices of'+str(target_example)+' (on AlexNet)')
 #j = 1
-a = 'SalMap'
+a = 'FGSM'
 
 for i in target_example:
     #runDeepDream(target_example=i)

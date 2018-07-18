@@ -1,6 +1,6 @@
 # CAMP-Project
 
-![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/snake_SalMap_GradCam(TrainedAlexNet).png)
+![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/cat_dog_FGSM_Guided Back Prop(TrainedAlexNet).png)
 
 ## Visualization Methods:
 
