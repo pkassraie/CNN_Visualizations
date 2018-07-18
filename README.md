@@ -1,4 +1,7 @@
 # CAMP-Project
+
+![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/snake_SalMap_GradCam(TrainedAlexNet).png)
+
 ## Visualization Methods:
 
 * Guided Back Prop / Vanilla Back Prop
