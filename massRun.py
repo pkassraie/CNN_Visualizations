@@ -1,25 +1,24 @@
-
 from visualization import *
 from matplotlib import pyplot as plt
 attacks = ['FGSM','PGD','DeepFool','Boundary','SinglePixel','SalMap','LBFGS','RPGD']
 networks = ['VGG19','AlexNet']
-trained = False
+trained = True
 target_example = range(0, 4) #its (0,4) really
 
 #fig = plt.figure()
 #fig.suptitle('Covariance Matrices of'+str(target_example)+' (on AlexNet)')
 #j = 1
-a = 'SalMap'
+a = 'FGSM'
 
 for i in target_example:
     #runDeepDream(target_example=i)
-    runGradCam(target_example=i, attack_type=a, isTrained=trained)
-    runGGradCam(target_example=i, attack_type=a, isTrained=trained)
-    runGBackProp(target_example=i, attack_type=a, isTrained=trained)
-    runInvRep(target_example=i, attack_type=a, isTrained=trained)
-    runsmoothGrad(target_example=i, attack_type=a, isTrained=trained)
-    runVanillaBP(target_example=i, attack_type=a, isTrained=trained)
-
+    #runGradCam(target_example=i, attack_type=a, isTrained=trained)
+    #runGGradCam(target_example=i, attack_type=a, isTrained=trained)
+    #runGBackProp(target_example=i, attack_type=a, isTrained=trained)
+    #runInvRep(target_example=i, attack_type=a, isTrained=trained)
+    #runsmoothGrad(target_example=i, attack_type=a, isTrained=trained)
+    #runVanillaBP(target_example=i, attack_type=a, isTrained=trained)
+    runExplain(target_example=i,attack_type=a,isTrained=trained,iters=500)
     #ax1 = fig.add_subplot(3,3,j)
     #ax1.imshow(A)
     #ax1.set_title('GradCam ' + a)
