@@ -24,10 +24,14 @@
 * Inverted image representations
 
     A. Mahendran, A. Vedaldi. Understanding Deep Image Representations by Inverting Them, https://arxiv.org/abs/1412.0035 
+
+* Interpretable Explanations
+
+	R. Fong, A. Vedaldi. Interpratable Explanations of Black Boxes by Meaningful Perturbations, https://arxiv.org/abs/1704.03296
     
 * Deep Image Prior (To be implemented)
 
-    Dmitry Ulyanov, Andrea Vedaldi, Victor Lempitsky. Deep Image Prior https://arxiv.org/abs/1711.10925
+    Dmitry Ulyanov, Andrea Vedaldi, Victor Lempitsky. Deep Image Prior, https://arxiv.org/abs/1711.10925
 
 ## Attacks:
 
