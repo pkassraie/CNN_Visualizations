@@ -3,13 +3,13 @@ from visualization import *
 from matplotlib import pyplot as plt
 attacks = ['FGSM','PGD','DeepFool','Boundary','SinglePixel','SalMap','LBFGS','RPGD']
 networks = ['VGG19','AlexNet']
-trained = True
+trained = False
 target_example = range(0, 4) #its (0,4) really
 
 #fig = plt.figure()
 #fig.suptitle('Covariance Matrices of'+str(target_example)+' (on AlexNet)')
 #j = 1
-a = 'FGSM'
+a = 'SalMap'
 
 for i in target_example:
     #runDeepDream(target_example=i)
