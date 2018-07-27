@@ -163,7 +163,10 @@ def get_params(example_index,network,isTrained):
     example_list = [['input_images/snake.jpg', 56],
                     ['input_images/cat_dog.png', 243],
                     ['input_images/spider.png', 72],
-                    ['input_images/volcano.jpg', 980]]
+                    ['input_images/volcano.jpg', 980],
+                    ['input_images/pelican.jpg', 144],
+                    ['input_images/jellyfish.jpg', 107],
+                    ['input_images/admiral.jpg', 321]]
     selected_example = example_index
     img_path = example_list[selected_example][0]
     target_class = example_list[selected_example][1]

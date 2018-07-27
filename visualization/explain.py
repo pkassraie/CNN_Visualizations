@@ -103,7 +103,7 @@ def prep_img(original_img):
     original_img = cv2.resize(original_img, (224, 224))
     img = np.float32(original_img) / 255
     blurred_img1 = cv2.GaussianBlur(img, (11, 11), 5)
-    blurred_img2 = np.float32(cv2.medianBlur(original_img, 11)) / 255
+    blurred_img2 = np.float32(cv2.medianBlur(np.uint8(original_img), 11)) / 255
     blurred_img_numpy = (blurred_img1 + blurred_img2) / 2
     mask_init = np.ones((28, 28), dtype=np.float32)
 
@@ -163,7 +163,8 @@ def optimizeMask(model,iters, mask,img,blurred_img):
 
 
 
-def runExplain(choose_network='VGG19',
+
+def runExplain(choose_network='AlexNet',
             isTrained=True,
             target_example=0,
             iters = 5,
@@ -172,6 +173,13 @@ def runExplain(choose_network='VGG19',
     model = load_model(choose_network, isTrained)
     (original_img, _, target_class, file_name_to_export,pretrained_model) = get_params(target_example,
                                                                                        choose_network, isTrained)
+
+    attack1 = attack(attack_type,pretrained_model,original_img,file_name_to_export,target_class)
+    _,advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
+
+    orig_labs,orig_vals = prediction_reader(orig_pred,10)
+    adver_labs,adver_vals = prediction_reader(adver_pred,10)
+    indices = np.arange(len(orig_labs))
 # Natural Image:
     img,blurred_img,mask,blurred_img_numpy = prep_img(original_img)
     upsampled_mask = optimizeMask(model,iters,mask,img,blurred_img)
@@ -179,13 +187,8 @@ def runExplain(choose_network='VGG19',
     print("Interpretable Explanations Completed")
 
 # Adversary:
-    _,_,orig_pred,adver_pred,diff = attack(attack_type,pretrained_model,original_img,
-                                                                file_name_to_export,target_class)
-    orig_labs,orig_vals = prediction_reader(orig_pred,10)
-    adver_labs,adver_vals = prediction_reader(adver_pred,10)
-    indices = np.arange(len(orig_labs))
-
-    adversarial = cv2.imread('results/'+file_name_to_export+'_'+attack_type +'_Attack.jpg')
+    adversarial = attack1.getadvers()
+    #adversarial = np.array(adversarial,np.uint8)
     img,blurred_img,mask,blurred_img_numpy = prep_img(adversarial)
     upsampled_mask = optimizeMask(model,iters,mask,img,blurred_img)
     save(upsampled_mask, original_img, blurred_img_numpy,'Adversarial_'+file_name_to_export)

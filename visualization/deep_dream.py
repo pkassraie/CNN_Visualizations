@@ -114,7 +114,9 @@ def runDeepDream(choose_network = 'VGG19',
     ax1.set_title('Natural Dream')
 
 # Attack:
-    adversarial, advers_class,orig_pred,adver_pred,diff = attack(attack_type,pretrained_model,original_image,'DeepDream',target_class)
+    attack1 = attack(attack_type,pretrained_model,original_image,'DeepDream',target_class)
+    adversarial, advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
+
     im_path = 'results/DeepDream_'+attack_type+'_Attack.jpg'
     dd2 = DeepDream(pretrained_model.features, cnn_layer, filter_pos, im_path)
 
@@ -130,7 +132,7 @@ def runDeepDream(choose_network = 'VGG19',
     ax5.set_xticks(indices)
     ax5.set_xticklabels(orig_labs,rotation = 45,ha="right")
 
-    adversarial = cv2.imread('results/'+file_name_to_export+'_'+attack_type +'_Attack.jpg')
+    adversarial = np.uint8(attack1.getadvers())
 
     ax4 = fig.add_subplot(2,3,4)
     ax4.imshow(cv2.cvtColor(adversarial, cv2.COLOR_BGR2RGB))
