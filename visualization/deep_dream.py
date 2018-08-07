@@ -1,7 +1,12 @@
 """
-Created on Mon Nov 21 21:57:29 2017
 
-@author: Utku Ozbulak - github.com/utkuozbulak
+********************************************IMPORTANT*****************************************************************
+
+I WILL NO LONGER UPDATE DEEP DREAM, SINCE IT SEEMS RATHER IRRELEVANT TO OUR PURPOSE.
+
+Therefore, you can not use RESNET or any kind of special training for the network on this visualization method.
+Only torch vision AlexNet & VGG19 work for this one.
+
 """
 import os
 import cv2
@@ -12,6 +17,8 @@ from torch.optim import SGD
 from torchvision import models
 import numpy as np
 from misc_functions import preprocess_image, recreate_image,get_params,prediction_reader
+
+
 
 class DeepDream():
     """
