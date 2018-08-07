@@ -184,7 +184,7 @@ def runExplain(choose_network='AlexNet',
                                                                                         choose_network, isTrained)
 
     attack1 = attack(attack_type, pretrained_model, original_img, file_name_to_export, target_class)
-    adversarialpic, advers_class, orig_pred, adver_pred, diff = attack1.getstuff()
+    adversarialpic, adversarial,advers_class, orig_pred, adver_pred, diff = attack1.getstuff()
 
     orig_labs, orig_vals = prediction_reader(orig_pred, 10)
     adver_labs, adver_vals = prediction_reader(adver_pred, 10)

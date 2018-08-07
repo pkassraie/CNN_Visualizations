@@ -77,7 +77,7 @@ class GradCam():
         # Define extractor
         self.extractor = CamExtractor(self.model, target_layer,self.network)
 
-    def generate_cam(self, input_image, network, target_class=None):
+    def generate_cam(self, input_image, target_class=None):
         # Full forward pass
         # conv_output is the output of convolutions at specified layer
         # model_output is the final output of the model (1, 1000)
@@ -89,7 +89,7 @@ class GradCam():
         one_hot_output[0][target_class] = 1
 
         # Zero grads
-        if network == "ResNet50":
+        if self.network == "ResNet50":
             for module in list(self.model.children())[:-1]:
                 module.zero_grad()
             module = list(self.model.children())[-1]
@@ -135,7 +135,7 @@ def runGradCam(choose_network = 'AlexNet',
 
     # Grad cam
     if choose_network == "ResNet50":
-        grad_cam = GradCam(pretrained_model, target_layer=8,network = choose_network)
+        grad_cam = GradCam(pretrained_model, target_layer=7,network = choose_network)
     elif choose_network == "AlexNet":
         grad_cam = GradCam(pretrained_model, target_layer=11,network = choose_network)
     elif choose_network == "VGG19":
@@ -143,7 +143,7 @@ def runGradCam(choose_network = 'AlexNet',
 
 
     # Generate cam mask
-    cam = grad_cam.generate_cam(prep_img, choose_network,target_class)
+    cam = grad_cam.generate_cam(prep_img,target_class)
     # Save mask
     gray,color, result = save_class_activation_on_image(original_image, cam, file_name_to_export)
 
@@ -159,7 +159,7 @@ def runGradCam(choose_network = 'AlexNet',
     indices = np.arange(len(orig_labs))
 
     # Generate cam mask
-    cam = grad_cam.generate_cam(adversarial,choose_network,advers_class)
+    cam = grad_cam.generate_cam(adversarial,advers_class)
     # Save mask
     gray2,color2, result2 = save_class_activation_on_image(original_image, cam, 'Adversary_'+file_name_to_export)
     print('Adversary Grad cam completed')

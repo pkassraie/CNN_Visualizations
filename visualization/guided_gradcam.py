@@ -37,13 +37,21 @@ def runGGradCam(choose_network = 'AlexNet',
         get_params(target_example,choose_network,isTrained)
 
     # Grad cam
-    gcv2 = GradCam(pretrained_model, target_layer=11)
+    # Grad cam
+    if choose_network == "ResNet50":
+        gcv2 = GradCam(pretrained_model, target_layer=7,network = choose_network)
+    elif choose_network == "AlexNet":
+        gcv2 = GradCam(pretrained_model, target_layer=11,network = choose_network)
+    elif choose_network == "VGG19":
+        gcv2 = GradCam(pretrained_model, target_layer=35,network = choose_network)
+
+
     # Generate cam mask
     cam = gcv2.generate_cam(prep_img, target_class)
     print('Grad cam completed')
 
     # Guided backprop
-    GBP = GuidedBackprop(pretrained_model)
+    GBP = GuidedBackprop(pretrained_model,choose_network)
     # Get gradients
     guided_grads = GBP.generate_gradients(prep_img, target_class)
     print('Guided backpropagation completed')
@@ -66,7 +74,7 @@ def runGGradCam(choose_network = 'AlexNet',
     print('Grad cam completed')
 
     # Guided backprop
-    GBP = GuidedBackprop(pretrained_model)
+    GBP = GuidedBackprop(pretrained_model,choose_network)
     # Get gradients
     guided_grads = GBP.generate_gradients(adversarial, advers_class)
     print('Guided backpropagation completed')

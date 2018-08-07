@@ -1,7 +1,5 @@
 """
-Created on Wed Jan 17 08:05:11 2018
-
-@author: Utku Ozbulak - github.com/utkuozbulak
+NOT UPDATED FOR RESNET50
 """
 import cv2
 import torch
@@ -15,7 +13,8 @@ from misc_functions import get_params, recreate_image,prediction_reader
 
 
 class InvertedRepresentation():
-    def __init__(self, model):
+    def __init__(self, model,network):
+        self.network = network
         self.model = model
         self.model.eval()
 
@@ -55,14 +54,24 @@ class InvertedRepresentation():
             but this one is simpler (I think)
         """
         layer_output = None
-        for index, layer in enumerate(self.model.features):
-            x = layer(x)
-            if str(index) == str(layer_id):
-                layer_output = x[0]
-                break
+        if self.network == "ResNet50":
+            i = 0
+            for module in list(self.model.children())[:-1]:
+                x = module(x)
+                if i == int(layer_id) :
+                    layer_output = x[0]
+                    break
+                i += 1
+        else:
+            for index, layer in enumerate(self.model.features):
+                x = layer(x)
+                if str(index) == str(layer_id):
+                    layer_output = x[0]
+                    break
         return layer_output
 
     def generate_inverted_image_specific_layer(self, input_image, img_size, advers, target_layer=3):
+
         if advers ==True:
             name = ''
         else:
@@ -120,6 +129,7 @@ class InvertedRepresentation():
 def runInvRep(choose_network = 'AlexNet',
               isTrained = True,
               target_example = 3,
+              target_layer = 0,
               attack_type = 'FGSM'):
 
     #if __name__ == '__main__':
@@ -127,9 +137,17 @@ def runInvRep(choose_network = 'AlexNet',
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
         get_params(target_example,choose_network,isTrained)
 
-    inverted_representation = InvertedRepresentation(pretrained_model)
+    inverted_representation = InvertedRepresentation(pretrained_model,choose_network)
     image_size = original_image.shape[0]  # width & height
-    target_layer = 12
+
+    if target_layer == 0:
+        if choose_network == "AlexNet":
+            target_layer = 11
+        elif choose_network == "VGG19":
+            target_layer = 36
+        elif choose_network == "ResNet50":
+            target_layer = 8
+
     cleanres = inverted_representation.generate_inverted_image_specific_layer(prep_img,
                                                                    image_size,
                                                                    False,
