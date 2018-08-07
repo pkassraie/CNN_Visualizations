@@ -1,6 +1,7 @@
 # CAMP-Project
 
-![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/admiral_FGSM_InterpExp(TrainedResNet50).png)
+![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/pelican_SalMap_GradCam(TrainedResNet50).png)
+
 
 ## Visualization Methods:
 
@@ -21,7 +22,7 @@
 
     D. Smilkov, N. Thorat, N. Kim, F. Viégas, M. Wattenberg. SmoothGrad: removing noise by adding noise https://arxiv.org/abs/1706.03825
 
-* Inverted image representations
+* Inverted image representations (Only supports AlexNet & VGG19)
 
     A. Mahendran, A. Vedaldi. Understanding Deep Image Representations by Inverting Them, https://arxiv.org/abs/1412.0035 
 
