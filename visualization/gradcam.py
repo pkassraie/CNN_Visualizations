@@ -14,7 +14,8 @@ class CamExtractor():
     """
         Extracts cam features from the model
     """
-    def __init__(self, model, target_layer):
+    def __init__(self, model, target_layer,network):
+        self.network = network
         self.model = model
         self.target_layer = target_layer
         self.gradients = None
@@ -22,22 +23,20 @@ class CamExtractor():
     def save_gradient(self, grad):
         self.gradients = grad
 
-    def forward_pass_on_convolutions(self, x, network):
+    def forward_pass_on_convolutions(self, x):
         """
             Does a forward pass on convolutions, hooks the function at given layer
         """
         conv_output = None
 
-        if network =="ResNet50":
+        if self.network =="ResNet50":
             i = 0
             for module in list(self.model.children())[:-1]:
                 i += 1
                 x = module(x)
-                print("i:",i,"- target:",self.target_layer)
                 if i == self.target_layer:
                     x.register_hook(self.save_gradient)
                     conv_output = x
-                    print("i'm here")
 
         else:
             for module_pos, module in self.model.features._modules.items():
@@ -49,16 +48,16 @@ class CamExtractor():
 
         return conv_output, x
 
-    def forward_pass(self, x,network):
+    def forward_pass(self, x):
         """
             Does a full forward pass on the model
         """
         # Forward pass on the convolutions
-        conv_output, x = self.forward_pass_on_convolutions(x,network)
+        conv_output, x = self.forward_pass_on_convolutions(x)
 
         # Forward pass on the classifier
         x = x.view(x.size(0), -1)  # Flatten
-        if network == "ResNet50":
+        if self.network == "ResNet50":
             module  = list(self.model.children())[-1]
             x = module(x)
 
@@ -71,17 +70,18 @@ class GradCam():
     """
         Produces class activation map
     """
-    def __init__(self, model, target_layer):
+    def __init__(self, model, target_layer,network):
+        self.network = network
         self.model = model
         self.model.eval()
         # Define extractor
-        self.extractor = CamExtractor(self.model, target_layer)
+        self.extractor = CamExtractor(self.model, target_layer,self.network)
 
     def generate_cam(self, input_image, network, target_class=None):
         # Full forward pass
         # conv_output is the output of convolutions at specified layer
         # model_output is the final output of the model (1, 1000)
-        conv_output, model_output = self.extractor.forward_pass(input_image,network)
+        conv_output, model_output = self.extractor.forward_pass(input_image)
         if target_class is None:
             target_class = np.argmax(model_output.data.numpy())
         # Target for backprop
@@ -135,11 +135,11 @@ def runGradCam(choose_network = 'AlexNet',
 
     # Grad cam
     if choose_network == "ResNet50":
-        grad_cam = GradCam(pretrained_model, target_layer=8)
+        grad_cam = GradCam(pretrained_model, target_layer=8,network = choose_network)
     elif choose_network == "AlexNet":
-        grad_cam = GradCam(pretrained_model, target_layer=11)
+        grad_cam = GradCam(pretrained_model, target_layer=11,network = choose_network)
     elif choose_network == "VGG19":
-        grad_cam = GradCam(pretrained_model, target_layer=35)
+        grad_cam = GradCam(pretrained_model, target_layer=35,network = choose_network)
 
 
     # Generate cam mask

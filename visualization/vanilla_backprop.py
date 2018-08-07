@@ -20,15 +20,15 @@ class VanillaBackprop():
         # Put model in evaluation mode
         self.model.eval()
         # Hook the first layer to get the gradient
-        self.hook_layers(network)
+        self.hook_layers()
 
-    def hook_layers(self,network):
+    def hook_layers(self):
 
         def hook_function(module, grad_in, grad_out):
             self.gradients = grad_in[0]
 
         # Register hook to the first layer
-        if network == "ResNet50":
+        if self.network == "ResNet50":
             first_layer = list(self.model.children())[0]
         else:
             first_layer = list(self.model.features._modules.items())[0][1]

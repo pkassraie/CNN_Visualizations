@@ -167,6 +167,7 @@ def get_params(example_index,network,isTrained):
                     ['input_images/pelican.jpg', 144],
                     ['input_images/jellyfish.jpg', 107],
                     ['input_images/admiral.jpg', 321]]
+
     selected_example = example_index
     img_path = example_list[selected_example][0]
     target_class = example_list[selected_example][1]
@@ -175,11 +176,20 @@ def get_params(example_index,network,isTrained):
     original_image = cv2.imread(img_path, 1)
     # Process image
     prep_img = preprocess_image(original_image)
+
+
     # Define model
     if network == "AlexNet":
         pretrained_model = models.alexnet(pretrained=isTrained)
+        pretrained_model.eval()
     elif network =="VGG19":
         pretrained_model = models.vgg19(pretrained = isTrained)
+        pretrained_model.eval()
+    elif network =="ResNet50":
+        pretrained_model = models.resnet50(pretrained=isTrained)
+        pretrained_model.eval()
+
+
     return (original_image,
             prep_img,
             target_class,
