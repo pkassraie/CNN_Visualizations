@@ -91,7 +91,7 @@ def runGBackProp(choose_network = 'AlexNet',
     print('Guided backprop completed')
     # Now the attack:
     attack1 = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
-    adversarial,advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
+    adversarialpic,adversarial,advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
 
     orig_labs,orig_vals = prediction_reader(orig_pred,10)
     adver_labs,adver_vals = prediction_reader(adver_pred,10)
@@ -142,7 +142,7 @@ def runGBackProp(choose_network = 'AlexNet',
     ax9.set_xticklabels(orig_labs,rotation = 45,ha="right")
 
     #adversarial = cv2.imread('results/'+file_name_to_export+'_'+attack_type +'_Attack.jpg')
-    adversarial = np.uint8(attack1.getadvers())
+    adversarial = np.uint8(adversarialpic)
     ax12 = fig.add_subplot(2,6,7)
     ax12.imshow(cv2.cvtColor(adversarial, cv2.COLOR_BGR2RGB))
     ax12.set_title('Adversary Image(SSIM = '+str(diff)+')')

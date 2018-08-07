@@ -1,8 +1,3 @@
-"""
-Created on Wed Mar 28 10:12:13 2018
-
-@author: Utku Ozbulak - github.com/utkuozbulak
-"""
 import numpy as np
 import cv2
 import torch
@@ -15,10 +10,6 @@ from misc_functions import (get_params,
                             save_gradient_images,
                             prediction_reader)
 from visualization.vanilla_backprop import VanillaBackprop
-
-
-# from guided_backprop import GuidedBackprop  # To use with guided backprop
-
 
 def generate_smooth_grad(Backprop, prep_img, target_class, param_n, param_sigma_multiplier):
     """
@@ -82,7 +73,7 @@ def runsmoothGrad(choose_network = 'AlexNet',
     # Now the attack:
     attack1 = attack(attack_type,pretrained_model,
                                                            original_image,file_name_to_export,target_class)
-    adversarial,advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
+    adversarialpic,adversarial,advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
 
     orig_labs,orig_vals = prediction_reader(orig_pred,10)
     adver_labs,adver_vals = prediction_reader(adver_pred,10)
@@ -123,7 +114,7 @@ def runsmoothGrad(choose_network = 'AlexNet',
     ax9.set_xticks(indices)
     ax9.set_xticklabels(orig_labs,rotation = 45,ha="right")
 
-    adversarial = np.uint8(attack1.getadvers())
+    adversarial = np.uint8(adversarialpic)
     ax12 = fig.add_subplot(2,4,5)
     ax12.imshow(cv2.cvtColor(adversarial, cv2.COLOR_BGR2RGB))
     ax12.set_title('Adversary Image(SSIM = '+str(diff)+')')
