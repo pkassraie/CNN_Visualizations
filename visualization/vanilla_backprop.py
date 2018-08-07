@@ -13,20 +13,25 @@ class VanillaBackprop():
     """
         Produces gradients generated with vanilla back propagation from the image
     """
-    def __init__(self, model):
+    def __init__(self, model,network):
         self.model = model
+        self.network = network
         self.gradients = None
         # Put model in evaluation mode
         self.model.eval()
         # Hook the first layer to get the gradient
-        self.hook_layers()
+        self.hook_layers(network)
 
-    def hook_layers(self):
+    def hook_layers(self,network):
+
         def hook_function(module, grad_in, grad_out):
             self.gradients = grad_in[0]
 
         # Register hook to the first layer
-        first_layer = list(self.model.features._modules.items())[0][1]
+        if network == "ResNet50":
+            first_layer = list(self.model.children())[0]
+        else:
+            first_layer = list(self.model.features._modules.items())[0][1]
         first_layer.register_backward_hook(hook_function)
 
     def generate_gradients(self, input_image, target_class):
@@ -54,7 +59,7 @@ def runVanillaBP(choose_network = 'AlexNet',
         get_params(target_example,choose_network,isTrained)
 
     # Vanilla backprop
-    VBP = VanillaBackprop(pretrained_model)
+    VBP = VanillaBackprop(pretrained_model,choose_network)
     # Generate gradients
     vanilla_grads = VBP.generate_gradients(prep_img, target_class)
     # Save colored gradients
