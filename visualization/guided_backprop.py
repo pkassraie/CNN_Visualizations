@@ -17,7 +17,8 @@ class GuidedBackprop():
     """
        Produces gradients generated with guided back propagation from the given image
     """
-    def __init__(self, model):
+    def __init__(self, model,network):
+        self.network = network
         self.model = model
         self.gradients = None
         # Put model in evaluation mode
@@ -30,7 +31,10 @@ class GuidedBackprop():
             self.gradients = grad_in[0]
 
         # Register hook to the first layer
-        first_layer = list(self.model.features._modules.items())[0][1]
+        if self.network == "ResNet50":
+            first_layer = list(self.model.children())[0]
+        else:
+            first_layer = list(self.model.features._modules.items())[0][1]
         first_layer.register_backward_hook(hook_function)
 
     def update_relus(self):
@@ -44,9 +48,16 @@ class GuidedBackprop():
             if isinstance(module, ReLU):
                 return (torch.clamp(grad_in[0], min=0.0),)
         # Loop through layers, hook up ReLUs with relu_hook_function
-        for pos, module in self.model.features._modules.items():
-            if isinstance(module, ReLU):
-                module.register_backward_hook(relu_hook_function)
+
+        if self.network == "ResNet50":
+            for module in list(self.model.children())[:-1]:
+                if isinstance(module,ReLU):
+                    module.register_backward_hook(relu_hook_function)
+
+        else:
+            for pos, module in self.model.features._modules.items():
+                if isinstance(module, ReLU):
+                    module.register_backward_hook(relu_hook_function)
 
     def generate_gradients(self, input_image, target_class):
         # Forward pass
@@ -75,7 +86,7 @@ def runGBackProp(choose_network = 'AlexNet',
 
 
     # Guided backprop
-    GBP = GuidedBackprop(pretrained_model)
+    GBP = GuidedBackprop(pretrained_model,choose_network)
     # Get gradients
     guided_grads = GBP.generate_gradients(prep_img, target_class)
     # Save colored gradients
