@@ -1,6 +1,6 @@
 # CAMP-Project
 
-![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/cat_dog_FGSM_Guided%20Back%20Prop(TrainedAlexNet).png)
+![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/admiral_FGSM_InterpExp(TrainedResNet50).png)
 
 ## Visualization Methods:
 
@@ -17,7 +17,7 @@
 
     R. R. Selvaraju, A. Das, R. Vedantam, M. Cogswell, D. Parikh, and D. Batra. Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization, https://arxiv.org/abs/1610.02391
     
-* Deep Dream
+* Deep Dream (Only supports AlexNet & VGG19)
 
     D. Smilkov, N. Thorat, N. Kim, F. Viégas, M. Wattenberg. SmoothGrad: removing noise by adding noise https://arxiv.org/abs/1706.03825
 
@@ -70,7 +70,7 @@ https://arxiv.org/abs/1607.02533
 
 [2] There is a function for each type of visualization. The common arguments between all functions are:
 
-* Choose Network: Currently you can either choose 'VGG19' or 'AlexNet'.
+* Choose Network: Currently you can either choose 'ResNet50', 'VGG19' or 'AlexNet'.
 
 * Attack Type: Can be chosen from: 'FGSM', 'LBFGS', 'PGD', 'RPGD', 'Boundary', 'DeepFool', 'SinglePixel', 'SalMap'
 
