@@ -88,16 +88,13 @@ class attack():
         cv2.imwrite('results/'+self.file_name+ attack_name +'_Attack.jpg',adversarial)
         #cv2.imwrite('results/'+self.file_name+ attack_name +'_Attack(Difference).jpg',adversarial-temp)
 
-        diff = ssim(temp, adversarial,multichannel=True)
+
+        diff = ssim(np.float32(temp), adversarial,multichannel=True)
         adversarial2 = preprocess_image(adversarial)
 
         return adversarial,adversarial2,advers_class,orig_preds,adver_preds,diff
 
-    def getadvers(self):
-        adversarial,_,_,_,_,_ = self.runAttack()
-        return adversarial
-
     def getstuff(self):
-        _,adversarial2,advers_class,orig_pred,adver_pred,diff = self.runAttack()
-        return adversarial2,advers_class,orig_pred,adver_pred,diff
+        adversarial,adversarial2,advers_class,orig_pred,adver_pred,diff = self.runAttack()
+        return adversarial,adversarial2,advers_class,orig_pred,adver_pred,diff
 
