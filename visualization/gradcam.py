@@ -14,8 +14,9 @@ class CamExtractor():
     """
         Extracts cam features from the model
     """
-    def __init__(self, model, target_layer,network):
+    def __init__(self, model, target_layer,network,structure = 'ResNet50'):
         self.network = network
+        self.structure = structure
         self.model = model
         self.target_layer = target_layer
         self.gradients = None
@@ -38,6 +39,15 @@ class CamExtractor():
                     x.register_hook(self.save_gradient)
                     conv_output = x
 
+        elif self.network == 'Custom':
+            if self.structure == "ResNet50":
+                i = 0
+                for module in list(self.model.children())[:-1]:
+                    i += 1
+                    x = module(x)
+                    if i == self.target_layer:
+                        x.register_hook(self.save_gradient)
+                        conv_output = x
         else:
             for module_pos, module in self.model.features._modules.items():
                 # print("module_pos: ",module_pos," - Module:" , module)
@@ -70,12 +80,13 @@ class GradCam():
     """
         Produces class activation map
     """
-    def __init__(self, model, target_layer,network):
+    def __init__(self, model, target_layer,network,structure = 'ResNet50'):
         self.network = network
+        self.structure = structure
         self.model = model
         self.model.eval()
         # Define extractor
-        self.extractor = CamExtractor(self.model, target_layer,self.network)
+        self.extractor = CamExtractor(self.model, target_layer,self.network,self.structure)
 
     def generate_cam(self, input_image, target_class=None):
         # Full forward pass
@@ -94,6 +105,16 @@ class GradCam():
                 module.zero_grad()
             module = list(self.model.children())[-1]
             module.zero_grad()
+
+        elif self.network =='Custom':
+            if self.structure =='ResNet50':
+                for module in list(self.model.children())[:-1]:
+                    module.zero_grad()
+                module = list(self.model.children())[-1]
+                module.zero_grad()
+            elif self.structure == 'VGG19':
+                self.model.features.zero_grad()
+                self.model.classifier.zero_grad()
         else:
             self.model.features.zero_grad()
             self.model.classifier.zero_grad()
@@ -127,11 +148,14 @@ class GradCam():
 # Get params
 def runGradCam(choose_network = 'AlexNet',
                isTrained = True,
-                 target_example = 3,
-                 attack_type = 'FGSM'):
+               training = "Normal",
+               structure="ResNet50",
+               target_example = 3,
+               attack_type = 'FGSM'):
 
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,choose_network,isTrained)
+        get_params(target_example,choose_network,isTrained,
+                   training,structure)
 
     # Grad cam
     if choose_network == "ResNet50":
@@ -140,6 +164,11 @@ def runGradCam(choose_network = 'AlexNet',
         grad_cam = GradCam(pretrained_model, target_layer=11,network = choose_network)
     elif choose_network == "VGG19":
         grad_cam = GradCam(pretrained_model, target_layer=35,network = choose_network)
+    elif choose_network =='Custom':
+        if structure == 'ResNet50': #target layer might be 4 instead of 5.
+            grad_cam = GradCam(pretrained_model,target_layer=5,network= choose_network,structure = structure)
+        elif structure =='VGG19':
+            grad_cam = GradCam(pretrained_model,target_layer=52,network= choose_network,structure = structure)
 
 
     # Generate cam mask

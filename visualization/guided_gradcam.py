@@ -29,12 +29,14 @@ def guided_grad_cam(grad_cam_mask, guided_backprop_mask):
 
 def runGGradCam(choose_network = 'AlexNet',
                 isTrained = True,
-                 target_example = 3,
-                 attack_type = 'FGSM'):
+                training = "Normal",
+                structure="ResNet50",
+                target_example = 3,
+                attack_type = 'FGSM'):
     #if __name__ == '__main__':
     # Get params
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,choose_network,isTrained)
+        get_params(target_example,choose_network,isTrained,training,structure)
 
     # Grad cam
     # Grad cam

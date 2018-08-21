@@ -13,9 +13,10 @@ class VanillaBackprop():
     """
         Produces gradients generated with vanilla back propagation from the image
     """
-    def __init__(self, model,network):
+    def __init__(self, model,network,structure):
         self.model = model
         self.network = network
+        self.structure = structure
         self.gradients = None
         # Put model in evaluation mode
         self.model.eval()
@@ -30,6 +31,12 @@ class VanillaBackprop():
         # Register hook to the first layer
         if self.network == "ResNet50":
             first_layer = list(self.model.children())[0]
+
+        if self.network == "Custom":
+            if self.structure == "ResNet50":
+                first_layer = list(self.model.children())[0]
+            elif self.structure =='VGG19':
+                first_layer = list(self.model.features._modules.items())[0][1]
         else:
             first_layer = list(self.model.features._modules.items())[0][1]
         first_layer.register_backward_hook(hook_function)
@@ -51,15 +58,17 @@ class VanillaBackprop():
 
 def runVanillaBP(choose_network = 'AlexNet',
                  isTrained = True,
+                 training = 'Normal',
+                 structure = 'ResNet50',
                  target_example = 3,
                  attack_type = 'FGSM'):
 #if __name__ == '__main__':
     # Get params
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,choose_network,isTrained)
+        get_params(target_example,choose_network,isTrained,training,structure)
 
     # Vanilla backprop
-    VBP = VanillaBackprop(pretrained_model,choose_network)
+    VBP = VanillaBackprop(pretrained_model,choose_network,structure)
     # Generate gradients
     vanilla_grads = VBP.generate_gradients(prep_img, target_class)
     # Save colored gradients

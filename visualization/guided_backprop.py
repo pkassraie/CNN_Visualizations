@@ -17,8 +17,9 @@ class GuidedBackprop():
     """
        Produces gradients generated with guided back propagation from the given image
     """
-    def __init__(self, model,network):
+    def __init__(self, model,network,structure='ResNet50'):
         self.network = network
+        self.structure = structure
         self.model = model
         self.gradients = None
         # Put model in evaluation mode
@@ -33,6 +34,13 @@ class GuidedBackprop():
         # Register hook to the first layer
         if self.network == "ResNet50":
             first_layer = list(self.model.children())[0]
+
+        elif self.network == "Custom":
+            if self.structure == "ResNet50":
+                first_layer = list(self.model.children())[0]
+            elif self.structure =='VGG19':
+                first_layer = list(self.model.features._modules.items())[0][1]
+
         else:
             first_layer = list(self.model.features._modules.items())[0][1]
         first_layer.register_backward_hook(hook_function)
@@ -53,7 +61,15 @@ class GuidedBackprop():
             for module in list(self.model.children())[:-1]:
                 if isinstance(module,ReLU):
                     module.register_backward_hook(relu_hook_function)
-
+        if self.network == 'Custom':
+            if self.structure == 'ResNet50':
+                for module in list(self.model.children())[:-1]:
+                    if isinstance(module,ReLU):
+                        module.register_backward_hook(relu_hook_function)
+            elif self.structure == 'VGG19':
+                for pos, module in self.model.features._modules.items():
+                    if isinstance(module, ReLU):
+                        module.register_backward_hook(relu_hook_function)
         else:
             for pos, module in self.model.features._modules.items():
                 if isinstance(module, ReLU):
@@ -77,16 +93,18 @@ class GuidedBackprop():
 
 def runGBackProp(choose_network = 'AlexNet',
                  isTrained = True,
+                 training = "Normal",
+                 structure="ResNet50",
                  target_example = 3,
                  attack_type = 'FGSM'):
 
     #if __name__ == '__main__':
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,choose_network,isTrained)
+        get_params(target_example,choose_network,isTrained,training,structure)
 
 
     # Guided backprop
-    GBP = GuidedBackprop(pretrained_model,choose_network)
+    GBP = GuidedBackprop(pretrained_model,choose_network,structure)
     # Get gradients
     guided_grads = GBP.generate_gradients(prep_img, target_class)
     # Save colored gradients

@@ -8,9 +8,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
-
-from models.resnet import ResNet18
-#from utils import progress_bar
+from models.resnet import *
 
 # Training
 def train(epoch):
@@ -37,6 +35,7 @@ def train(epoch):
 
 def test(epoch):
     global best_acc
+    global modelName
     net.eval()
     test_loss = 0
     correct = 0
@@ -67,6 +66,9 @@ def test(epoch):
         if not os.path.isdir('checkpoint'):
             os.mkdir('checkpoint')
         torch.save(state, './checkpoint/ckpt.t7')
+        if not os.path.isdir('trainedmodels'):
+            os.mkdir('trainedmodels')
+        torch.save(net.state_dict(), './trainedmodels/'+'Norm_'+modelName)
         best_acc = acc
 
 if __name__=='__main__':
@@ -105,16 +107,8 @@ if __name__=='__main__':
     # Model
     print('==> Building model..')
     # net = VGG('VGG19')
-    net = ResNet18()
-    # net = PreActResNet18()
-    # net = GoogLeNet()
-    # net = DenseNet121()
-    # net = ResNeXt29_2x64d()
-    # net = MobileNet()
-    # net = MobileNetV2()
-    # net = DPN92()
-    # net = ShuffleNetG2()
-    # net = SENet18()
+    net = ResNet50()
+    modelName = 'ResNet50'
     net = net.to(device)
     if device == 'cuda':
         net = torch.nn.DataParallel(net)
@@ -131,9 +125,15 @@ if __name__=='__main__':
 
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(net.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
+    scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[50,100], gamma=0.1)
 
 
-
-    for epoch in range(start_epoch, start_epoch+200):
+    for epoch in range(start_epoch, start_epoch+2):
+        scheduler.step()
         train(epoch)
         test(epoch)
+
+
+
+
+

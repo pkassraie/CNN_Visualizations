@@ -6,6 +6,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 from misc_functions import get_params, prediction_reader
 from attacks import attack
+from customization.loadModel import loadModel
+
 
 use_cuda = torch.cuda.is_available()
 FloatTensor = torch.cuda.FloatTensor if use_cuda else torch.FloatTensor
@@ -76,7 +78,7 @@ def numpy_to_torch(img, requires_grad=True):
     return v
 
 
-def load_model(choose_network='VGG19', trained=True):
+def load_model(choose_network='VGG19', trained=True,training = 'Normal', structure = 'VGG19'):
     if choose_network == 'VGG19':
         model = models.vgg19(pretrained=trained)
         model.eval()
@@ -101,6 +103,15 @@ def load_model(choose_network='VGG19', trained=True):
 
     elif choose_network == 'ResNet50':
         model = models.resnet50(pretrained=trained)
+        model.eval()
+        if use_cuda:
+            model.cuda()
+
+        for param in model.parameters():
+            param.requires_grad = False
+
+    elif choose_network == 'Custom':
+        model = loadModel(training,structure)
         model.eval()
         if use_cuda:
             model.cuda()
@@ -175,13 +186,16 @@ def optimizeMask(model, iters, mask, img, blurred_img):
 
 def runExplain(choose_network='AlexNet',
                isTrained=True,
+               training = "Normal",
+               structure="ResNet50",
                target_example=0,
                iters=5,
                attack_type='FGSM'):
     model = load_model(choose_network, isTrained)
 
     (original_img, _, target_class, file_name_to_export, pretrained_model) = get_params(target_example,
-                                                                                        choose_network, isTrained)
+                                                                                        choose_network, isTrained,
+                                                                                        training,structure)
 
     attack1 = attack(attack_type, pretrained_model, original_img, file_name_to_export, target_class)
     adversarialpic, adversarial,advers_class, orig_pred, adver_pred, diff = attack1.getstuff()

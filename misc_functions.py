@@ -8,6 +8,8 @@ from torch.autograd import Variable
 from torchvision import models
 from torch.nn import functional as F
 
+from customization import loadModel
+
 def convert_to_grayscale(cv2im):
     """
         Converts 3d image to grayscale
@@ -145,7 +147,7 @@ def get_positive_negative_saliency(gradient):
     return pos_saliency, neg_saliency
 
 
-def get_params(example_index,network,isTrained):
+def get_params(example_index,network,isTrained,training='Normal', structure=''):
     """
         Gets used variables for almost all visualizations, like the image, model etc.
 
@@ -188,6 +190,8 @@ def get_params(example_index,network,isTrained):
     elif network =="ResNet50":
         pretrained_model = models.resnet50(pretrained=isTrained)
         pretrained_model.eval()
+    elif network == "Custom":
+        pretrained_model = loadModel(training, structure)
 
 
     return (original_image,
@@ -212,5 +216,7 @@ def prediction_reader(preds,length):
     toppreds = output.argsort()[-length:][::-1]
     labels = [dict[x] for x in toppreds]
     return labels,output[toppreds]
+
+
 
 

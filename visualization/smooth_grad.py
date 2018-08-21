@@ -42,13 +42,15 @@ def generate_smooth_grad(Backprop, prep_img, target_class, param_n, param_sigma_
 
 def runsmoothGrad(choose_network = 'AlexNet',
                  isTrained = True,
+                 training = "Normal",
+                 structure="ResNet50",
                  target_example = 3,
                  attack_type = 'FGSM'):
 
 #if __name__ == '__main__':
     # Get params
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,choose_network,isTrained)
+        get_params(target_example,choose_network,isTrained,training, structure)
 
     VBP = VanillaBackprop(pretrained_model)
     # GBP = GuidedBackprop(pretrained_model)  # if you want to use GBP dont forget to

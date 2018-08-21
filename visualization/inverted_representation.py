@@ -128,6 +128,8 @@ class InvertedRepresentation():
 
 def runInvRep(choose_network = 'AlexNet',
               isTrained = True,
+              training = "Normal",
+              structure="ResNet50",
               target_example = 3,
               target_layer = 0,
               attack_type = 'FGSM'):
@@ -135,7 +137,7 @@ def runInvRep(choose_network = 'AlexNet',
     #if __name__ == '__main__':
         # Get params
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
-        get_params(target_example,choose_network,isTrained)
+        get_params(target_example,choose_network,isTrained,training,structure)
 
     inverted_representation = InvertedRepresentation(pretrained_model,choose_network)
     image_size = original_image.shape[0]  # width & height

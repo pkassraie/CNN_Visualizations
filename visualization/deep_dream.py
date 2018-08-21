@@ -80,6 +80,8 @@ class DeepDream():
 
 def runDeepDream(choose_network = 'VGG19',
                  isTrained = True,
+                 training = "Normal",
+                 structure = 'VGG19',
                  target_example = 3,
                  attack_type = 'FGSM',
                  cnn_layer = 34,
@@ -109,7 +111,8 @@ def runDeepDream(choose_network = 'VGG19',
     # See layer visualisation for the implementation without hooks
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) = get_params(target_example,
                                                                                                  choose_network,
-                                                                                                 isTrained)
+                                                                                                 isTrained,
+                                                                                                 training,structure)
     result = dd.dream(file_name_to_export,iters)
     fig = plt.figure()
     fig.suptitle(file_name_to_export+' - '+attack_type+' - Deep Dream '+str(cnn_layer) +' On:'+ choose_network)
