@@ -181,6 +181,7 @@ env.bak/
 venv.bak/
 
 results/
+customization/data/
 
 
 
@@ -207,3 +208,4 @@ results/
 # mypy
 
 .mypy_cache/
+.idea/
