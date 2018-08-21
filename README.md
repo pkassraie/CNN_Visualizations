@@ -63,7 +63,11 @@ https://arxiv.org/abs/1607.02533
     Nicolas Papernot, Patrick McDaniel, Somesh Jha, Matt Fredrikson, Z. Berkay Celik, Ananthram Swami. The Limitations of Deep Learning in Adversarial Settings,   https://arxiv.org/abs/1511.07528	
     
 ## ConvNets:
-  Currently, AlexNet & VGG19 from torch vision library (pre-trained on ImageNet).
+  * AlexNet, VGG19 & ResNet50 from torch vision library (pre-trained on ImageNet).
+
+  * ResNet50 & VGG19 with custom training on CIFAR10.
+
+  * ResNet50 & VGG19 with adversarial training. (Will be added soon.)
 
 ## Instructions:
 
@@ -71,7 +75,11 @@ https://arxiv.org/abs/1607.02533
 
 [2] There is a function for each type of visualization. The common arguments between all functions are:
 
-* Choose Network: Currently you can either choose 'ResNet50', 'VGG19' or 'AlexNet'.
+* Choose Network: Currently you can either choose pretrained 'ResNet50', 'VGG19' or 'AlexNet' or 'Custom' network.
+
+* Training: Choose either 'Normal' or 'Adversarial'.
+
+* Structure: Having chosen 'Custom' network, choose its structure from 'ResNet50' and 'VGG19'.
 
 * Attack Type: Can be chosen from: 'FGSM', 'LBFGS', 'PGD', 'RPGD', 'Boundary', 'DeepFool', 'SinglePixel', 'SalMap'
 
