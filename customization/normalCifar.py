@@ -68,7 +68,7 @@ def test(epoch):
         torch.save(state, './checkpoint/ckpt.t7')
         if not os.path.isdir('trainedmodels'):
             os.mkdir('trainedmodels')
-        torch.save(net.state_dict(), './trainedmodels/'+'Norm_'+modelName)
+        torch.save(net.state_dict(), './trainedmodels/'+'Normal_'+modelName)
         best_acc = acc
 
 if __name__=='__main__':
@@ -128,7 +128,7 @@ if __name__=='__main__':
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[50,100], gamma=0.1)
 
 
-    for epoch in range(start_epoch, start_epoch+2):
+    for epoch in range(start_epoch, start_epoch+150):
         scheduler.step()
         train(epoch)
         test(epoch)
