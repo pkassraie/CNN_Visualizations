@@ -10,7 +10,7 @@ def loadModel(training, structure):
     if structure == 'ResNet50':
         model = ResNet50()
         path = './trainedmodels/'+training+'_'+ structure
-        model.load_state_dict(torch.load(path))
+        model.load_state_dict(torch.load(path,map_location=lambda storage, loc: storage))
     elif structure == 'VGG19':
         model = VGG('VGG19')
         path = './trainedmodels/'+training+ '_'+ structure

@@ -106,6 +106,9 @@ def test(epoch):
         if not os.path.isdir('checkpoint'):
             os.mkdir('checkpoint')
         torch.save(state, './checkpoint/ckpt.t7')
+        if not os.path.isdir('trainedmodels'):
+            os.mkdir('trainedmodels')
+        torch.save(net.state_dict(), './trainedmodels/'+'Adversarial_'+modelName)
         best_acc = acc
 
 if __name__=='__main__':
@@ -146,16 +149,8 @@ if __name__=='__main__':
 
     print('==> Building model..')
     # basic_net = VGG('VGG19')
-    basic_net = ResNet18()
-    # basic_net = PreActResNet18()
-    # basic_net = GoogLeNet()
-    # basic_net = DenseNet121()
-    # basic_net = ResNeXt29_2x64d()
-    # basic_net = MobileNet()
-    # basic_net = MobileNetV2()
-    # basic_net = DPN92()
-    # basic_net = ShuffleNetG2()
-    # basic_net = SENet18()
+    basic_net = ResNet50()
+    modelName = 'ResNet50'
     basic_net = basic_net.to(device)
 
     # From https://github.com/MadryLab/cifar10_challenge/blob/master/config.json
