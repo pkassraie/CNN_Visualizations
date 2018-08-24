@@ -144,9 +144,9 @@ def runGBackProp(choose_network = 'AlexNet',
 
     fig = plt.figure()
     fig.suptitle(file_name_to_export+' - '+attack_type+' - Guided Back Prop')
-
+    original_image= cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
     ax11 = fig.add_subplot(2,6,1)
-    ax11.imshow(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB))
+    ax11.imshow(original_image)
     ax11.set_title('Original Image')
 
     ax1 = fig.add_subplot(2,6,2)
@@ -171,9 +171,9 @@ def runGBackProp(choose_network = 'AlexNet',
     ax9.set_xticklabels(orig_labs,rotation = 45,ha="right")
 
     #adversarial = cv2.imread('results/'+file_name_to_export+'_'+attack_type +'_Attack.jpg')
-    adversarial = np.uint8(adversarialpic)
+    adversarial = cv2.cvtColor(np.uint8(adversarialpic), cv2.COLOR_BGR2RGB)
     ax12 = fig.add_subplot(2,6,7)
-    ax12.imshow(cv2.cvtColor(adversarial, cv2.COLOR_BGR2RGB))
+    ax12.imshow(adversarial)
     ax12.set_title('Adversary Image(SSIM = '+str(diff)+')')
     ax5 = fig.add_subplot(2, 6, 8)
     ax5.imshow(colorgrads2)
@@ -203,3 +203,5 @@ def runGBackProp(choose_network = 'AlexNet',
     fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+
                 '_Guided Back Prop('+train+choose_network+')',dpi = 100)
 
+    return original_image, colorgrads,graygrads[:,:,0],possal, negsal, adversarial,colorgrads2,graygrads2[:,:,0],possal2,negsal2\
+        , indices,orig_labs,orig_vals,adver_labs,adver_vals

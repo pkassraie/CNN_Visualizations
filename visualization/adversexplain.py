@@ -260,9 +260,8 @@ def runExplain(choose_network='AlexNet',
     ax6.set_title('Adversary Mask Gray')
 
     cam2 = cv2.imread('results/Adversarial_' + file_name_to_export + "_Explain_Cam.jpg", 1)
-    cam2 = cv2.cvtColor(cam2, cv2.COLOR_BGR2RGB)
     ax7 = fig.add_subplot(2, 5, 9)
-    ax7.imshow(cam2)
+    ax7.imshow(cv2.cvtColor(cam2, cv2.COLOR_BGR2RGB))
     ax7.set_title('Adversary Cam Result')
 
     ax10 = fig.add_subplot(2, 5, 10)
@@ -279,11 +278,3 @@ def runExplain(choose_network='AlexNet',
         train = 'UnTrained'
     fig.savefig('Concise Results/' + file_name_to_export + '_' + attack_type +
                 '_InterpExp(' + train + choose_network + ')', dpi=100)
-
-    original_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB)
-    heat = cv2.cvtColor(heat, cv2.COLOR_BGR2RGB)
-    cam = cv2.cvtColor(cam, cv2.COLOR_BGR2RGB)
-    adversarialpic = cv2.cvtColor(np.uint8(adversarialpic), cv2.COLOR_BGR2RGB)
-    return original_img,heat, mask,cam,\
-           adversarialpic,heat2,mask2, cam2,\
-           indices,orig_labs,orig_vals,adver_labs,adver_vals

@@ -91,8 +91,9 @@ def runGGradCam(choose_network = 'AlexNet',
 
     fig = plt.figure()
     fig.suptitle(file_name_to_export+' - '+attack_type+' - Guided GradCam')
+    original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
     ax0 = fig.add_subplot(2,4,1)
-    ax0.imshow(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB))
+    ax0.imshow(original_image)
     ax0.set_title('Original Image')
     ax1 = fig.add_subplot(2,4,2)
     ax1.imshow(guidedgrad)
@@ -108,8 +109,9 @@ def runGGradCam(choose_network = 'AlexNet',
     ax9.set_xticklabels(orig_labs,rotation = 45,ha="right")
 
     adversarial = np.uint8(adversarialpic)
+    adversarial = cv2.cvtColor(adversarial, cv2.COLOR_BGR2RGB)
     ax12 = fig.add_subplot(2,4,5)
-    ax12.imshow(cv2.cvtColor(adversarial, cv2.COLOR_BGR2RGB))
+    ax12.imshow(adversarial)
     ax12.set_title('Adversary Image(SSIM = '+str(diff)+')')
 
     ax3 = fig.add_subplot(2,4,6)
@@ -134,4 +136,6 @@ def runGGradCam(choose_network = 'AlexNet',
     fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+'_Guided GradCam('+
                 train+choose_network+')',dpi = 100)
 
-    return np.cov(grayguidedgrad[:,:,0],grayguidedgrad2[:,:,0])
+    #return np.cov(grayguidedgrad[:,:,0],grayguidedgrad2[:,:,0])
+    return original_image, guidedgrad, grayguidedgrad[:,:,0], adversarial, guidedgrad2, grayguidedgrad2[:,:,0],\
+           indices,orig_labs,orig_vals,adver_labs,adver_vals
