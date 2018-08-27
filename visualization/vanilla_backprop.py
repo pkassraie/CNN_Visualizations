@@ -85,8 +85,8 @@ def runVanillaBP(choose_network = 'AlexNet',
                                       original_image,file_name_to_export,target_class)
     adversarialpic,adversarial,advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
 
-    orig_labs,orig_vals = prediction_reader(orig_pred,10)
-    adver_labs,adver_vals = prediction_reader(adver_pred,10)
+    orig_labs,orig_vals = prediction_reader(orig_pred,10,choose_network)
+    adver_labs,adver_vals = prediction_reader(adver_pred,10,choose_network)
     indices = np.arange(len(orig_labs))
     # Generate gradients
     vanilla_grads = VBP.generate_gradients(adversarial, advers_class)

@@ -201,18 +201,23 @@ def get_params(example_index,network,isTrained,training='Normal', structure=''):
             pretrained_model)
 
 
-def prediction_reader(preds,length):
+def prediction_reader(preds,length,choose_network):
 
     dict = {}
-    with open("input_images/labels.txt") as f:
-        for line in f:
-           (key, val) = line.split(': ')
-           val = val[1:-3]
-           val = val.split(',')[0]
-           dict[int(key)] = val
+    if choose_network == 'Custom':
+        classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+        key = (0,1,2,3,4,5,6,7,8,9)
+        for i in key:
+            dict[i] = classes[i]
+    else:
+        with open("input_images/labels.txt") as f:
+            for line in f:
+               (key, val) = line.split(': ')
+               val = val[1:-3]
+               val = val.split(',')[0]
+               dict[int(key)] = val
 
     output = F.softmax(torch.from_numpy(preds), dim=0).numpy()
-
     toppreds = output.argsort()[-length:][::-1]
     labels = [dict[x] for x in toppreds]
     return labels,output[toppreds]

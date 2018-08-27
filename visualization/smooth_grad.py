@@ -52,7 +52,7 @@ def runsmoothGrad(choose_network = 'AlexNet',
     (original_image, prep_img, target_class, file_name_to_export, pretrained_model) =\
         get_params(target_example,choose_network,isTrained,training, structure)
 
-    VBP = VanillaBackprop(pretrained_model)
+    VBP = VanillaBackprop(pretrained_model,choose_network,structure)
     # GBP = GuidedBackprop(pretrained_model)  # if you want to use GBP dont forget to
     # change the parametre in generate_smooth_grad
 
@@ -77,8 +77,8 @@ def runsmoothGrad(choose_network = 'AlexNet',
                                                            original_image,file_name_to_export,target_class)
     adversarialpic,adversarial,advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
 
-    orig_labs,orig_vals = prediction_reader(orig_pred,10)
-    adver_labs,adver_vals = prediction_reader(adver_pred,10)
+    orig_labs,orig_vals = prediction_reader(orig_pred,10,choose_network)
+    adver_labs,adver_vals = prediction_reader(adver_pred,10,choose_network)
     indices = np.arange(len(orig_labs))
 
     smooth_grad = generate_smooth_grad(VBP,  # ^This parameter

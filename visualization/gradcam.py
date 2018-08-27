@@ -183,8 +183,8 @@ def runGradCam(choose_network = 'AlexNet',
     attack1 = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
     adversarialpic,adversarial,advers_class,orig_pred,adver_pred ,diff = attack1.getstuff()
 
-    orig_labs,orig_vals = prediction_reader(orig_pred,10)
-    adver_labs,adver_vals = prediction_reader(adver_pred,10)
+    orig_labs,orig_vals = prediction_reader(orig_pred,10,choose_network)
+    adver_labs,adver_vals = prediction_reader(adver_pred,10,choose_network)
     indices = np.arange(len(orig_labs))
 
     # Generate cam mask
@@ -246,6 +246,5 @@ def runGradCam(choose_network = 'AlexNet',
         train = 'UnTrained'
     fig.savefig('Concise Results/'+file_name_to_export+'_'+attack_type+
                 '_GradCam('+train+choose_network+')',dpi = 100)
-
     #return np.cov(gray,gray2)
     return original_image,gray,color,result,adversarial,gray2,color2,result2, indices,orig_labs,orig_vals,adver_labs,adver_vals

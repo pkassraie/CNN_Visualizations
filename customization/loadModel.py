@@ -20,6 +20,6 @@ def loadModel(training, structure):
     return model
 
 
-loadModel('Normal','ResNet50')
+#loadModel('Normal','ResNet50')
 
 

@@ -68,8 +68,8 @@ def runGGradCam(choose_network = 'AlexNet',
     attack1 =  attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
     adversarialpic,adversarial,advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
 
-    orig_labs,orig_vals = prediction_reader(orig_pred,10)
-    adver_labs,adver_vals = prediction_reader(adver_pred,10)
+    orig_labs,orig_vals = prediction_reader(orig_pred,10,choose_network)
+    adver_labs,adver_vals = prediction_reader(adver_pred,10,choose_network)
     indices = np.arange(len(orig_labs))
 
     cam = gcv2.generate_cam(adversarial, advers_class)
