@@ -69,7 +69,7 @@ https://arxiv.org/abs/1607.02533
 
   * ResNet50 & VGG19 with custom training on CIFAR10.
 
-  * ResNet50 & VGG19 with adversarial training. (Will be added soon.)
+  * ResNet50 & VGG19 with adversarial training on CIFAR10.
 
 ## Comparing Functions:
 
