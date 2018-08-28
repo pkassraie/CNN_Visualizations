@@ -71,7 +71,7 @@ https://arxiv.org/abs/1607.02533
 
   * ResNet50 & VGG19 with adversarial training. (Will be added soon.)
 
-##Comparing Functions:
+## Comparing Functions:
 
 There are 4 functions written for making the following comparisons:
   * Among Visualization Methods(CompareVisualization): For a specific network and attack type, one can compare chosen visualization methods.
