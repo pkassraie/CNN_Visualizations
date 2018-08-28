@@ -1,5 +1,7 @@
 # CAMP-Project
 
+This is a package for attacking and visualizing convolutional networks with the purpose of understanding and comparing the effects of adversarial example on such networks.
+
 ![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/pelican_SalMap_GradCam(TrainedResNet50).png)
 
 
@@ -69,11 +71,23 @@ https://arxiv.org/abs/1607.02533
 
   * ResNet50 & VGG19 with adversarial training. (Will be added soon.)
 
+##Comparing Functions:
+
+There are 4 functions written for making the following comparisons:
+  * Among Visualization Methods(CompareVisualization): For a specific network and attack type, one can compare chosen visualization methods.
+
+  * Among Networks(CompareNetworks): For a specific attack, one can see how different networks are visualized using the same visualization method.
+
+
+  * Among Attacks(CompareAttacks): For a specific network, one can see how different attacks are visualized using the same visualization method.
+
+  * Among Training (CompareTraining): For a selected attack and network, one can compare how different training methods affect the chosen visualization. Currently Normal and [adversarial training](https://arxiv.org/abs/1412.6572) are available, distillation will soon be added. In addition for sanity check, visualization with a noisey input as well as untrained network could be shown. 
+
 ## Instructions:
 
 [1] Open 'massRun.py'
 
-[2] There is a function for each type of visualization. The common arguments between all functions are:
+[2] There is a function for each type of visualization or comparision. The common arguments between all functions are:
 
 * Choose Network: Currently you can either choose pretrained 'ResNet50', 'VGG19' or 'AlexNet' or 'Custom' network.
 
