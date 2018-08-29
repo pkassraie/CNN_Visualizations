@@ -39,8 +39,7 @@ class CamExtractor():
                     x.register_hook(self.save_gradient)
                     conv_output = x
 
-        elif self.network == 'Custom':
-            if self.structure == "ResNet50":
+        elif self.network == 'Custom' and self.structure == "ResNet50":
                 i = 0
                 for module in list(self.model.children())[:-1]:
                     i += 1
@@ -48,6 +47,10 @@ class CamExtractor():
                     if i == self.target_layer:
                         x.register_hook(self.save_gradient)
                         conv_output = x
+                tempmod = torch.nn.AvgPool2d(kernel_size=7, stride=1, padding=0)
+                conv_output = tempmod(conv_output)
+
+
         else:
             for module_pos, module in self.model.features._modules.items():
                 # print("module_pos: ",module_pos," - Module:" , module)
@@ -67,8 +70,9 @@ class CamExtractor():
 
         # Forward pass on the classifier
         x = x.view(x.size(0), -1)  # Flatten
-        if self.network == "ResNet50":
+        if self.network == "ResNet50" or self.structure =="ResNet50":
             module  = list(self.model.children())[-1]
+            x = x.view(x.size(0), -1)
             x = module(x)
 
         else:

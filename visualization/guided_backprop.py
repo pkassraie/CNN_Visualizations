@@ -58,10 +58,11 @@ class GuidedBackprop():
         # Loop through layers, hook up ReLUs with relu_hook_function
 
         if self.network == "ResNet50":
+
             for module in list(self.model.children())[:-1]:
                 if isinstance(module,ReLU):
                     module.register_backward_hook(relu_hook_function)
-        if self.network == 'Custom':
+        elif self.network == 'Custom':
             if self.structure == 'ResNet50':
                 for module in list(self.model.children())[:-1]:
                     if isinstance(module,ReLU):
@@ -71,6 +72,7 @@ class GuidedBackprop():
                     if isinstance(module, ReLU):
                         module.register_backward_hook(relu_hook_function)
         else:
+            print(self.network)
             for pos, module in self.model.features._modules.items():
                 if isinstance(module, ReLU):
                     module.register_backward_hook(relu_hook_function)

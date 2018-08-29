@@ -104,6 +104,7 @@ if __name__=='__main__':
 
     classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
+
     # Model
     print('==> Building model..')
     # net = VGG('VGG19')

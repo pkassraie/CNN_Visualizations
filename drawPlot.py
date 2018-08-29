@@ -18,7 +18,7 @@ from matplotlib import pyplot as plt
 def compareAttacks(vizmethod, choose_network, image_index, training='', structure=''):
     isTrained = True
     _,_,_,img_name,_ = get_params(image_index,choose_network,isTrained,training, structure)
-    attacks = ['FGSM','DeepFool','PGD','SalMap','LBFGS','RPGD' , 'Boundary']#,'SinglePixel']
+    attacks = ['FGSM','DeepFool','PGD','SalMap','LBFGS','RPGD']# , 'Boundary']#,'SinglePixel']
     rows = 1+len(attacks)
     fig = plt.figure()
     fig.suptitle('Comparing Attacks:'+img_name+' - '+ vizmethod)
@@ -150,47 +150,47 @@ def compareAttacks(vizmethod, choose_network, image_index, training='', structur
                                                                                  training,structure,
                                                                                  image_index,attack_type=i)
             if j ==1:
-                ax11 = fig.add_subplot(2,6,1)
+                ax11 = fig.add_subplot(rows,6,1)
                 ax11.imshow(original_image)
                 ax11.set_title('Original Image')
 
-                ax1 = fig.add_subplot(2,6,2)
+                ax1 = fig.add_subplot(rows, 6,2)
                 ax1.imshow(colorgrads)
                 ax1.set_title('Guided BP Color')
 
-                ax2 = fig.add_subplot(2, 6, 3)
+                ax2 = fig.add_subplot(rows, 6, 3)
                 ax2.imshow(graygrads)
                 ax2.set_title( 'Guided BP Gray')
-                ax3 = fig.add_subplot(2, 6, 4)
+                ax3 = fig.add_subplot(rows, 6, 4)
                 ax3.imshow(possal)
                 ax3.set_title('Positive Saliency')
-                ax4 = fig.add_subplot(2, 6, 5)
+                ax4 = fig.add_subplot(rows, 6, 5)
                 ax4.imshow(negsal)
                 ax4.set_title('Negative Saliency')
 
 
-                ax9 = fig.add_subplot(2,6,6)
+                ax9 = fig.add_subplot(rows, 6,6)
                 ax9.bar(indices,orig_vals,align='center', alpha=0.5)
                 ax9.set_title('Orignial Image Predictions')
                 ax9.set_xticks(indices)
                 ax9.set_xticklabels(orig_labs,rotation = 45,ha="right")
 
-            ax12 = fig.add_subplot(2,6,6*j+1)
+            ax12 = fig.add_subplot(rows, 6,6*j+1)
             ax12.imshow(adversarial)
             ax12.set_title(i + ' Attack')
-            ax5 = fig.add_subplot(2, 6, 6*j+2)
+            ax5 = fig.add_subplot(rows, 6, 6*j+2)
             ax5.imshow(colorgrads2)
             ax5.set_title('Adversarial Guided BP Color')
-            ax6 = fig.add_subplot(2, 6, 6*j+3)
+            ax6 = fig.add_subplot(rows, 6, 6*j+3)
             ax6.imshow(graygrads2)
             ax6.set_title('Adversarial'+ 'Guided BP Gray')
-            ax7 = fig.add_subplot(2, 6, 6*j+4)
+            ax7 = fig.add_subplot(rows, 6, 6*j+4)
             ax7.imshow(possal2)
             ax7.set_title('Adversarial ''Positive Saliency')
-            ax8 = fig.add_subplot(2, 6, 6*j+5)
+            ax8 = fig.add_subplot(rows, 6, 6*j+5)
             ax8.imshow(negsal2)
             ax8.set_title('Adversarial'+'Negative Saliency')
-            ax10 = fig.add_subplot(2,6,6*j+6)
+            ax10 = fig.add_subplot(rows, 6,6*j+6)
             ax10.bar(indices,adver_vals,align='center', alpha=0.5)
             ax10.set_title('Adversary Image Predictions')
             ax10.set_xticks(indices)

@@ -32,7 +32,7 @@ class VanillaBackprop():
         if self.network == "ResNet50":
             first_layer = list(self.model.children())[0]
 
-        if self.network == "Custom":
+        elif self.network == "Custom":
             if self.structure == "ResNet50":
                 first_layer = list(self.model.children())[0]
             elif self.structure =='VGG19':

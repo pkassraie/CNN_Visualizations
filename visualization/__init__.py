@@ -7,3 +7,5 @@ from visualization.smooth_grad import runsmoothGrad
 from visualization.vanilla_backprop import runVanillaBP
 from visualization.explain import runExplain
 from visualization.deepimgprior import runImgPrior
+from visualization.gradcam2 import runGradCam2
+from visualization.explain2 import runExplain2
