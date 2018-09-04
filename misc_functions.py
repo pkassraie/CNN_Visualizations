@@ -5,7 +5,7 @@ import numpy as np
 
 import torch
 from torch.autograd import Variable
-from torchvision import models
+from torchvision import models,datasets,transforms
 from torch.nn import functional as F
 
 from customization import loadModel
@@ -48,7 +48,7 @@ def save_gradient_images(gradient, file_name):
     return gradient
 
 
-def save_class_activation_on_image(org_img, activation_map, file_name):
+def save_class_activation_on_image(network, org_img, activation_map, file_name):
     """
         Saves cam activation map and activation map on the original image
 
@@ -67,7 +67,10 @@ def save_class_activation_on_image(org_img, activation_map, file_name):
     path_to_file = os.path.join('results', file_name+'_Cam_Heatmap.jpg')
     cv2.imwrite(path_to_file, activation_heatmap)
     # Heatmap on picture
-    org_img = cv2.resize(org_img, (224, 224))
+    if network == 'Custom':
+        org_img = cv2.resize(org_img, (32, 32))
+    else:
+        org_img = cv2.resize(org_img, (224, 224))
     img_with_heatmap = np.float32(activation_heatmap) + np.float32(org_img)
     img_with_heatmap = img_with_heatmap / np.max(img_with_heatmap)
     path_to_file = os.path.join('results', file_name+'_Cam_On_Image.jpg')
@@ -161,23 +164,50 @@ def get_params(example_index,network,isTrained,training='Normal', structure=''):
         file_name_to_export (string): File name to export the visualizations
         pretrained_model(Pytorch model): Model to use for the operations
     """
-    # Pick one of the examples
-    example_list = [['input_images/snake.jpg', 56],
-                    ['input_images/cat_dog.png', 243],
-                    ['input_images/spider.png', 72],
-                    ['input_images/volcano.jpg', 980],
-                    ['input_images/pelican.jpg', 144],
-                    ['input_images/jellyfish.jpg', 107],
-                    ['input_images/admiral.jpg', 321]]
 
-    selected_example = example_index
-    img_path = example_list[selected_example][0]
-    target_class = example_list[selected_example][1]
-    file_name_to_export = img_path[img_path.rfind('/')+1:img_path.rfind('.')]
-    # Read image
-    original_image = cv2.imread(img_path, 1)
-    # Process image
-    prep_img = preprocess_image(original_image)
+    if network == 'Custom':
+
+        transform_test = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+        ])
+
+        testset = datasets.CIFAR10(root='./customization/data', train=False, download=False, transform=transform_test)
+        testloader = torch.utils.data.DataLoader(testset, batch_size=1, shuffle=True, num_workers=2)
+        classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+
+
+        prep_img, target_class= next(iter(testloader))
+
+        file_name_to_export = classes[target_class]
+        target_class = target_class.numpy()
+        original_image = prep_img.numpy().transpose(0,2,3,1)[0,:,:,:]
+        mean = np.array([0.4914, 0.4822, 0.4465])
+        std = np.array([0.2023, 0.1994, 0.2010])
+        original_image = std * original_image + mean
+        original_image = np.clip(original_image, 0, 1)
+        #################################################
+        prep_img = Variable(prep_img, requires_grad=True)
+        #################################################
+
+    else:
+        # Pick one of the examples
+        example_list = [['input_images/snake.jpg', 56],
+                        ['input_images/cat_dog.png', 243],
+                        ['input_images/spider.png', 72],
+                        ['input_images/volcano.jpg', 980],
+                        ['input_images/pelican.jpg', 144],
+                        ['input_images/jellyfish.jpg', 107],
+                        ['input_images/admiral.jpg', 321]]
+
+        selected_example = example_index
+        img_path = example_list[selected_example][0]
+        target_class = example_list[selected_example][1]
+        file_name_to_export = img_path[img_path.rfind('/')+1:img_path.rfind('.')]
+        # Read image
+        original_image = cv2.imread(img_path, 1)
+        # Process image
+        prep_img = preprocess_image(original_image)
 
 
     # Define model

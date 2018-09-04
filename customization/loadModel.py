@@ -14,8 +14,9 @@ def loadModel(training, structure):
     elif structure == 'VGG19':
         model = VGG('VGG19')
         path = './customization/trainedmodels/'+training+ '_'+ structure
-        model.load_state_dict(torch.load(path))
+        model.load_state_dict(torch.load(path,map_location=lambda storage, loc: storage),strict=False)
 
+    model.eval()
 
     return model
 

@@ -73,7 +73,7 @@ def runsmoothGrad(choose_network = 'AlexNet',
     print('Smooth grad completed')
 
     # Now the attack:
-    attack1 = attack(attack_type,pretrained_model,
+    attack1 = attack(choose_network,attack_type,pretrained_model,
                                                            original_image,file_name_to_export,target_class)
     adversarialpic,adversarial,advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
 

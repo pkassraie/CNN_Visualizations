@@ -2,7 +2,7 @@ import numpy as np
 import foolbox
 import cv2
 from misc_functions import preprocess_image
-
+from matplotlib import pyplot as plt
 from skimage.measure import compare_ssim as ssim
 
 # So basically, the attack functions receive a trained model, an image (and sometimes) the correct label.
@@ -11,23 +11,32 @@ from skimage.measure import compare_ssim as ssim
 class attack():
 
 
-    def __init__(self,type, model, image, file_name,label):
+    def __init__(self,model_name,type, model, image, file_name,label):
         self.type = type
         self.model = model
+        self.model_name = model_name
         self.image = image
         self.file_name = file_name
         self.label = label
 
     def runAttack(self):
         # instantiate the model
-        mean = np.array([0.485, 0.456, 0.406]).reshape((3, 1, 1))
-        std = np.array([0.229, 0.224, 0.225]).reshape((3, 1, 1))
-        fmodel = foolbox.models.PyTorchModel(self.model, bounds=(0, 1), num_classes=1000, preprocessing=(mean, std))
+
+        if self.model_name == 'Custom':
+            mean = np.array([0.4914, 0.4822, 0.4465]).reshape((3, 1, 1))
+            std = np.array([0.2023, 0.1994, 0.2010]).reshape((3, 1, 1))
+            fmodel = foolbox.models.PyTorchModel(self.model, bounds=(0, 1), num_classes=10, preprocessing=(mean, std))
+        else:
+            mean = np.array([0.485, 0.456, 0.406]).reshape((3, 1, 1))
+            std = np.array([0.229, 0.224, 0.225]).reshape((3, 1, 1))
+            fmodel = foolbox.models.PyTorchModel(self.model, bounds=(0, 1), num_classes=1000, preprocessing=(mean, std))
         temp = self.image.copy()
         # get source image and label
+
         image = np.swapaxes(self.image,0,2)
         image = np.swapaxes(image,1,2)
         image = np.float32(image / 255.)  # because our model expects values in [0, 1]
+
         #label = target_class  #WHAT SHOULD I DO HERE?!?
         label = np.argmax(fmodel.predictions(image))
         orig_preds = np.array(fmodel.predictions(image))
@@ -73,11 +82,11 @@ class attack():
             attack_name = '_SalMap'
             adversarial = attack(image,np.int64(label))
 
-            # apply attack on source image
+        # apply attack on source image
         advers_class = np.argmax(fmodel.predictions(adversarial))
         adver_preds = np.array(fmodel.predictions(adversarial))
 
-        print('label',label)
+
         print('predicted class', np.argmax(fmodel.predictions(image)))
         print('adversarial class', advers_class)
 

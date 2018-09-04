@@ -6,6 +6,7 @@ Created on Thu Oct 26 11:06:51 2017
 import cv2
 import numpy as np
 import torch
+from torch.nn import functional as F
 from matplotlib import pyplot as plt
 from attacks import attack
 from misc_functions import get_params, save_class_activation_on_image,prediction_reader
@@ -39,16 +40,18 @@ class CamExtractor():
                     x.register_hook(self.save_gradient)
                     conv_output = x
 
-        elif self.network == 'Custom' and self.structure == "ResNet50":
-                i = 0
-                for module in list(self.model.children())[:-1]:
-                    i += 1
-                    x = module(x)
-                    if i == self.target_layer:
-                        x.register_hook(self.save_gradient)
-                        conv_output = x
-                tempmod = torch.nn.AvgPool2d(kernel_size=7, stride=1, padding=0)
-                conv_output = tempmod(conv_output)
+        elif self.network == 'Custom' and self.structure =='ResNet50':
+            i = 0
+            for module in list(self.model.children())[:-1]:
+                i += 1
+                if i ==3:
+                    x = F.relu(x)
+                x = module(x)
+                if i == self.target_layer:
+                    x.register_hook(self.save_gradient)
+                    conv_output = x
+
+            x = F.avg_pool2d(x, 4)
 
 
         else:
@@ -67,7 +70,6 @@ class CamExtractor():
         """
         # Forward pass on the convolutions
         conv_output, x = self.forward_pass_on_convolutions(x)
-
         # Forward pass on the classifier
         x = x.view(x.size(0), -1)  # Flatten
         if self.network == "ResNet50" or self.structure =="ResNet50":
@@ -97,6 +99,7 @@ class GradCam():
         # conv_output is the output of convolutions at specified layer
         # model_output is the final output of the model (1, 1000)
         conv_output, model_output = self.extractor.forward_pass(input_image)
+
         if target_class is None:
             target_class = np.argmax(model_output.data.numpy())
         # Target for backprop
@@ -141,7 +144,10 @@ class GradCam():
         # Multiply each weight with its conv output and then, sum
         for i, w in enumerate(weights):
             cam += w * target[i, :, :]
-        cam = cv2.resize(cam, (224, 224))
+        if self.network == 'Custom':
+            cam = cv2.resize(cam, (32, 32))
+        else:
+            cam = cv2.resize(cam, (224, 224))
         cam = np.maximum(cam, 0)
         cam = (cam - np.min(cam)) / (np.max(cam) - np.min(cam))  # Normalize between 0-1
         cam = np.uint8(cam * 255)  # Scale between 0-255 to visualize
@@ -178,13 +184,13 @@ def runGradCam(choose_network = 'AlexNet',
     # Generate cam mask
     cam = grad_cam.generate_cam(prep_img,target_class)
     # Save mask
-    gray,color, result = save_class_activation_on_image(original_image, cam, file_name_to_export)
+    gray,color, result = save_class_activation_on_image(choose_network, original_image, cam, file_name_to_export)
 
     print('Grad cam completed')
 
         # Adversary:
 
-    attack1 = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
+    attack1 = attack(choose_network,attack_type,pretrained_model,original_image,file_name_to_export,target_class)
     adversarialpic,adversarial,advers_class,orig_pred,adver_pred ,diff = attack1.getstuff()
 
     orig_labs,orig_vals = prediction_reader(orig_pred,10,choose_network)
@@ -194,7 +200,7 @@ def runGradCam(choose_network = 'AlexNet',
     # Generate cam mask
     cam = grad_cam.generate_cam(adversarial,advers_class)
     # Save mask
-    gray2,color2, result2 = save_class_activation_on_image(original_image, cam, 'Adversary_'+file_name_to_export)
+    gray2,color2, result2 = save_class_activation_on_image(choose_network, original_image, cam, 'Adversary_'+file_name_to_export)
     print('Adversary Grad cam completed')
 
 

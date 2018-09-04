@@ -39,16 +39,21 @@ def runGGradCam(choose_network = 'AlexNet',
         get_params(target_example,choose_network,isTrained,training,structure)
 
     # Grad cam
-    # Grad cam
     if choose_network == "ResNet50":
         gcv2 = GradCam(pretrained_model, target_layer=7,network = choose_network)
     elif choose_network == "AlexNet":
         gcv2 = GradCam(pretrained_model, target_layer=11,network = choose_network)
     elif choose_network == "VGG19":
         gcv2 = GradCam(pretrained_model, target_layer=35,network = choose_network)
+    elif choose_network =='Custom':
+        if structure == 'ResNet50': #target layer might be 4 instead of 5.
+            gcv2 = GradCam(pretrained_model,target_layer=5,network= choose_network,structure = structure)
+        elif structure =='VGG19':
+            gcv2 = GradCam(pretrained_model,target_layer=52,network= choose_network,structure = structure)
 
 
     # Generate cam mask
+
     cam = gcv2.generate_cam(prep_img, target_class)
     print('Grad cam completed')
 
@@ -65,7 +70,7 @@ def runGGradCam(choose_network = 'AlexNet',
     grayguidedgrad = save_gradient_images(grayscale_cam_gb, file_name_to_export + '_GGrad_Cam_gray')
     print('Guided grad cam completed')
 
-    attack1 =  attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
+    attack1 =  attack(choose_network,attack_type,pretrained_model,original_image,file_name_to_export,target_class)
     adversarialpic,adversarial,advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
 
     orig_labs,orig_vals = prediction_reader(orig_pred,10,choose_network)

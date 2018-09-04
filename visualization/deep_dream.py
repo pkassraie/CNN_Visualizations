@@ -124,7 +124,7 @@ def runDeepDream(choose_network = 'VGG19',
     ax1.set_title('Natural Dream')
 
 # Attack:
-    attack1 = attack(attack_type,pretrained_model,original_image,'DeepDream',target_class)
+    attack1 = attack(choose_network,attack_type,pretrained_model,original_image,'DeepDream',target_class)
     adversarial, advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
 
     im_path = 'results/DeepDream_'+attack_type+'_Attack.jpg'

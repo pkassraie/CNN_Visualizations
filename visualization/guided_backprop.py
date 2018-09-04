@@ -121,7 +121,7 @@ def runGBackProp(choose_network = 'AlexNet',
     negsal = save_gradient_images(neg_sal, file_name_to_export + '_neg_sal')
     print('Guided backprop completed')
     # Now the attack:
-    attack1 = attack(attack_type,pretrained_model,original_image,file_name_to_export,target_class)
+    attack1 = attack(choose_network,attack_type,pretrained_model,original_image,file_name_to_export,target_class)
     adversarialpic,adversarial,advers_class,orig_pred,adver_pred,diff = attack1.getstuff()
 
     orig_labs,orig_vals = prediction_reader(orig_pred,10,choose_network)
