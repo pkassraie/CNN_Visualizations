@@ -277,7 +277,7 @@ def runExplain(choose_network='AlexNet',
     (original_img, _, target_class, file_name_to_export, pretrained_model) = get_params(target_example,
                                                                                         choose_network, isTrained,
                                                                                         training,structure)
-    print(original_img.shape)
+
     attack1 = attack(choose_network,attack_type, pretrained_model, original_img, file_name_to_export, target_class)
     adversarialpic, adversarial,advers_class, orig_pred, adver_pred, diff = attack1.getstuff()
 

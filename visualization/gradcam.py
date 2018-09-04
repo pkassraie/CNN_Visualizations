@@ -15,7 +15,7 @@ class CamExtractor():
     """
         Extracts cam features from the model
     """
-    def __init__(self, model, target_layer,network,structure = 'ResNet50'):
+    def __init__(self, model, target_layer,network,structure):
         self.network = network
         self.structure = structure
         self.model = model
@@ -86,7 +86,7 @@ class GradCam():
     """
         Produces class activation map
     """
-    def __init__(self, model, target_layer,network,structure = 'ResNet50'):
+    def __init__(self, model, target_layer,network,structure):
         self.network = network
         self.structure = structure
         self.model = model
@@ -107,6 +107,7 @@ class GradCam():
         one_hot_output[0][target_class] = 1
 
         # Zero grads
+
         if self.network == "ResNet50":
             for module in list(self.model.children())[:-1]:
                 module.zero_grad()

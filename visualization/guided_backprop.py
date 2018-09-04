@@ -17,7 +17,7 @@ class GuidedBackprop():
     """
        Produces gradients generated with guided back propagation from the given image
     """
-    def __init__(self, model,network,structure='ResNet50'):
+    def __init__(self, model,network,structure=''):
         self.network = network
         self.structure = structure
         self.model = model
@@ -56,26 +56,27 @@ class GuidedBackprop():
             if isinstance(module, ReLU):
                 return (torch.clamp(grad_in[0], min=0.0),)
         # Loop through layers, hook up ReLUs with relu_hook_function
-
         if self.network == "ResNet50":
-
             for module in list(self.model.children())[:-1]:
                 if isinstance(module,ReLU):
                     module.register_backward_hook(relu_hook_function)
+                    print(module)
+
         elif self.network == 'Custom':
             if self.structure == 'ResNet50':
                 for module in list(self.model.children())[:-1]:
                     if isinstance(module,ReLU):
                         module.register_backward_hook(relu_hook_function)
+
             elif self.structure == 'VGG19':
                 for pos, module in self.model.features._modules.items():
                     if isinstance(module, ReLU):
                         module.register_backward_hook(relu_hook_function)
         else:
-            print(self.network)
             for pos, module in self.model.features._modules.items():
                 if isinstance(module, ReLU):
                     module.register_backward_hook(relu_hook_function)
+
 
     def generate_gradients(self, input_image, target_class):
         # Forward pass
@@ -89,6 +90,7 @@ class GuidedBackprop():
         model_output.backward(gradient=one_hot_output)
         # Convert Pytorch variable to numpy array
         # [0] to get rid of the first channel (1,3,224,224)
+        print(self.gradients.data.numpy().shape)
         gradients_as_arr = self.gradients.data.numpy()[0]
         return gradients_as_arr
 

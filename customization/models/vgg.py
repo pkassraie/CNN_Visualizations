@@ -38,10 +38,4 @@ class VGG(nn.Module):
         return nn.Sequential(*layers)
 
 
-def test():
-    net = VGG('VGG19')
-    j = 0
-    for i in list(net.children()):
-        print(j,":",i)
-
 # test()

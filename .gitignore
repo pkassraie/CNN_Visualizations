@@ -209,3 +209,4 @@ customization/data/
 
 .mypy_cache/
 .idea/
+customization/trainedmodels/

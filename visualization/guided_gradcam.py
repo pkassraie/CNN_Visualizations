@@ -56,9 +56,10 @@ def runGGradCam(choose_network = 'AlexNet',
 
     cam = gcv2.generate_cam(prep_img, target_class)
     print('Grad cam completed')
+    print('cam shape:',cam.shape)
 
     # Guided backprop
-    GBP = GuidedBackprop(pretrained_model,choose_network)
+    GBP = GuidedBackprop(pretrained_model,choose_network,structure)
     # Get gradients
     guided_grads = GBP.generate_gradients(prep_img, target_class)
     print('Guided backpropagation completed')

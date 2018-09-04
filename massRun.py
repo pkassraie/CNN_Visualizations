@@ -1,17 +1,26 @@
+#!/usr/bin/python
+
 from visualization import *
 from drawPlot import *
 
 attacks = ['FGSM','PGD','DeepFool','Boundary','SinglePixel','SalMap','LBFGS','RPGD']
 networks = ['VGG19','AlexNet','ResNet50','Custom']
-visualmethods = ['GBP','VanillaBP','SmoothGrad','Explain']#'GradCam','GGradCam',
+visualmethods = ['VanillaBP','SmoothGrad','Explain']#'GradCam','GGradCam','GBP',
 trained = True
 target_example = range(0, 6)
 
-for m in visualmethods:
-    print('Now comparing attacks for: ',m)
-    compareAttacks(m, 'ResNet50', 4, training='', structure='')
+if __name__ == '__main__':
+    #runGradCam('ResNet50')
+    runGradCam('Custom',structure = 'VGG19')
 
-#compareVisualizations(False,'FGSM','AlexNet',6,training='', structure='')
+
+#runExplain2('ResNet50',target_example=4,iters=20)
+#runGradCam2('ResNet50',target_example=5,attack_type='DeepFool')
+#for m in visualmethods:
+#    print('Now comparing attacks for: ',m)
+#compareAttacks('Explain', 'ResNet50', 4, training='', structure='')
+
+#compareVisualizations('FGSM','AlexNet',6,training='', structure='')
 #compareNetworks('FGSM','GradCam',4)
 
 # Compatible with all networks:
