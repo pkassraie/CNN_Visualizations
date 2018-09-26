@@ -60,7 +60,7 @@ class GuidedBackprop():
             for module in list(self.model.children())[:-1]:
                 if isinstance(module,ReLU):
                     module.register_backward_hook(relu_hook_function)
-                    print(module)
+
 
         elif self.network == 'Custom':
             if self.structure == 'ResNet50':
@@ -80,18 +80,21 @@ class GuidedBackprop():
 
     def generate_gradients(self, input_image, target_class):
         # Forward pass
+        if torch.cuda.is_available():
+            input_image = input_image.cuda()
         model_output = self.model(input_image)
         # Zero gradients
         self.model.zero_grad()
         # Target for backprop
         one_hot_output = torch.FloatTensor(1, model_output.size()[-1]).zero_()
+        if torch.cuda.is_available():
+            one_hot_output = one_hot_output.cuda()
         one_hot_output[0][target_class] = 1
         # Backward pass
         model_output.backward(gradient=one_hot_output)
         # Convert Pytorch variable to numpy array
         # [0] to get rid of the first channel (1,3,224,224)
-        print(self.gradients.data.numpy().shape)
-        gradients_as_arr = self.gradients.data.numpy()[0]
+        gradients_as_arr = self.gradients.data.cpu().numpy()[0]
         return gradients_as_arr
 
 

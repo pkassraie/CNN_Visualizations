@@ -78,6 +78,8 @@ class ResNet(nn.Module):
         return nn.Sequential(*layers)
 
     def forward(self, x):
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        x = x.to(device)
         out = F.relu(self.bn1(self.conv1(x)))
         out = self.layer1(out)
         out = self.layer2(out)

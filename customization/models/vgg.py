@@ -18,6 +18,8 @@ class VGG(nn.Module):
         self.classifier = nn.Linear(512, 10)
 
     def forward(self, x):
+        if torch.cuda.is_available():
+            self = self.cuda()
         out = self.features(x)
         out = out.view(out.size(0), -1)
         out = self.classifier(out)

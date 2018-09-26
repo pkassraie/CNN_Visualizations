@@ -178,10 +178,12 @@ def get_params(example_index,network,isTrained,training='Normal', structure=''):
 
 
         prep_img, target_class= next(iter(testloader))
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        prep_img,target_class = prep_img.to(device),target_class.to(device)
 
         file_name_to_export = classes[target_class]
-        target_class = target_class.numpy()
-        original_image = prep_img.numpy().transpose(0,2,3,1)[0,:,:,:]
+        target_class = target_class.cpu().numpy()
+        original_image = prep_img.cpu().numpy().transpose(0,2,3,1)[0,:,:,:]
         mean = np.array([0.4914, 0.4822, 0.4465])
         std = np.array([0.2023, 0.1994, 0.2010])
         original_image = std * original_image + mean
@@ -209,7 +211,6 @@ def get_params(example_index,network,isTrained,training='Normal', structure=''):
         # Process image
         prep_img = preprocess_image(original_image)
 
-
     # Define model
     if network == "AlexNet":
         pretrained_model = models.alexnet(pretrained=isTrained)
@@ -222,6 +223,9 @@ def get_params(example_index,network,isTrained,training='Normal', structure=''):
         pretrained_model.eval()
     elif network == "Custom":
         pretrained_model = loadModel(training, structure)
+
+    if torch.cuda.is_available():
+        pretrained_model = pretrained_model.cuda()
 
 
     return (original_image,

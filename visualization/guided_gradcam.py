@@ -40,11 +40,11 @@ def runGGradCam(choose_network = 'AlexNet',
 
     # Grad cam
     if choose_network == "ResNet50":
-        gcv2 = GradCam(pretrained_model, target_layer=7,network = choose_network)
+        gcv2 = GradCam(pretrained_model, target_layer=7,network = choose_network,structure=structure)
     elif choose_network == "AlexNet":
-        gcv2 = GradCam(pretrained_model, target_layer=11,network = choose_network)
+        gcv2 = GradCam(pretrained_model, target_layer=11,network = choose_network,structure=structure)
     elif choose_network == "VGG19":
-        gcv2 = GradCam(pretrained_model, target_layer=35,network = choose_network)
+        gcv2 = GradCam(pretrained_model, target_layer=35,network = choose_network,structure=structure)
     elif choose_network =='Custom':
         if structure == 'ResNet50': #target layer might be 4 instead of 5.
             gcv2 = GradCam(pretrained_model,target_layer=5,network= choose_network,structure = structure)

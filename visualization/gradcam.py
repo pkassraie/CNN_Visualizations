@@ -1,8 +1,3 @@
-"""
-Created on Thu Oct 26 11:06:51 2017
-
-@author: Utku Ozbulak - github.com/utkuozbulak
-"""
 import cv2
 import numpy as np
 import torch
@@ -52,11 +47,12 @@ class CamExtractor():
                     conv_output = x
 
             x = F.avg_pool2d(x, 4)
-
-
         else:
+            if torch.cuda.is_available():
+                self.model = self.model.cuda()
             for module_pos, module in self.model.features._modules.items():
                 # print("module_pos: ",module_pos," - Module:" , module)
+
                 x = module(x)  # Forward
                 if int(module_pos) == self.target_layer:
                     x.register_hook(self.save_gradient)
@@ -69,11 +65,13 @@ class CamExtractor():
             Does a full forward pass on the model
         """
         # Forward pass on the convolutions
+        if torch.cuda.is_available():
+            self.model = self.model.cuda()
         conv_output, x = self.forward_pass_on_convolutions(x)
         # Forward pass on the classifier
         x = x.view(x.size(0), -1)  # Flatten
         if self.network == "ResNet50" or self.structure =="ResNet50":
-            module  = list(self.model.children())[-1]
+            module = list(self.model.children())[-1]
             x = x.view(x.size(0), -1)
             x = module(x)
 
@@ -98,12 +96,16 @@ class GradCam():
         # Full forward pass
         # conv_output is the output of convolutions at specified layer
         # model_output is the final output of the model (1, 1000)
+
+        input_image = input_image.cuda()
         conv_output, model_output = self.extractor.forward_pass(input_image)
 
         if target_class is None:
             target_class = np.argmax(model_output.data.numpy())
         # Target for backprop
         one_hot_output = torch.FloatTensor(1, model_output.size()[-1]).zero_()
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        one_hot_output = one_hot_output.to(device)
         one_hot_output[0][target_class] = 1
 
         # Zero grads
@@ -131,10 +133,10 @@ class GradCam():
         model_output.backward(gradient=one_hot_output, retain_graph=True)
 
         # Get hooked gradients
-        guided_gradients = self.extractor.gradients.data.numpy()[0]
+        guided_gradients = self.extractor.gradients.data.cpu().numpy()[0]
 
         # Get convolution outputs
-        target = conv_output.data.numpy()[0]
+        target = conv_output.data.cpu().numpy()[0]
 
         # Get weights from gradients
         weights = np.mean(guided_gradients, axis=(1, 2))  # Take averages for each gradient
@@ -170,11 +172,11 @@ def runGradCam(choose_network = 'AlexNet',
 
     # Grad cam
     if choose_network == "ResNet50":
-        grad_cam = GradCam(pretrained_model, target_layer=7,network = choose_network)
+        grad_cam = GradCam(pretrained_model, target_layer=7,network = choose_network,structure = '')
     elif choose_network == "AlexNet":
-        grad_cam = GradCam(pretrained_model, target_layer=11,network = choose_network)
+        grad_cam = GradCam(pretrained_model, target_layer=11,network = choose_network,structure = '')
     elif choose_network == "VGG19":
-        grad_cam = GradCam(pretrained_model, target_layer=35,network = choose_network)
+        grad_cam = GradCam(pretrained_model, target_layer=35,network = choose_network,structure = '')
     elif choose_network =='Custom':
         if structure == 'ResNet50': #target layer might be 4 instead of 5.
             grad_cam = GradCam(pretrained_model,target_layer=5,network= choose_network,structure = structure)

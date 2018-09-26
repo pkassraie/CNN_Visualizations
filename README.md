@@ -6,7 +6,9 @@ This is a package for attacking and visualizing convolutional networks with the 
 
 ![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/pelican_SalMap_GradCam(TrainedResNet50).png)
 
-## Visualization Methods:
+## Tools:
+
+### Visualization Methods:
 
 * Guided Back Prop / Vanilla Back Prop
 
@@ -37,7 +39,7 @@ This is a package for attacking and visualizing convolutional networks with the 
 
     Dmitry Ulyanov, Andrea Vedaldi, Victor Lempitsky. Deep Image Prior, https://arxiv.org/abs/1711.10925
 
-## Attacks:
+### Attacks:
 
 * FGSM
 
@@ -65,30 +67,78 @@ https://arxiv.org/abs/1607.02533
 
     Nicolas Papernot, Patrick McDaniel, Somesh Jha, Matt Fredrikson, Z. Berkay Celik, Ananthram Swami. The Limitations of Deep Learning in Adversarial Settings,   https://arxiv.org/abs/1511.07528	
     
-## ConvNets:
+### ConvNets:
   * AlexNet, VGG19 & ResNet50 from torch vision library (pre-trained on ImageNet).
 
   * ResNet50 & VGG19 with custom training on CIFAR10.
 
   * ResNet50 & VGG19 with adversarial training on CIFAR10.
 
-## Comparing Functions:
+## Getting to know the practical side:
 
-There are 4 functions written for making the following comparisons:
-  * Among Visualization Methods(CompareVisualization): For a specific network and attack type, one can compare chosen visualization methods.
+### Folders Description
+- Comparing:
+- Concise Results:
+- input_images:
+- results:
+- visualization:
+- customization:
+### Main Python Files:
+- attacks.py:
+- drawPlot.py:
+- massRun.py:
+### Useful Functions:
+#### Plain Visualizations:
+##### Deconvolution Methods
+```sh
+runGBackProp(choose_network = 'AlexNet',
+                 isTrained = True,
+                 training = "Normal",
+                 structure="ResNet50",
+                 target_example = 3,
+                 attack_type = 'FGSM')
+```
+##### Modification Methods
+```sh
+runExplain(choose_network='AlexNet',
+               isTrained=True,
+               training = "Normal",
+               structure="ResNet50",
+               target_example=0,
+               iters=5,
+               attack_type='FGSM')
+```
+##### Reconstruction Methods
+```sh
+runDeepDream(choose_network = 'VGG19',
+                 isTrained = True,
+                 training = "Normal",
+                 structure = 'VGG19',
+                 target_example = 3,
+                 attack_type = 'FGSM',
+                 cnn_layer = 34,
+                 filter_pos = 94,
+                 iters = 50)
+```
+```sh
+runInvRep(choose_network = 'AlexNet',
+              isTrained = True,
+              training = "Normal",
+              structure="ResNet50",
+              target_example = 3,
+              target_layer = 0,
+              attack_type = 'FGSM')
+```
 
-  * Among Networks(CompareNetworks): For a specific attack, one can see how different networks are visualized using the same visualization method.
+#### Comparing Visualizations:
 
 
-  * Among Attacks(CompareAttacks): For a specific network, one can see how different attacks are visualized using the same visualization method.
 
-  * Among Training (CompareTraining): For a selected attack and network, one can compare how different training methods affect the chosen visualization. Currently Normal and [adversarial training](https://arxiv.org/abs/1412.6572) are available, distillation will soon be added. In addition for sanity check, visualization with a noisey input as well as untrained network could be shown. 
+### Step by step instructions:
 
-## Instructions:
+1. run `massRun.py`
 
-[1] Open 'massRun.py'
-
-[2] There is a function for each type of visualization or comparision. The common arguments between all functions are:
+2. There is a function for each type of visualization or comparision. The common arguments between all functions are:
 
 * Choose Network: Currently you can either choose pretrained 'ResNet50', 'VGG19' or 'AlexNet' or 'Custom' network.
 

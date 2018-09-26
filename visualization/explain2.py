@@ -73,6 +73,7 @@ def save(mask, img, blurred, name):
     cv2.imwrite('results/' + name + "_Explain_Mask.jpg", np.uint8(255 * mask))
     cv2.imwrite('results/' + name + "_Explain_Cam.jpg", np.uint8(255 * cam))
 
+    return np.uint8(255 * heatmap),np.uint8(255 * mask), np.uint8(255 * cam)
 
 def numpy_to_torch(img, requires_grad=True):
     if len(img.shape) < 3:
@@ -279,6 +280,14 @@ def runExplain2(choose_network='AlexNet',
                                                                                         choose_network, isTrained,
                                                                                         training,structure)
 
+
+    # Natural Image:
+    img, blurred_img, mask, blurred_img_numpy = prep_img(original_img,choose_network)
+    upsampled_mask = optimizeMask(choose_network,model, iters, mask, img, blurred_img)
+    heat1,mask1, cam1 = save(upsampled_mask, original_img, blurred_img_numpy, file_name_to_export)
+    print("Interpretable Explanations Completed")
+
+
     attack1 = attack(choose_network,attack_type, pretrained_model, original_img, file_name_to_export, target_class)
     adversarialpic, adversarial,advers_class, orig_pred, adver_pred, diff = attack1.getstuff()
 
@@ -286,26 +295,20 @@ def runExplain2(choose_network='AlexNet',
     adver_labs, adver_vals = prediction_reader(adver_pred, 10,choose_network)
     indices = np.arange(len(orig_labs))
 
-    # Natural Image:
-    img, blurred_img, mask, blurred_img_numpy = prep_img(original_img)
-    upsampled_mask = optimizeMask(choose_network,model, iters, mask, img, blurred_img)
-    heat1,mask1, cam1 = save(upsampled_mask, original_img, blurred_img_numpy, file_name_to_export)
-    print("Interpretable Explanations Completed")
-
     # Adversary:
-    img, blurred_img, mask, blurred_img_numpy = prep_img(adversarialpic)
+    img, blurred_img, mask, blurred_img_numpy = prep_img(adversarialpic,choose_network)
     upsampled_mask = optimizeMaskadvers(choose_network,model, iters, mask, img, blurred_img,advers_class)
     heat2,mask2,cam2 = save(upsampled_mask, original_img, blurred_img_numpy, 'Adversarial_' + file_name_to_export)
     print("Adversary Interpretable Explanations Completed")
 
     #NotSoNormie
-    img, blurred_img, mask, blurred_img_numpy = prep_img(original_img)
+    img, blurred_img, mask, blurred_img_numpy = prep_img(original_img,choose_network)
     upsampled_mask = optimizeMaskadvers(choose_network,model, iters, mask, img, blurred_img,advers_class)
     heat3,mask3,cam3 = save(upsampled_mask, original_img, blurred_img_numpy, 'NotSoNormie_' + file_name_to_export)
     print("NotSoNormie Interpretable Explanations Completed")
 
     #Inv NotSoNormie
-    img, blurred_img, mask, blurred_img_numpy = prep_img(adversarialpic)
+    img, blurred_img, mask, blurred_img_numpy = prep_img(adversarialpic,choose_network)
     upsampled_mask = optimizeMask(choose_network,model, iters, mask, img, blurred_img)
     heat4,mask4,cam4 = save(upsampled_mask, original_img, blurred_img_numpy, 'InvNotSoNormie_' + file_name_to_export)
     print("Inverse NotSoNormie Interpretable Explanations Completed")

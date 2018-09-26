@@ -16,7 +16,7 @@ class CamExtractor():
     """
         Extracts cam features from the model
     """
-    def __init__(self, model, target_layer,network,structure = 'ResNet50'):
+    def __init__(self, model, target_layer,network,structure):
         self.network = network
         self.structure = structure
         self.model = model
@@ -51,15 +51,14 @@ class CamExtractor():
                 if i == self.target_layer:
                     x.register_hook(self.save_gradient)
                     conv_output = x
-                print(x.detach().numpy().shape)
 
             x = F.avg_pool2d(x, 4)
-            print(x.detach().numpy().shape)
-
-
         else:
+            if torch.cuda.is_available():
+                self.model = self.model.cuda()
             for module_pos, module in self.model.features._modules.items():
                 # print("module_pos: ",module_pos," - Module:" , module)
+
                 x = module(x)  # Forward
                 if int(module_pos) == self.target_layer:
                     x.register_hook(self.save_gradient)
@@ -72,19 +71,15 @@ class CamExtractor():
             Does a full forward pass on the model
         """
         # Forward pass on the convolutions
-        print('x entering forwardpass',x.detach().numpy().shape)
+        if torch.cuda.is_available():
+            self.model = self.model.cuda()
         conv_output, x = self.forward_pass_on_convolutions(x)
-        print('x after convs:',x.detach().numpy().shape)
-        print('conv_output after forward:',conv_output.detach().numpy().shape)
         # Forward pass on the classifier
         x = x.view(x.size(0), -1)  # Flatten
         if self.network == "ResNet50" or self.structure =="ResNet50":
             module  = list(self.model.children())[-1]
-            print(module)
             x = x.view(x.size(0), -1)
-            print('x entering module:',x.detach().numpy().shape)
             x = module(x)
-            print('x after module:',x.detach().numpy().shape)
 
         else:
             x = self.model.classifier(x)
@@ -95,7 +90,7 @@ class GradCam():
     """
         Produces class activation map
     """
-    def __init__(self, model, target_layer,network,structure = 'ResNet50'):
+    def __init__(self, model, target_layer,network,structure):
         self.network = network
         self.structure = structure
         self.model = model
@@ -107,15 +102,20 @@ class GradCam():
         # Full forward pass
         # conv_output is the output of convolutions at specified layer
         # model_output is the final output of the model (1, 1000)
+
+        input_image = input_image.cuda()
         conv_output, model_output = self.extractor.forward_pass(input_image)
 
         if target_class is None:
             target_class = np.argmax(model_output.data.numpy())
         # Target for backprop
         one_hot_output = torch.FloatTensor(1, model_output.size()[-1]).zero_()
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        one_hot_output = one_hot_output.to(device)
         one_hot_output[0][target_class] = 1
 
         # Zero grads
+
         if self.network == "ResNet50":
             for module in list(self.model.children())[:-1]:
                 module.zero_grad()
@@ -139,10 +139,10 @@ class GradCam():
         model_output.backward(gradient=one_hot_output, retain_graph=True)
 
         # Get hooked gradients
-        guided_gradients = self.extractor.gradients.data.numpy()[0]
+        guided_gradients = self.extractor.gradients.data.cpu().numpy()[0]
 
         # Get convolution outputs
-        target = conv_output.data.numpy()[0]
+        target = conv_output.data.cpu().numpy()[0]
 
         # Get weights from gradients
         weights = np.mean(guided_gradients, axis=(1, 2))  # Take averages for each gradient
@@ -162,7 +162,6 @@ class GradCam():
         cam = np.uint8(cam * 255)  # Scale between 0-255 to visualize
         return cam
 
-
 #if __name__ == '__main__':
 # Get params
 def runGradCam2(choose_network = 'AlexNet',
@@ -178,11 +177,11 @@ def runGradCam2(choose_network = 'AlexNet',
 
     # Grad cam
     if choose_network == "ResNet50":
-        grad_cam = GradCam(pretrained_model, target_layer=7,network = choose_network)
+        grad_cam = GradCam(pretrained_model, target_layer=7,network = choose_network,structure = structure)
     elif choose_network == "AlexNet":
-        grad_cam = GradCam(pretrained_model, target_layer=11,network = choose_network)
+        grad_cam = GradCam(pretrained_model, target_layer=11,network = choose_network,structure = structure)
     elif choose_network == "VGG19":
-        grad_cam = GradCam(pretrained_model, target_layer=35,network = choose_network)
+        grad_cam = GradCam(pretrained_model, target_layer=35,network = choose_network,structure = structure)
     elif choose_network =='Custom':
         if structure == 'ResNet50': #target layer might be 4 instead of 5.
             grad_cam = GradCam(pretrained_model,target_layer=5,network= choose_network,structure = structure)

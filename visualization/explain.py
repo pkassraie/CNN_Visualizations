@@ -278,18 +278,18 @@ def runExplain(choose_network='AlexNet',
                                                                                         choose_network, isTrained,
                                                                                         training,structure)
 
+    # Natural Image:
+    img, blurred_img, mask, blurred_img_numpy = prep_img(original_img,network=choose_network)
+    upsampled_mask = optimizeMask(choose_network,model, iters, mask, img, blurred_img)
+    save(upsampled_mask, original_img, blurred_img_numpy, file_name_to_export)
+    print("Interpretable Explanations Completed")
+
     attack1 = attack(choose_network,attack_type, pretrained_model, original_img, file_name_to_export, target_class)
     adversarialpic, adversarial,advers_class, orig_pred, adver_pred, diff = attack1.getstuff()
 
     orig_labs, orig_vals = prediction_reader(orig_pred, 10,choose_network)
     adver_labs, adver_vals = prediction_reader(adver_pred, 10,choose_network)
     indices = np.arange(len(orig_labs))
-
-    # Natural Image:
-    img, blurred_img, mask, blurred_img_numpy = prep_img(original_img,network=choose_network)
-    upsampled_mask = optimizeMask(choose_network,model, iters, mask, img, blurred_img)
-    save(upsampled_mask, original_img, blurred_img_numpy, file_name_to_export)
-    print("Interpretable Explanations Completed")
 
     # Adversary:
     img, blurred_img, mask, blurred_img_numpy = prep_img(adversarialpic,choose_network)
