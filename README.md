@@ -278,14 +278,18 @@ An extension to `runGradCam` which allows you to compare the following Grad Cam 
 * Adversarial Input Image with the correct class prediction (Ground truth)
 * Natural Input Image with the adversarial class prediction (The wrong network prediction when fed the adversarial image)
 
+The arguments are similar to Grad Cam and the output will look like this:
+![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/pelican_FGSM_GradCam2(TrainedResNet50).png)
+
 #### runExplain2
 
 An extension to `runExplain` which allows you to compare the following Interpretable Explanations visualizations:
 * Natural Input Image with the correct class prediction (Ground truth)
 * Adversarial Input Image with the adversarial class prediction
-* Adversarial Input Image with the correct class prediction (Ground truth)
 * Natural Input Image with the adversarial class prediction (The wrong network prediction when fed the adversarial image)
 
+The arguments are similar to Explainable Interpretations and the output will look like this:
+![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/pelican_SalMap_InterpExp2_200iters(TrainedResNet50).png)
 
 ### Step By Step Instructions
 
