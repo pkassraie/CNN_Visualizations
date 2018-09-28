@@ -1,6 +1,7 @@
 
+
 # Visualizing Adversarial Examples on Convolutional Networks
-This is a package for attacking and visualizing convolutional networks with the purpose of understanding and comparing the effects of adversarial example on such networks.
+This is my Internship project at [CAMP](http://campar.in.tum.de/WebHome), [TUM](https://www.tum.de/), under supervision of [Professor Nassir Navab](http://campar.in.tum.de/Main/NassirNavab), [Dr. Federico Tombari](http://campar.in.tum.de/Main/FedericoTombari) with [Magda Paschali](http://campar.in.tum.de/Main/MagdaPaschali) as my advisor. It's a package for attacking and visualizing convolutional networks with the purpose of understanding and comparing the effects of adversarial example on such networks.
 
 ### Contents
 0. [Intro](#intro) 
@@ -34,10 +35,11 @@ This is a package for attacking and visualizing convolutional networks with the 
 2. [Code Structure](#code-structure)
 	1. [Other Functions](#other-functions)
 	2. [TL;DR: Step By Step Instructions](#step-by-step-instructions)
-3. [Requirements](#requirements)
-4. [References](#references)
+4. [Requirements](#requirements)
+5. [References](#references)
 
 ## Intro
+To be updated soon.
 ## Tools
 ### Visualization Methods
 #### Guided Back Prop
@@ -53,7 +55,7 @@ runGBackProp(choose_network = 'ResNet50',
                  attack_type = 'LBFGS')
 ```
 
-![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/pelican_LBFGS_Guided Back Prop(TrainedResNet50.png)
+![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/pelican_FGSM_Guided%20Back%20Prop(TrainedResNet50).png)
 
 - For more information on `choose_network`, `isTrained`, `training`, `structure` see [this section](#convolutional-networks).
 - For more information on `attack_type` check [the list of attacks](#attack-types). `
@@ -173,22 +175,23 @@ To be added soon.
 >Dmitry Ulyanov, Andrea Vedaldi, Victor Lempitsky. Deep Image Prior, https://arxiv.org/abs/1711.10925
 
 ### Attack Types
+All the attacks are implemented using [FoolBox Package](https://foolbox.readthedocs.io/en/latest/).
 #### FGSM
->Alexey Kurakin, Ian Goodfellow, Samy Bengio, “Adversarial examples in the physical world”,
+>Alexey Kurakin, Ian Goodfellow, Samy Bengio, *Adversarial examples in the physical world*,
 https://arxiv.org/abs/1607.02533
 
 #### PGD
->Aleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, Adrian Vladu, “Towards Deep Learning Models Resistant to Adversarial Attacks”, https://arxiv.org/abs/1706.06083
+>Aleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, Adrian Vladu, *Towards Deep Learning Models Resistant to Adversarial Attacks*, https://arxiv.org/abs/1706.06083
 #### Single Pixel
->Nina Narodytska, Shiva Prasad Kasiviswanathan, “Simple Black-Box Adversarial Perturbations for Deep Networks”, https://arxiv.org/pdf/1612.06299.pdf
+>Nina Narodytska, Shiva Prasad Kasiviswanathan, *Simple Black-Box Adversarial Perturbations for Deep Networks*, https://arxiv.org/pdf/1612.06299.pdf
 #### Boundary
->Wieland Brendel, Jonas Rauber, Matthias Bethge, “Decision-Based Adversarial Attacks: Reliable Attacks Against Black-Box Machine Learning Models”, https://arxiv.org/abs/1712.04248
+>Wieland Brendel, Jonas Rauber, Matthias Bethge, *Decision-Based Adversarial Attacks: Reliable Attacks Against Black-Box Machine Learning Models*, https://arxiv.org/abs/1712.04248
 #### Deep Fool
->Seyed-Mohsen Moosavi-Dezfooli, Alhussein Fawzi, Pascal Frossard, “DeepFool: a simple and accurate method to fool deep neural networks”, https://arxiv.org/abs/1511.04599
+>Seyed-Mohsen Moosavi-Dezfooli, Alhussein Fawzi, Pascal Frossard, *DeepFool: a simple and accurate method to fool deep neural networks*, https://arxiv.org/abs/1511.04599
 #### LBFGS
-> Pedro Tabacof, Eduardo Valle. Exploring the Space of Adversarial Images, https://arxiv.org/abs/1510.05328
+> Pedro Tabacof, Eduardo Valle. *Exploring the Space of Adversarial Images*, https://arxiv.org/abs/1510.05328
 #### Saliency Map 
->Nicolas Papernot, Patrick McDaniel, Somesh Jha, Matt Fredrikson, Z. Berkay Celik, Ananthram Swami. The Limitations of Deep Learning in Adversarial Settings,   https://arxiv.org/abs/1511.07528	
+>Nicolas Papernot, Patrick McDaniel, Somesh Jha, Matt Fredrikson, Z. Berkay Celik, Ananthram Swami. *The Limitations of Deep Learning in Adversarial Settings*,   https://arxiv.org/abs/1511.07528	
 
 ### Convolutional Networks
 #### AlexNet
