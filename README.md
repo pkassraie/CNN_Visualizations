@@ -34,7 +34,10 @@ This is my Internship project at [CAMP](http://campar.in.tum.de/WebHome), [TUM](
 			-- [Custom Adversarial Training on CIFAR10](#resnet50)
 2. [Code Structure](#code-structure)
 	1. [Other Functions](#other-functions)
-	2. [TL;DR: Step By Step Instructions](#step-by-step-instructions)
+		* [Comparison Functions](#comparison-functions)
+		* [runGradCam2](#rungradcam2)
+		* [runExplain2](#runexplain2)
+	3. [TL;DR: Step By Step Instructions](#step-by-step-instructions)
 4. [Requirements](#requirements)
 5. [References](#references)
 
@@ -234,19 +237,40 @@ You should train the model by running `adversCifar.py` if the corresponding ckpt
 
 ## Code Structure
 ### Other Functions
+#### Comparison Functions
 There are 4 functions written for making the following comparisons:
 * Among Visualization Methods(`CompareVisualization`): For a specific network and attack type, one can compare chosen visualization methods.
 * Among Networks(`CompareNetworks`): For a specific attack, one can see how different networks are visualized using the same visualization method.
 * Among Attacks(`CompareAttacks`): For a specific network, one can see how different attacks are visualized using the same visualization method.
 
-* Among Training (`CompareTraining`): For a selected attack and network, one can compare how different training methods affect the chosen visualization. Currently Normal and [adversarial training](https://arxiv.org/abs/1412.6572) are available, distillation will soon be added. In addition for sanity check, visualization with a noisey input as well as untrained network could be shown.
+* Among Training (`CompareTraining`): For a selected attack and network, one can compare how different training methods affect the chosen visualization. Currently Normal and [adversarial training](https://arxiv.org/abs/1412.6572) are available, distillation will soon be added. In addition for sanity check, visualization with a noisy input as well as untrained network could be shown.
+
+#### runGradCam2
+An extension to `runGradCam` which allows you to compare the following Grad Cam visualizations:
+* Natural Input Image with the correct class prediction (Ground truth)
+* Adversarial Input Image with the adversarial class prediction
+* Adversarial Input Image with the correct class prediction (Ground truth)
+* Natural Input Image with the adversarial class prediction (The wrong network prediction when fed the adversarial image)
+
+#### runExplain2
+
+An extension to `runExplain` which allows you to compare the following Interpretable Explanations visualizations:
+* Natural Input Image with the correct class prediction (Ground truth)
+* Adversarial Input Image with the adversarial class prediction
+* Adversarial Input Image with the correct class prediction (Ground truth)
+* Natural Input Image with the adversarial class prediction (The wrong network prediction when fed the adversarial image)
+
 
 ### Step By Step Instructions
 
 1. open `massRun.py`
 2. Choose your function amongst the following available ones:
+* Single Visualization:
+>`runGradCam`, `runGradCam2`, `runGGradCam`, `runsmoothGrad`, `runExplain`, `runExplain2`, `runVanillaBP`, `runInvRep`, `runDeepDream`.
 
-4. As explained above there is a function for each type of visualization or comparison. The common arguments between all functions are:
+* Comparison Visualizations:
+> `CompareTraining`, `CompareVisualizaion`, `CompareNetworks`, `CompareAttacks` 
+3. As explained above there is a function for each type of visualization or comparison. The common arguments between all functions are:
 
 * *Choose Network*: Currently you can either choose pretrained `ResNet50`, `VGG19` or `AlexNet` or `Custom` network.
 
