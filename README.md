@@ -49,7 +49,7 @@ To be updated soon.
 1. Instructions
 In `massRun.py` run the function `runGBackProp` for guided backprop method, or `runVanillaBP` for Vanilla Back prop. For instance:
 
-```sh
+```python
 runGBackProp(choose_network = 'ResNet50',
                  isTrained = True,
                  training = "Normal",
@@ -73,7 +73,7 @@ runGBackProp(choose_network = 'ResNet50',
 1. Instructions
 In `massRun.py` run the function `runsmoothGrad` for smooth guided grad method. For instance:
 
-```sh
+```python
 runsmoothGrad(choose_network = 'VGG19',
                  isTrained = True,
                  training = "Normal",
@@ -93,7 +93,7 @@ runsmoothGrad(choose_network = 'VGG19',
 1. Instructions
 In `massRun.py` run the function `runGradCam` for Grad Cam method, or `runGGradCam` for Guided Grad Cam. For instance:
 
-```sh
+```python
 runGradCam(choose_network = 'ResNet50',
                  isTrained = True,
                  target_example = 4,
@@ -111,7 +111,7 @@ runGradCam(choose_network = 'ResNet50',
 #### Interpretable Explanations
 1. Instructions
 In `massRun.py` run the function `runExplain` for Interpretable explanations method. For instance:
-```sh
+```python
 runExplain(choose_network='ResNet50',
                isTrained=True,
                target_example=5,
@@ -133,7 +133,7 @@ runExplain(choose_network='ResNet50',
 > Note that this method is *only* implemented for Pytorch pretrained AlexNet or VGG19. The method is also not supported by *any of the comparison functions*. Use with caution!
 
 In `massRun.py` run the function `runInvRep` for Inverted Image Representations method. For instance:
-```sh
+```python
 runInvRep(choose_network = 'AlexNet',
               isTrained = True,
               target_example = 4,
@@ -156,7 +156,7 @@ runInvRep(choose_network = 'AlexNet',
 1. Instructions
 > Note that this method is *only* implemented for Pytorch pretrained AlexNet or VGG19. The method is also not supported by *any of the comparison functions*. Use with caution!
 In `massRun.py` run the function `runDeepDream` for Inverted Image Representations method. For instance:
-```sh
+```python
 runDeepDream(choose_network = 'VGG19',
                  isTrained = True,
                  target_example = 3,
@@ -239,12 +239,38 @@ You should train the model by running `adversCifar.py` if the corresponding ckpt
 ### Other Functions
 #### Comparison Functions
 There are 4 functions written for making the following comparisons:
-* Among Visualization Methods(`CompareVisualization`): For a specific network and attack type, one can compare chosen visualization methods.
-* Among Networks(`CompareNetworks`): For a specific attack, one can see how different networks are visualized using the same visualization method.
-* Among Attacks(`CompareAttacks`): For a specific network, one can see how different attacks are visualized using the same visualization method.
+* Among Attacks(`CompareAttacks`): For a specific network, one can see how different attacks are visualized using the same visualization method. It is executed from `massRun.py` by entering:
+```python
+compareAttacks(vizmethod = 'Explain',  
+                   choose_network = 'Custom',  
+                   image_index = 4,  
+                   training='Normal',  
+                   structure='ResNet50'):
+```
+![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Comparing/AttackComp_pelican_Explain%20(ResNet50__%20).png)
 
-* Among Training (`CompareTraining`): For a selected attack and network, one can compare how different training methods affect the chosen visualization. Currently Normal and [adversarial training](https://arxiv.org/abs/1412.6572) are available, distillation will soon be added. In addition for sanity check, visualization with a noisy input as well as untrained network could be shown.
-
+* Among Visualization Methods(`CompareVisualization`): For a specific network and attack type, one can compare chosen visualization methods. Implemented similar to `CompareAttacks`,
+```python
+compareVisualizations(attackmethod = 'Boundary',  
+                          choose_network = 'Custom',  
+                          image_index = 5,  
+                          training='Adverarial',  
+                          structure='VGG19')
+```
+* Among Networks(`CompareNetworks`): For a specific attack, one can see how different networks are visualized using the same visualization method. Implemented similar to `CompareAttacks`,
+```python
+compareNetworks(attackmethod = 'PGD,  
+                    vizmethod = 'GradCam',  
+                    image_index = 3,  
+                    training='Normal') # or `Adversarial`
+```
+* Among Training (`CompareTraining`): For a selected attack and network, one can compare how different training methods affect the chosen visualization. Currently Normal and [adversarial training](https://arxiv.org/abs/1412.6572) are available, distillation will soon be added. In addition for sanity check, visualization with a noisy input as well as untrained network could be shown. Implemented similar to `CompareAttacks`,
+```python
+compareTraining(attackmethod = 'SinglePixle',  
+                    vizmethod = 'VanillaBP',  
+                    structure = 'ResNet50',  
+                    image_index = 2)
+```
 #### runGradCam2
 An extension to `runGradCam` which allows you to compare the following Grad Cam visualizations:
 * Natural Input Image with the correct class prediction (Ground truth)
@@ -283,7 +309,7 @@ An extension to `runExplain` which allows you to compare the following Interpret
 * *Example Index* (Only for ImageNet): Choose a number from 0-6 to choose an image from `input_images`. If you are using a network trained on CIFAR10 the example would be chosen randomly.
 
 ## Requirements
-```
+```python
 python = 3.5
 torch >= 0.4.0
 torchvision >= 0.1.9
