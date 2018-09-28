@@ -3,46 +3,42 @@
 This is a package for attacking and visualizing convolutional networks with the purpose of understanding and comparing the effects of adversarial example on such networks.
 
 ### Contents
-0. [Intro](#Intro) 
-1. [Tools]()
-	1. Visualization Methods
-		* Guided Back Prop / Vanilla Back Prop
-		* Smooth Back Prop
-		* Grad Cam / Guided Gram Cam
-		* Interpretable Explanations
-		*  Inverted image representations
-		* Deep Dream
-		*  Deep Image Prior	
-	2. Attack Types
-		* FGSM
-		* PGD / Random Start PGD
-		* Single Pixel
-		* Boundary
-		* Deep Fool
-		* LBFGS
-		* Saliency Map 
-	3. Convolutional Network & Training Choices
-		* AlexNet
-		* VGG19
-			-- Pytorch Pretrained Model on ImageNet
-			-- Custom Training on CIFAR10
-			-- Custom Adversarial Training on CIFAR10
-		* ResNet50
-			-- Pytorch Pretrained Model on ImageNet
-			-- Custom Training on CIFAR10
-			-- Custom Adversarial Training on CIFAR10
-2. Code Structure
-	1. Folders & Code Hierarchy 
-	2. Main Python Files
-	3. Pivotal Functions
+0. [Intro](#intro) 
+1. [Tools](#tools)
+	1. [Visualization Methods](#visualization-methods)
+		* [Guided Back Prop / Vanilla Back Prop](#guided-back-prop)
+		* [Smooth Back Prop](#smooth-back-prop)
+		* [Grad Cam / Guided Gram Cam](#grad-cam)
+		* [Interpretable Explanations](#interpretable-explanations)
+		*  [Inverted image representations](#inverted-image-representations)
+		* [Deep Dream](#deep-dream)
+		*  [Deep Image Prior](#deep-image-prior)	
+	2. [Attack Types](#attack-types)
+		* [FGSM](#fgsm)
+		* [PGD / Random Start PGD](#pgd)
+		* [Single Pixel](#single-pixel)
+		* [Boundary](#boundary)
+		* [Deep Fool](#deep-fool)
+		* [LBFGS](#lbfgs)
+		* [Saliency Map](#saliency-map)
+	3. [Convolutional Network & Training Choices](#convolutional-networks)
+		* [AlexNet](#alexnet)
+		* [VGG19](#vgg19)
+			-- [Pytorch Pretrained Model on ImageNet](#vgg19)
+			-- [Custom Training on CIFAR10](#vgg19)
+			-- [Custom Adversarial Training on CIFAR10](#vgg19)
+		* [ResNet50](#resnet50)
+			-- [Pytorch Pretrained Model on ImageNet](#resnet50)
+			-- [Custom Training on CIFAR10](#resnet50)
+			-- [Custom Adversarial Training on CIFAR10](#resnet50)
+2. [Code Structure](#code-structure)
+	1. [Main Python Files](#main-python-files)
+	2. [Other Functions](#other-functions)
 
-![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/admiral_RPGD_InterpExp(TrainedResNet50).png)
-
-![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/pelican_SalMap_GradCam(TrainedResNet50).png)
 ## Intro
 ## Tools
-### 1. Visualization Methods
-#### Guided Back Prop / Vanilla Back Prop
+### Visualization Methods
+#### Guided Back Prop
 ```sh
 runGBackProp(choose_network = 'AlexNet',
                  isTrained = True,
@@ -57,8 +53,25 @@ runGBackProp(choose_network = 'AlexNet',
 >K. Simonyan, A. Vedaldi, A. Zisserman. Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps, https://arxiv.org/abs/1312.6034
  
 #### Smooth Back Prop
+```sh
+runGBackProp(choose_network = 'AlexNet',
+                 isTrained = True,
+                 training = "Normal",
+                 structure="ResNet50",
+                 target_example = 3,
+                 attack_type = 'FGSM')
+```
 >D. Smilkov, N. Thorat, N. Kim, F. Viégas, M. Wattenberg. SmoothGrad: removing noise by adding noise https://arxiv.org/abs/1706.03825
-#### Grad Cam / Guided Gram Cam
+#### Grad Cam
+```sh
+runGBackProp(choose_network = 'AlexNet',
+                 isTrained = True,
+                 training = "Normal",
+                 structure="ResNet50",
+                 target_example = 3,
+                 attack_type = 'FGSM')
+```
+![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/pelican_SalMap_GradCam(TrainedResNet50).png)
 >R. R. Selvaraju, A. Das, R. Vedantam, M. Cogswell, D. Parikh, and D. Batra. Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization, https://arxiv.org/abs/1610.02391
 #### Interpretable Explanations
 ```sh
@@ -70,6 +83,8 @@ runExplain(choose_network='AlexNet',
                iters=5,
                attack_type='FGSM')
 ```
+![Output](https://raw.githubusercontent.com/svarthafnyra/CAMP-Project/master/Concise%20Results/admiral_RPGD_InterpExp(TrainedResNet50).png)
+
 >R. Fong, A. Vedaldi. Interpratable Explanations of Black Boxes by Meaningful Perturbations, https://arxiv.org/abs/1704.03296
 #### Inverted image representations
 ```sh
@@ -96,13 +111,14 @@ runDeepDream(choose_network = 'VGG19',
 ```
 > D. Smilkov, N. Thorat, N. Kim, F. Viégas, M. Wattenberg. SmoothGrad: removing noise by adding noise https://arxiv.org/abs/1706.03825
 #### Deep Image Prior
->Dmitry Ulyanov, Andrea Vedaldi, Victor Lempitsky. Deep Image Prior, https://arxiv.org/abs/1711.10925	
-### 2. Attack Types
+To be added soon.
+>Dmitry Ulyanov, Andrea Vedaldi, Victor Lempitsky. Deep Image Prior, https://arxiv.org/abs/1711.10925
+### Attack Types
 #### FGSM
 >Alexey Kurakin, Ian Goodfellow, Samy Bengio, “Adversarial examples in the physical world”,
 https://arxiv.org/abs/1607.02533
 
-#### PGD / Random Start PGD
+#### PGD
 >Aleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, Adrian Vladu, “Towards Deep Learning Models Resistant to Adversarial Attacks”, https://arxiv.org/abs/1706.06083
 #### Single Pixel
 >Nina Narodytska, Shiva Prasad Kasiviswanathan, “Simple Black-Box Adversarial Perturbations for Deep Networks”, https://arxiv.org/pdf/1612.06299.pdf
@@ -114,25 +130,16 @@ https://arxiv.org/abs/1607.02533
 > Pedro Tabacof, Eduardo Valle. Exploring the Space of Adversarial Images, https://arxiv.org/abs/1510.05328
 #### Saliency Map 
 >Nicolas Papernot, Patrick McDaniel, Somesh Jha, Matt Fredrikson, Z. Berkay Celik, Ananthram Swami. The Limitations of Deep Learning in Adversarial Settings,   https://arxiv.org/abs/1511.07528	
-### 3. Convolutional Network & Training Choices
+### Convolutional Networks
 #### AlexNet
 #### VGG19
 #### ResNet50
-## 2. Code Structure
-### 1. Folders & Code Hierarchy 
-- Comparing:
-- Concise Results:
-- input_images:
-- results:
-- visualization:
-- customization:
-
-### 2. Main Python Files
+## Code Structure
+### Main Python Files
 - drawPlot.py:
 - massRun.py:
 
-### 3. Pivotal Functions
-#### Comparing Functions
+### Other Functions
 There are 4 functions written for making the following comparisons:
 * Among Visualization Methods(CompareVisualization): For a specific network and attack type, one can compare chosen visualization methods.
 * Among Networks(CompareNetworks): For a specific attack, one can see how different networks are visualized using the same visualization method.
