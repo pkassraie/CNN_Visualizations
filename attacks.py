@@ -1,6 +1,7 @@
 import numpy as np
 import foolbox
 import cv2
+import torch
 from misc_functions import preprocess_image
 from matplotlib import pyplot as plt
 from skimage.measure import compare_ssim as ssim
@@ -23,9 +24,11 @@ class attack():
         # instantiate the model
 
         if self.model_name == 'Custom':
+            ## MAYBE YOU SHOULD NOT ADD PREPROCESSING FOR ADVERSARIAL TRAININGS!!!!
             mean = np.array([0.4914, 0.4822, 0.4465]).reshape((3, 1, 1))
             std = np.array([0.2023, 0.1994, 0.2010]).reshape((3, 1, 1))
             fmodel = foolbox.models.PyTorchModel(self.model, bounds=(0, 1), num_classes=10, preprocessing=(mean, std))
+
         else:
             mean = np.array([0.485, 0.456, 0.406]).reshape((3, 1, 1))
             std = np.array([0.229, 0.224, 0.225]).reshape((3, 1, 1))
@@ -48,9 +51,14 @@ class attack():
             adversarial = attack(image,np.int64(label))
 
         elif self.type =='PGD':
+            iterations = 40
+            epsilon = 0.3
+            if self.model_name == 'Custom':
+                iterations = 100
+                epsilon = 0.7
             attack = foolbox.attacks.ProjectedGradientDescentAttack(fmodel)
             attack_name = '_PGD'
-            adversarial = attack(image,np.int64(label))
+            adversarial = attack(image,np.int64(label),iterations=iterations, epsilon=epsilon)
 
         elif self.type == 'DeepFool':
             attack = foolbox.attacks.DeepFoolLinfinityAttack(fmodel)

@@ -11,15 +11,6 @@ from torch.nn import functional as F
 from customization import loadModel
 
 def convert_to_grayscale(cv2im):
-    """
-        Converts 3d image to grayscale
-
-    Args:
-        cv2im (numpy arr): RGB image with shape (D,W,H)
-
-    returns:
-        grayscale_im (numpy_arr): Grayscale image with shape (1,W,D)
-    """
     grayscale_im = np.sum(np.abs(cv2im), axis=0)
     im_max = np.percentile(grayscale_im, 99)
     im_min = np.min(grayscale_im)
@@ -166,32 +157,56 @@ def get_params(example_index,network,isTrained,training='Normal', structure=''):
     """
 
     if network == 'Custom':
+        if training == 'Normal':
+            transform_test = transforms.Compose([
+                transforms.Resize((224, 224)),
+                transforms.ToTensor(),
+                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+            ])
 
-        transform_test = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
-        ])
+            testset = datasets.CIFAR10(root='./customization/data', train=False, download=False, transform=transform_test)
+            testloader = torch.utils.data.DataLoader(testset, batch_size=1, shuffle=True, num_workers=2)
+            classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-        testset = datasets.CIFAR10(root='./customization/data', train=False, download=False, transform=transform_test)
-        testloader = torch.utils.data.DataLoader(testset, batch_size=1, shuffle=True, num_workers=2)
-        classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+            prep_img, target_class= next(iter(testloader))
+            device = 'cuda' if torch.cuda.is_available() else 'cpu'
+            prep_img,target_class = prep_img.to(device),target_class.to(device)
 
+            file_name_to_export = classes[target_class]
+            target_class = target_class.cpu().numpy()
+            original_image = prep_img.cpu().numpy().transpose(0,2,3,1)[0,:,:,:]
+            mean = np.array([0.4914, 0.4822, 0.4465])
+            std = np.array([0.2023, 0.1994, 0.2010])
+            original_image = std * original_image + mean
+            original_image = np.clip(original_image, 0, 1)
+            #################################################
+            prep_img = Variable(prep_img, requires_grad=True)
+            #################################################
+        elif training == 'Adversarial':
+            transform_test = transforms.Compose([
+                transforms.Resize((224, 224)),
+                transforms.ToTensor(),
+            ])
 
-        prep_img, target_class= next(iter(testloader))
-        device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        prep_img,target_class = prep_img.to(device),target_class.to(device)
+            testset = datasets.CIFAR10(root='./customization/data', train=False, download=False,
+                                       transform=transform_test)
+            testloader = torch.utils.data.DataLoader(testset, batch_size=1, shuffle=True, num_workers=2)
+            classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-        file_name_to_export = classes[target_class]
-        target_class = target_class.cpu().numpy()
-        original_image = prep_img.cpu().numpy().transpose(0,2,3,1)[0,:,:,:]
-        mean = np.array([0.4914, 0.4822, 0.4465])
-        std = np.array([0.2023, 0.1994, 0.2010])
-        original_image = std * original_image + mean
-        original_image = np.clip(original_image, 0, 1)
-        #################################################
-        prep_img = Variable(prep_img, requires_grad=True)
-        #################################################
+            prep_img, target_class = next(iter(testloader))
+            device = 'cuda' if torch.cuda.is_available() else 'cpu'
+            prep_img, target_class = prep_img.to(device), target_class.to(device)
 
+            file_name_to_export = classes[target_class]
+            target_class = target_class.cpu().numpy()
+            original_image = prep_img.cpu().numpy().transpose(0, 2, 3, 1)[0, :, :, :]
+            #mean = np.array([0.4914, 0.4822, 0.4465])
+            #std = np.array([0.2023, 0.1994, 0.2010])
+            #original_image = std * original_image + mean
+            #original_image = np.clip(original_image, 0, 1)
+            #################################################
+            prep_img = Variable(prep_img, requires_grad=True)
+            #################################################
     else:
         # Pick one of the examples
         example_list = [['input_images/snake.jpg', 56],

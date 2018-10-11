@@ -32,17 +32,11 @@ class GuidedBackprop():
             self.gradients = grad_in[0]
 
         # Register hook to the first layer
-        if self.network == "ResNet50":
+        if self.network == "ResNet50" or self.structure == 'ResNet50':
             first_layer = list(self.model.children())[0]
-
-        elif self.network == "Custom":
-            if self.structure == "ResNet50":
-                first_layer = list(self.model.children())[0]
-            elif self.structure =='VGG19':
-                first_layer = list(self.model.features._modules.items())[0][1]
-
         else:
             first_layer = list(self.model.features._modules.items())[0][1]
+
         first_layer.register_backward_hook(hook_function)
 
     def update_relus(self):
@@ -56,22 +50,10 @@ class GuidedBackprop():
             if isinstance(module, ReLU):
                 return (torch.clamp(grad_in[0], min=0.0),)
         # Loop through layers, hook up ReLUs with relu_hook_function
-        if self.network == "ResNet50":
+        if self.network == "ResNet50" or self.structure == 'ResNet50':
             for module in list(self.model.children())[:-1]:
                 if isinstance(module,ReLU):
                     module.register_backward_hook(relu_hook_function)
-
-
-        elif self.network == 'Custom':
-            if self.structure == 'ResNet50':
-                for module in list(self.model.children())[:-1]:
-                    if isinstance(module,ReLU):
-                        module.register_backward_hook(relu_hook_function)
-
-            elif self.structure == 'VGG19':
-                for pos, module in self.model.features._modules.items():
-                    if isinstance(module, ReLU):
-                        module.register_backward_hook(relu_hook_function)
         else:
             for pos, module in self.model.features._modules.items():
                 if isinstance(module, ReLU):
@@ -101,7 +83,7 @@ class GuidedBackprop():
 def runGBackProp(choose_network = 'AlexNet',
                  isTrained = True,
                  training = "Normal",
-                 structure="ResNet50",
+                 structure = '',
                  target_example = 3,
                  attack_type = 'FGSM'):
 

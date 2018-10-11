@@ -30,7 +30,7 @@ def guided_grad_cam(grad_cam_mask, guided_backprop_mask):
 def runGGradCam(choose_network = 'AlexNet',
                 isTrained = True,
                 training = "Normal",
-                structure="ResNet50",
+                structure='',
                 target_example = 3,
                 attack_type = 'FGSM'):
     #if __name__ == '__main__':
@@ -39,17 +39,12 @@ def runGGradCam(choose_network = 'AlexNet',
         get_params(target_example,choose_network,isTrained,training,structure)
 
     # Grad cam
-    if choose_network == "ResNet50":
+    if choose_network == "ResNet50" or structure == 'ResNet50':
         gcv2 = GradCam(pretrained_model, target_layer=7,network = choose_network,structure=structure)
     elif choose_network == "AlexNet":
         gcv2 = GradCam(pretrained_model, target_layer=11,network = choose_network,structure=structure)
-    elif choose_network == "VGG19":
+    elif choose_network == "VGG19" or structure == 'VGG19':
         gcv2 = GradCam(pretrained_model, target_layer=35,network = choose_network,structure=structure)
-    elif choose_network =='Custom':
-        if structure == 'ResNet50': #target layer might be 4 instead of 5.
-            gcv2 = GradCam(pretrained_model,target_layer=5,network= choose_network,structure = structure)
-        elif structure =='VGG19':
-            gcv2 = GradCam(pretrained_model,target_layer=52,network= choose_network,structure = structure)
 
 
     # Generate cam mask

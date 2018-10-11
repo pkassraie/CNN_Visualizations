@@ -29,14 +29,9 @@ class VanillaBackprop():
             self.gradients = grad_in[0]
 
         # Register hook to the first layer
-        if self.network == "ResNet50":
+        if self.network == "ResNet50" or self.structure == 'ResNet50':
             first_layer = list(self.model.children())[0]
 
-        elif self.network == "Custom":
-            if self.structure == "ResNet50":
-                first_layer = list(self.model.children())[0]
-            elif self.structure =='VGG19':
-                first_layer = list(self.model.features._modules.items())[0][1]
         else:
             first_layer = list(self.model.features._modules.items())[0][1]
         first_layer.register_backward_hook(hook_function)
@@ -63,7 +58,7 @@ class VanillaBackprop():
 def runVanillaBP(choose_network = 'AlexNet',
                  isTrained = True,
                  training = 'Normal',
-                 structure = 'ResNet50',
+                 structure = '',
                  target_example = 3,
                  attack_type = 'FGSM'):
 #if __name__ == '__main__':

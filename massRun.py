@@ -21,14 +21,15 @@ target_example = range(0, 6)
 #compareNetworks('FGSM','GradCam',4)
 
 # Compatible with all networks:
-runExplain(target_example=4,attack_type="LBFGS",isTrained=trained,iters=100,choose_network='AlexNet')
-#runGradCam(target_example=5, attack_type=a, isTrained=trained,choose_network="AlexNet")
-#runGGradCam(target_example=i, attack_type=a, isTrained=trained,choose_network="ResNet50")
-#runGBackProp(target_example=4, attack_type='LBFGS', isTrained=trained,choose_network="ResNet50")
-#runsmoothGrad(target_example=3,attack_type='Boundary',choose_network='VGG19')
-#runVanillaBP(target_example=5, attack_type='SalMap', isTrained=trained,choose_network="ResNet50")
+
+runExplain(target_example=6,attack_type="PGD",isTrained=trained,iters=50,choose_network='Custom',structure='ResNet50',training='Adversarial')
+#runGradCam2(target_example=5, attack_type='FGSM', isTrained=trained,choose_network="VGG19")
+#runGGradCam(target_example=2, attack_type='FGSM', isTrained=trained,choose_network="ResNet50")
+#runGBackProp(target_example=4, attack_type='FGSM', isTrained=trained,choose_network="ResNet50")
+#runsmoothGrad(target_example=4,attack_type='FGSM',choose_network='VGG19')
+#runVanillaBP(target_example=5, attack_type='FGSM', isTrained=trained,choose_network='Custom',structure="ResNet50",training='Adversarial')
 
 
 # Only for VGG19 & AlexNet
-runInvRep(target_example=4, attack_type='FGSM', isTrained=trained,choose_network="VGG19")
+#runInvRep(target_example=4, attack_type='FGSM', isTrained=trained,choose_network="VGG19")
 #runDeepDream(target_example=3,iters=10)

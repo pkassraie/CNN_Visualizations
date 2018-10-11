@@ -23,16 +23,20 @@ def tv_norm(input, tv_beta):
     return row_grad + col_grad
 
 
-def preprocess_image(img,network = ''):
+def preprocess_image(img,network = '',training = ''):
     if network == 'Custom':
-        means = [0.4914, 0.4822, 0.4465]
-        stds = [0.2023, 0.1994, 0.2010]
-        preprocessed_img = img.copy()[:, :, ::-1]
-        for i in range(3):
-            preprocessed_img[:, :, i] = preprocessed_img[:, :, i] - means[i]
-            preprocessed_img[:, :, i] = preprocessed_img[:, :, i] / stds[i]
-        preprocessed_img = \
-            np.ascontiguousarray(np.transpose(preprocessed_img, (2, 0, 1)))
+        if training == 'Normal':
+            means = [0.4914, 0.4822, 0.4465]
+            stds = [0.2023, 0.1994, 0.2010]
+            preprocessed_img = img.copy()[:, :, ::-1]
+            for i in range(3):
+                preprocessed_img[:, :, i] = preprocessed_img[:, :, i] - means[i]
+                preprocessed_img[:, :, i] = preprocessed_img[:, :, i] / stds[i]
+            preprocessed_img = \
+                np.ascontiguousarray(np.transpose(preprocessed_img, (2, 0, 1)))
+        else:
+            preprocessed_img = img.copy()[:, :, ::-1]
+            preprocessed_img = np.ascontiguousarray(np.transpose(preprocessed_img, (2, 0, 1)))
     else:
         means = [0.485, 0.456, 0.406]
         stds = [0.229, 0.224, 0.225]
@@ -68,12 +72,9 @@ def save(mask, img, blurred, name):
     img = np.float32(img) / 255
     perturbated = np.multiply(1 - mask, img) + np.multiply(mask, blurred)
 
-    cv2.imwrite('results/' + name + "_Explain_Perturb.jpg", np.uint8(255 * perturbated))
-    cv2.imwrite('results/' + name + "_Explain_Heatmap.jpg", np.uint8(255 * heatmap))
-    cv2.imwrite('results/' + name + "_Explain_Mask.jpg", np.uint8(255 * mask))
-    cv2.imwrite('results/' + name + "_Explain_Cam.jpg", np.uint8(255 * cam))
 
-    return np.uint8(255 * heatmap),np.uint8(255 * mask), np.uint8(255 * cam)
+    return np.uint8(255 * heatmap), np.uint8(255 * mask), np.uint8(255 * cam)
+
 
 def numpy_to_torch(img, requires_grad=True):
     if len(img.shape) < 3:
@@ -134,45 +135,32 @@ def load_model(choose_network, trained,training, structure):
     return model
 
 
-def prep_img(original_img,network):
-    if network == 'Custom':
-        img = np.float32(original_img) / 255
-        blurred_img1 = cv2.GaussianBlur(img, (11, 11), 5)
-        blurred_img2 = np.float32(cv2.medianBlur(np.uint8(original_img), 11)) / 255
-        blurred_img_numpy = (blurred_img1 + blurred_img2) / 2
-        mask_init = np.ones((8, 8), dtype=np.float32)
-    else:
-        original_img = cv2.resize(original_img, (224, 224))
-        img = np.float32(original_img) / 255
-        blurred_img1 = cv2.GaussianBlur(img, (11, 11), 5)
-        blurred_img2 = np.float32(cv2.medianBlur(np.uint8(original_img), 11)) / 255
-        blurred_img_numpy = (blurred_img1 + blurred_img2) / 2
-        mask_init = np.ones((28, 28), dtype=np.float32)
+def prep_img(original_img,network,training):
+    original_img = cv2.resize(original_img, (224, 224))
+    img = np.float32(original_img) / 255
+    blurred_img1 = cv2.GaussianBlur(img, (11, 11), 5)
+    blurred_img2 = np.float32(cv2.medianBlur(np.uint8(original_img), 11)) / 255
+    blurred_img_numpy = (blurred_img1 + blurred_img2) / 2
+    mask_init = np.ones((28, 28), dtype=np.float32)
 
     # Convert to torch variables
-    img = preprocess_image(img,network)
-    blurred_img = preprocess_image(blurred_img2)
+    img = preprocess_image(img,network,training)
+    blurred_img = preprocess_image(blurred_img2,network,training)
     mask = numpy_to_torch(mask_init)
     return img, blurred_img, mask, blurred_img_numpy
 
 
-def optimizeMask(network,model, iters, mask, img, blurred_img):
+def optimizeMask(model, iters, mask, img, blurred_img):
     # Hyper parameters.
     tv_beta = 3
     learning_rate = 0.1
     max_iterations = iters
     l1_coeff = 0.01
     tv_coeff = 0.2
-    if network == 'Custom':
-        if use_cuda:
-            upsample = torch.nn.Upsample(size=(32, 32)).cuda()
-        else:
-            upsample = torch.nn.Upsample(size=(32, 32))
+    if use_cuda:
+        upsample = torch.nn.Upsample(size=(224, 224)).cuda()
     else:
-        if use_cuda:
-            upsample = torch.nn.Upsample(size=(224, 224)).cuda()
-        else:
-            upsample = torch.nn.Upsample(size=(224, 224))
+        upsample = torch.nn.Upsample(size=(224, 224))
 
     optimizer = torch.optim.Adam([mask], lr=learning_rate)
     target = torch.nn.Softmax(dim=1)(model(img))
@@ -188,10 +176,7 @@ def optimizeMask(network,model, iters, mask, img, blurred_img):
         # Use the mask to perturbated the input image.
         perturbated_input = img.mul(upsampled_mask) + \
                             blurred_img.mul(1 - upsampled_mask)
-        if network == 'Custom':
-            noise = np.zeros((32, 32, 3), dtype=np.float32)
-        else:
-            noise = np.zeros((224, 224, 3), dtype=np.float32)
+        noise = np.zeros((224, 224, 3), dtype=np.float32)
         cv2.randn(noise, 0, 0.2)
         noise = numpy_to_torch(noise)
         perturbated_input = perturbated_input + noise
@@ -210,7 +195,7 @@ def optimizeMask(network,model, iters, mask, img, blurred_img):
 
     return upsample(mask)
 
-def optimizeMaskadvers(network, model, iters, mask, img, blurred_img,advers_class):
+def optimizeMaskadvers( model, iters, mask, img, blurred_img,advers_class):
     # Hyper parameters.
     tv_beta = 3
     learning_rate = 0.1
@@ -218,16 +203,10 @@ def optimizeMaskadvers(network, model, iters, mask, img, blurred_img,advers_clas
     l1_coeff = 0.01
     tv_coeff = 0.2
 
-    if network == 'Custom':
-        if use_cuda:
-            upsample = torch.nn.Upsample(size=(32, 32)).cuda()
-        else:
-            upsample = torch.nn.Upsample(size=(32, 32))
+    if use_cuda:
+        upsample = torch.nn.Upsample(size=(224, 224)).cuda()
     else:
-        if use_cuda:
-            upsample = torch.nn.Upsample(size=(224, 224)).cuda()
-        else:
-            upsample = torch.nn.Upsample(size=(224, 224))
+        upsample = torch.nn.Upsample(size=(224, 224))
     optimizer = torch.optim.Adam([mask], lr=learning_rate)
 
     category = advers_class
@@ -243,10 +222,7 @@ def optimizeMaskadvers(network, model, iters, mask, img, blurred_img,advers_clas
         perturbated_input = img.mul(upsampled_mask) + \
                             blurred_img.mul(1 - upsampled_mask)
 
-        if network == 'Custom':
-            noise = np.zeros((32, 32, 3), dtype=np.float32)
-        else:
-            noise = np.zeros((224, 224, 3), dtype=np.float32)
+        noise = np.zeros((224, 224, 3), dtype=np.float32)
 
         cv2.randn(noise, 0, 0.2)
         noise = numpy_to_torch(noise)
@@ -282,8 +258,9 @@ def runExplain2(choose_network='AlexNet',
 
 
     # Natural Image:
-    img, blurred_img, mask, blurred_img_numpy = prep_img(original_img,choose_network)
-    upsampled_mask = optimizeMask(choose_network,model, iters, mask, img, blurred_img)
+    img, blurred_img, mask, blurred_img_numpy = prep_img(original_img,choose_network,training)
+    upsampled_mask = optimizeMask(model, iters, mask, img, blurred_img)
+
     heat1,mask1, cam1 = save(upsampled_mask, original_img, blurred_img_numpy, file_name_to_export)
     print("Interpretable Explanations Completed")
 
@@ -296,20 +273,20 @@ def runExplain2(choose_network='AlexNet',
     indices = np.arange(len(orig_labs))
 
     # Adversary:
-    img, blurred_img, mask, blurred_img_numpy = prep_img(adversarialpic,choose_network)
-    upsampled_mask = optimizeMaskadvers(choose_network,model, iters, mask, img, blurred_img,advers_class)
+    img, blurred_img, mask, blurred_img_numpy = prep_img(adversarialpic,choose_network,training)
+    upsampled_mask = optimizeMaskadvers(model, iters, mask, img, blurred_img,advers_class)
     heat2,mask2,cam2 = save(upsampled_mask, original_img, blurred_img_numpy, 'Adversarial_' + file_name_to_export)
     print("Adversary Interpretable Explanations Completed")
 
     #NotSoNormie
-    img, blurred_img, mask, blurred_img_numpy = prep_img(original_img,choose_network)
-    upsampled_mask = optimizeMaskadvers(choose_network,model, iters, mask, img, blurred_img,advers_class)
+    img, blurred_img, mask, blurred_img_numpy = prep_img(original_img,choose_network,training)
+    upsampled_mask = optimizeMaskadvers(model, iters, mask, img, blurred_img,advers_class)
     heat3,mask3,cam3 = save(upsampled_mask, original_img, blurred_img_numpy, 'NotSoNormie_' + file_name_to_export)
     print("NotSoNormie Interpretable Explanations Completed")
 
     #Inv NotSoNormie
-    img, blurred_img, mask, blurred_img_numpy = prep_img(adversarialpic,choose_network)
-    upsampled_mask = optimizeMask(choose_network,model, iters, mask, img, blurred_img)
+    img, blurred_img, mask, blurred_img_numpy = prep_img(adversarialpic,choose_network,training)
+    upsampled_mask = optimizeMask(model, iters, mask, img, blurred_img)
     heat4,mask4,cam4 = save(upsampled_mask, original_img, blurred_img_numpy, 'InvNotSoNormie_' + file_name_to_export)
     print("Inverse NotSoNormie Interpretable Explanations Completed")
 

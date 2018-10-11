@@ -15,7 +15,11 @@ from matplotlib import pyplot as plt
 # original_image,vanilbp,grayvanilbp,adversarial,vanilbp2,grayvanilbp2
 
 # photo index, network, visualization
-def compareAttacks(vizmethod, choose_network, image_index, training='', structure=''):
+def compareAttacks(vizmethod,
+                   choose_network,
+                   image_index,
+                   training='',
+                   structure=''):
     isTrained = True
     _,_,_,img_name,_ = get_params(image_index,choose_network,isTrained,training, structure)
     attacks = ['FGSM','DeepFool','PGD','SalMap','LBFGS','RPGD']# , 'Boundary']#,'SinglePixel']
@@ -637,7 +641,11 @@ def compareNetworks(attackmethod,vizmethod, image_index, training='Normal'):
 # *********************************************************************************************************
 # *********************************************************************************************************
 
-def compareVisualizations(attackmethod, choose_network, image_index, training='', structure=''):
+def compareVisualizations(attackmethod,
+                          choose_network,
+                          image_index,
+                          training='',
+                          structure=''):
     isTrained = True
     i = attackmethod
     _,_,_,img_name,_ = get_params(image_index,choose_network,isTrained,training, structure)
@@ -903,7 +911,10 @@ def compareVisualizations(attackmethod, choose_network, image_index, training=''
 # *********************************************************************************************************
 # *********************************************************************************************************
 
-def compareTraining(attackmethod,vizmethod,structure,image_index):
+def compareTraining(attackmethod,
+                    vizmethod,
+                    structure,
+                    image_index):
     isTrained = True
     choose_network = 'Custom'
     i = attackmethod

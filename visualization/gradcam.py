@@ -26,7 +26,7 @@ class CamExtractor():
         """
         conv_output = None
 
-        if self.network =="ResNet50":
+        if self.network =="ResNet50" or self.structure == 'ResNet50': ##new edition of custom resnets
             i = 0
             for module in list(self.model.children())[:-1]:
                 i += 1
@@ -35,18 +35,6 @@ class CamExtractor():
                     x.register_hook(self.save_gradient)
                     conv_output = x
 
-        elif self.network == 'Custom' and self.structure =='ResNet50':
-            i = 0
-            for module in list(self.model.children())[:-1]:
-                i += 1
-                if i ==3:
-                    x = F.relu(x)
-                x = module(x)
-                if i == self.target_layer:
-                    x.register_hook(self.save_gradient)
-                    conv_output = x
-
-            x = F.avg_pool2d(x, 4)
         else:
             if torch.cuda.is_available():
                 self.model = self.model.cuda()
@@ -96,8 +84,8 @@ class GradCam():
         # Full forward pass
         # conv_output is the output of convolutions at specified layer
         # model_output is the final output of the model (1, 1000)
-
-        input_image = input_image.cuda()
+        if torch.cuda.is_available():
+            input_image = input_image.cuda()
         conv_output, model_output = self.extractor.forward_pass(input_image)
 
         if target_class is None:
@@ -110,21 +98,11 @@ class GradCam():
 
         # Zero grads
 
-        if self.network == "ResNet50":
+        if self.network == "ResNet50" or self.structure == 'ResNet50':
             for module in list(self.model.children())[:-1]:
                 module.zero_grad()
             module = list(self.model.children())[-1]
             module.zero_grad()
-
-        elif self.network =='Custom':
-            if self.structure =='ResNet50':
-                for module in list(self.model.children())[:-1]:
-                    module.zero_grad()
-                module = list(self.model.children())[-1]
-                module.zero_grad()
-            elif self.structure == 'VGG19':
-                self.model.features.zero_grad()
-                self.model.classifier.zero_grad()
         else:
             self.model.features.zero_grad()
             self.model.classifier.zero_grad()
@@ -147,10 +125,7 @@ class GradCam():
         # Multiply each weight with its conv output and then, sum
         for i, w in enumerate(weights):
             cam += w * target[i, :, :]
-        if self.network == 'Custom':
-            cam = cv2.resize(cam, (32, 32))
-        else:
-            cam = cv2.resize(cam, (224, 224))
+        cam = cv2.resize(cam, (224, 224))
         cam = np.maximum(cam, 0)
         cam = (cam - np.min(cam)) / (np.max(cam) - np.min(cam))  # Normalize between 0-1
         cam = np.uint8(cam * 255)  # Scale between 0-255 to visualize
@@ -162,7 +137,7 @@ class GradCam():
 def runGradCam(choose_network = 'AlexNet',
                isTrained = True,
                training = "Normal",
-               structure="ResNet50",
+               structure='',
                target_example = 3,
                attack_type = 'FGSM'):
 
@@ -171,18 +146,12 @@ def runGradCam(choose_network = 'AlexNet',
                    training,structure)
 
     # Grad cam
-    if choose_network == "ResNet50":
-        grad_cam = GradCam(pretrained_model, target_layer=7,network = choose_network,structure = '')
+    if choose_network == "ResNet50" or structure == 'ResNet50':
+        grad_cam = GradCam(pretrained_model, target_layer=7,network = choose_network,structure = structure)
     elif choose_network == "AlexNet":
         grad_cam = GradCam(pretrained_model, target_layer=11,network = choose_network,structure = '')
-    elif choose_network == "VGG19":
-        grad_cam = GradCam(pretrained_model, target_layer=35,network = choose_network,structure = '')
-    elif choose_network =='Custom':
-        if structure == 'ResNet50': #target layer might be 4 instead of 5.
-            grad_cam = GradCam(pretrained_model,target_layer=5,network= choose_network,structure = structure)
-        elif structure =='VGG19':
-            grad_cam = GradCam(pretrained_model,target_layer=52,network= choose_network,structure = structure)
-
+    elif choose_network == "VGG19" or structure == 'VGG19':
+        grad_cam = GradCam(pretrained_model, target_layer=35,network = choose_network,structure =structure)
 
     # Generate cam mask
     cam = grad_cam.generate_cam(prep_img,target_class)

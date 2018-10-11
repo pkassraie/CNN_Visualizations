@@ -3,6 +3,7 @@ import torchvision
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 import numpy as np
+from loadModel import loadModel
 
 # functions to show an image
 def imshow(img):
@@ -28,8 +29,14 @@ if __name__ == '__main__':
     # get some random training images
     prep_img, target_class= next(iter(testloader))
 
+    net = loadModel('Normal','ResNet50')
+    if torch.cuda.is_available():
+        net = net.cuda()
+
+    predicted_class = net(prep_img)
     # show images
     imshow(torchvision.utils.make_grid(prep_img))
     plt.show()
     # print labels
     print(classes[target_class])
+    print(classes[predicted_class])

@@ -7,7 +7,6 @@ import torchvision
 import torchvision.transforms as transforms
 import os
 import argparse
-from utils import progress_bar
 
 def train(epoch):
     print('\nEpoch: %d' % epoch)
@@ -70,14 +69,14 @@ def test(epoch):
         }
         if not os.path.isdir('checkpoint'):
             os.mkdir('checkpoint')
-        torch.save(state, './checkpoint/ckpt.t7')
+        torch.save(state, './checkpoint/ckpt_norm_'+modelName+'.t7')
         if not os.path.isdir('trainedmodels'):
             os.mkdir('trainedmodels')
         torch.save(net.state_dict(), './trainedmodels/'+'Normal_'+modelName)
         best_acc = mean_acc
 
 
-parser = argparse.ArgumentParser(description='PyTorch CIFAR10 Training')
+parser = argparse.ArgumentParser(description='PyTorch CIFAR10 Normal Training')
 parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
 parser.add_argument('--resume', '-r', action='store_true', help='resume from checkpoint')
 args = parser.parse_args()
@@ -114,10 +113,15 @@ classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship'
 # Build the model
 print('==> Building model..')
 net = torchvision.models.resnet50(pretrained=True)
-## Change the last layer since we don't have 1000 classes but we want to used a pretrained model
-num_ftrs = net.fc.in_features
-net.fc = nn.Linear(num_ftrs, len(classes))
 modelName = 'ResNet50'
+
+## Change the last layer since we don't have 1000 classes but we want to used a pretrained model
+if modelName == 'ResNet50':
+    num_ftrs = net.fc.in_features
+    net.fc = nn.Linear(num_ftrs, len(classes))
+elif modelName == 'VGG19':
+    num_ftrs = net.classifier[6].in_features
+    net.classsifier[6] = nn.Linear(num_ftrs, len(classes))
 net = net.to(device)
 if device == 'cuda':
     net = torch.nn.DataParallel(net)
@@ -128,7 +132,7 @@ if args.resume:
     # Load checkpoint.
     print('==> Resuming from checkpoint..')
     assert os.path.isdir('checkpoint'), 'Error: no checkpoint directory found!'
-    checkpoint = torch.load('./checkpoint/ckpt_dermofit.t7')
+    checkpoint = torch.load('./checkpoint/ckpt_norm_'+modelName+'.t7')
     net.load_state_dict(checkpoint['net'])
     best_acc = checkpoint['acc']
     start_epoch = checkpoint['epoch']
@@ -136,8 +140,12 @@ if args.resume:
 
 # Training Parameters and Optimization
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(net.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
-scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[20, 50, 100], gamma=0.1)
+if modelName == 'ResNet50':
+    optimizer = optim.SGD(net.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
+    scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[20, 50, 100], gamma=0.1)
+elif modelName == 'VGG19':
+    optimizer = optim.SGD(net.parameters(), lr=args.lr/10, momentum=0.9, weight_decay=5e-4)
+    scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[80, 100], gamma=0.1)
 
 
 for epoch in range(start_epoch, start_epoch+150):
