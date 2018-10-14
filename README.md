@@ -1,7 +1,7 @@
 
 
 # Visualizing Adversarial Examples on Convolutional Networks
-This is my Internship project at [CAMP](http://campar.in.tum.de/WebHome), [TUM](https://www.tum.de/), under supervision of [Professor Nassir Navab](http://campar.in.tum.de/Main/NassirNavab), [Dr. Federico Tombari](http://campar.in.tum.de/Main/FedericoTombari) with [Magda Paschali](http://campar.in.tum.de/Main/MagdaPaschali) as my advisor. It's a package for attacking and visualizing convolutional networks with the purpose of understanding and comparing the effects of adversarial example on such networks.
+This is my B.Sc. Thesis at [CAMP](http://campar.in.tum.de/WebHome), [TUM](https://www.tum.de/), under supervision of [Professor Nassir Navab](http://campar.in.tum.de/Main/NassirNavab), [Dr. Federico Tombari](http://campar.in.tum.de/Main/FedericoTombari) with [Magda Paschali](http://campar.in.tum.de/Main/MagdaPaschali) as my advisor. It's a package for attacking and visualizing convolutional networks with the purpose of understanding and comparing the effects of adversarial example on such networks.
 
 ### Contents
 0. [Intro](#intro) 
